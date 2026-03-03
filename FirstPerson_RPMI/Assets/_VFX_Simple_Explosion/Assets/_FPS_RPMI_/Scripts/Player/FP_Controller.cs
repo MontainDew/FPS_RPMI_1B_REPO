@@ -4,8 +4,8 @@ using UnityEngine.InputSystem;
 public class FP_Controller : MonoBehaviour
 {
     #region General Variables
-    [Header ("Movement & Look")]
-    [SerializeField] GameObject camHolder;
+    [Header("Movement & Look")]
+    [SerializeField] GameObject camHolder;    // Cámara dentro de un empty para girar la cabeza
     [SerializeField] float speed = 5f;
     [SerializeField] float crouchSpeed = 3f;
     [SerializeField] float sprintSpeed = 8f;
@@ -22,15 +22,30 @@ public class FP_Controller : MonoBehaviour
     [Header("Player State Bools")]
     [SerializeField] bool isSprinting;
     [SerializeField] bool isCrounching;
+
+    [Header("Lean Settings")]
+    [SerializeField] float leanAngle = 10f;  
+    [SerializeField] float leanSpeed = 4f;
+    [SerializeField] float leanOffset = 0.1f;
+
+    [Header("Head Bob Y Offset Settings")]
+    [SerializeField] float bobAmplitude = 0.02f;  // altura de subida/bajada
+    [SerializeField] float bobFrequency = 6f;     // velocidad del movimiento
+    [SerializeField] float bobSmoothing = 5f;
     #endregion
-    //Variables de autoreferencia
+
     Rigidbody rb;
     Animator anim;
 
-    //Variables de input
+    // Inputs
     Vector2 moveInput;
     Vector2 lookInput;
     float lookRotation;
+
+    float leanInput;
+    float currentLean;
+    Vector3 initialCamPos;
+    float bobTimer;
 
     private void Awake()
     {
@@ -38,21 +53,18 @@ public class FP_Controller : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //Lock y visualizacion del cursor del raton
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        initialCamPos = camHolder.transform.localPosition;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //GroundCheck
         isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayer);
     }
+
     private void FixedUpdate()
     {
         Movement();
@@ -60,36 +72,65 @@ public class FP_Controller : MonoBehaviour
 
     private void LateUpdate()
     {
-        CameraLook();    
+        CameraLook();
+        ApplyHeadBob();
     }
 
-    void CameraLook() 
+    void CameraLook()
     {
-        //Rotacion del personaje (Horizaontal)
-        transform.Rotate(Vector3.up * lookInput.x * sensitivity);
-        //Rotacion del Camara (Vertical)
-        lookRotation += (-lookInput.y * sensitivity);
-        lookRotation = Mathf.Clamp(lookRotation, -90, 90);
-        camHolder.transform.localEulerAngles = new Vector3(lookRotation, 0f, 0f);
+        // Rotación horizontal solo en el empty que contiene la cámara
+        float yaw = lookInput.x * sensitivity;
+        float pitch = -lookInput.y * sensitivity;
+
+        // Actualiza pitch acumulado
+        lookRotation += pitch;
+        lookRotation = Mathf.Clamp(lookRotation, -90f, 90f);
+
+        // Lean suave
+        float targetLean = leanInput * leanAngle;
+        currentLean = Mathf.Lerp(currentLean, targetLean, Time.deltaTime * leanSpeed);
+
+        // Aplicar rotación horizontal (giro de cabeza)
+        transform.Rotate(Vector3.up * yaw);
+
+        // Aplicar pitch y lean a la cámara
+        camHolder.transform.localRotation = Quaternion.Euler(lookRotation, 0f, -currentLean);
     }
+
+    void ApplyHeadBob()
+    {
+        Vector3 targetPos = initialCamPos;
+
+        if (moveInput.magnitude > 0.1f && isGrounded)
+        {
+            bobTimer += Time.deltaTime * bobFrequency;
+            float yOffset = Mathf.Sin(bobTimer) * bobAmplitude; // solo subida/bajada
+            targetPos.y += yOffset;
+        }
+        else
+        {
+            bobTimer = 0f; // reset timer cuando no camina
+        }
+
+        // Aplicar lean lateral + head bob vertical
+        targetPos.x += leanInput * leanOffset;
+        camHolder.transform.localPosition = Vector3.Lerp(camHolder.transform.localPosition, targetPos, Time.deltaTime * bobSmoothing);
+    }
+
     void Movement()
-    { 
-        //Definir los dos vectores que permiten la aceleraci�n
+    {
         Vector3 currentVelocity = rb.linearVelocity;
         Vector3 targetVelocity = new Vector3(moveInput.x, 0, moveInput.y);
-        //A la direcci�n a alcanzar le multiplicamos la velocidad
-        targetVelocity *= isCrounching ? crouchSpeed : isSprinting ? sprintSpeed :speed;
+        targetVelocity *= isCrounching ? crouchSpeed : isSprinting ? sprintSpeed : speed;
 
-        //Convertir la direccion al eje mundial(world)
         targetVelocity = transform.TransformDirection(targetVelocity);
-        //Calcular el cambio de velocidad(aceleraci�n)
         Vector3 velocityChange = (targetVelocity - currentVelocity);
         velocityChange = new Vector3(velocityChange.x, 0, velocityChange.z);
         velocityChange = Vector3.ClampMagnitude(velocityChange, maxForce);
 
-        //Aplicacion del movimiento(Direccion + Aceleraci�n)
         rb.AddForce(velocityChange, ForceMode.VelocityChange);
     }
+
     void Jump()
     {
         if (isGrounded) rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
@@ -113,7 +154,7 @@ public class FP_Controller : MonoBehaviour
 
     public void OnCrouch(InputAction.CallbackContext context)
     {
-         if (context.performed) 
+        if (context.performed)
         {
             isCrounching = !isCrounching;
             anim.SetBool("isCrouching", isCrounching);
@@ -124,6 +165,11 @@ public class FP_Controller : MonoBehaviour
     {
         if (context.performed && !isCrounching) isSprinting = true;
         if (context.canceled) isSprinting = false;
+    }
+
+    public void OnLean(InputAction.CallbackContext context)
+    {
+        leanInput = context.ReadValue<float>();
     }
     #endregion
 }

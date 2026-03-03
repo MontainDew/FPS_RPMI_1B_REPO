@@ -290,6 +290,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: eec1bdc8-8c60-4680-945c-4853bb4c0b74
     m_ActionName: 'Gameplay/Sprint[/Keyboard/shift]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6863050712185925095}
+        m_TargetAssemblyTypeName: FP_Controller, Assembly-CSharp
+        m_MethodName: OnLean
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3230e7e8-970d-4e23-94fa-d620f14bd759
+    m_ActionName: 'Gameplay/Lean[/Keyboard/q,/Keyboard/e]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -322,6 +338,12 @@ MonoBehaviour:
     m_Bits: 8
   isSprinting: 0
   isCrounching: 0
+  leanAngle: 15
+  leanSpeed: 5
+  leanOffset: 0.3
+  bobAmplitude: 0.2
+  bobFrequency: 6
+  bobSmoothing: 7
 --- !u!95 &5295112097514557594
 Animator:
   serializedVersion: 7
