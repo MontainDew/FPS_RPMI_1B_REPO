@@ -61,6 +61,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8117492148930647040}
+  - {fileID: 2949219499383306526}
   m_Father: {fileID: 6848693870807386463}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4102560840254363106
@@ -77,6 +78,7 @@ GameObject:
   - component: {fileID: 1198256679342410192}
   - component: {fileID: 6863050712185925095}
   - component: {fileID: 5295112097514557594}
+  - component: {fileID: 7723284726935233986}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -225,11 +227,35 @@ MonoBehaviour:
     m_ActionId: 800380e8-4895-4aed-bcc9-78870de86c0e
     m_ActionName: 'Gameplay/Jump[/Keyboard/space]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7723284726935233986}
+        m_TargetAssemblyTypeName: GunSystem, Assembly-CSharp
+        m_MethodName: OnShoot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: a9526293-2c5a-4faf-ac04-a86d7ba6be14
     m_ActionName: 'Gameplay/Shoot[/Mouse/leftButton]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7723284726935233986}
+        m_TargetAssemblyTypeName: GunSystem, Assembly-CSharp
+        m_MethodName: OnReload
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 79a89ce2-d465-464a-a5bd-b9171b1108d3
     m_ActionName: 'Gameplay/Reload[/Keyboard/r]'
   - m_PersistentCalls:
@@ -318,6 +344,35 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7723284726935233986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4102560840254363106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc799494f4706984c841cf87545d5126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GunSystem
+  fpsCam: {fileID: 7371174511409014852}
+  shootPoint: {fileID: 0}
+  impactLayer:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  damage: 10
+  range: 100
+  spread: 0
+  shootingCooldown: 0.2
+  reloadTime: 1.5
+  allowButtonHold: 0
+  ammoSize: 30
+  bulletsPerTap: 1
+  impactEffect: {fileID: 0}
+  shooting: 0
+  canShoot: 0
+  reloading: 0
 --- !u!1 &6821701422649867914
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,3 +510,65 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!1001 &3415702137426468597
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 432115626898878748}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 9941c2051f6add8409f16473bd52bfb8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.455
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9941c2051f6add8409f16473bd52bfb8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.116
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9941c2051f6add8409f16473bd52bfb8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.721
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9941c2051f6add8409f16473bd52bfb8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.14339991
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9941c2051f6add8409f16473bd52bfb8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9941c2051f6add8409f16473bd52bfb8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.98966485
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9941c2051f6add8409f16473bd52bfb8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9941c2051f6add8409f16473bd52bfb8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9941c2051f6add8409f16473bd52bfb8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 163.511
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9941c2051f6add8409f16473bd52bfb8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9941c2051f6add8409f16473bd52bfb8, type: 3}
+      propertyPath: m_Name
+      value: Gun
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9941c2051f6add8409f16473bd52bfb8, type: 3}
+--- !u!4 &2949219499383306526 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9941c2051f6add8409f16473bd52bfb8, type: 3}
+  m_PrefabInstance: {fileID: 3415702137426468597}
+  m_PrefabAsset: {fileID: 0}
