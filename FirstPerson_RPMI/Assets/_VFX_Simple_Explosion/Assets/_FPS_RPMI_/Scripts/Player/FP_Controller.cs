@@ -5,7 +5,7 @@ public class FP_Controller : MonoBehaviour
 {
     #region General Variables
     [Header("Movement & Look")]
-    [SerializeField] GameObject camHolder;    // Cámara dentro de un empty para girar la cabeza
+    [SerializeField] GameObject camHolder;
     [SerializeField] float speed = 5f;
     [SerializeField] float crouchSpeed = 3f;
     [SerializeField] float sprintSpeed = 8f;
@@ -24,20 +24,36 @@ public class FP_Controller : MonoBehaviour
     [SerializeField] bool isCrounching;
 
     [Header("Lean Settings")]
-    [SerializeField] float leanAngle = 10f;  
+    [SerializeField] float leanAngle = 10f;
     [SerializeField] float leanSpeed = 4f;
     [SerializeField] float leanOffset = 0.1f;
 
     [Header("Head Bob Y Offset Settings")]
-    [SerializeField] float bobAmplitude = 0.02f;  // altura de subida/bajada
-    [SerializeField] float bobFrequency = 6f;     // velocidad del movimiento
+    [SerializeField] float bobAmplitude = 0.02f;
+    [SerializeField] float bobFrequency = 6f;
     [SerializeField] float bobSmoothing = 5f;
+
+    [Header("Footsteps - Wood Interior")]
+    [SerializeField] AudioSource footstepSource;
+    [SerializeField] AudioClip[] woodFootsteps;
+
+    [SerializeField] float walkStepRate = 0.55f;
+    [SerializeField] float sprintStepRate = 0.32f;
+    [SerializeField] float crouchStepRate = 0.85f;
+
+    [SerializeField] float walkVolume = 0.6f;
+    [SerializeField] float sprintVolume = 0.95f;
+    [SerializeField] float crouchVolume = 0.25f;
+
+    [SerializeField] float fadeOutSpeed = 3f;
+
+    float stepTimer;
+    bool isFootstepPlaying;
     #endregion
 
     Rigidbody rb;
     Animator anim;
 
-    // Inputs
     Vector2 moveInput;
     Vector2 lookInput;
     float lookRotation;
@@ -63,6 +79,8 @@ public class FP_Controller : MonoBehaviour
     void Update()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayer);
+        HandleFootsteps();
+        HandleFootstepFadeOut();
     }
 
     private void FixedUpdate()
@@ -78,22 +96,16 @@ public class FP_Controller : MonoBehaviour
 
     void CameraLook()
     {
-        // Rotación horizontal solo en el empty que contiene la cámara
         float yaw = lookInput.x * sensitivity;
         float pitch = -lookInput.y * sensitivity;
 
-        // Actualiza pitch acumulado
         lookRotation += pitch;
         lookRotation = Mathf.Clamp(lookRotation, -90f, 90f);
 
-        // Lean suave
         float targetLean = leanInput * leanAngle;
         currentLean = Mathf.Lerp(currentLean, targetLean, Time.deltaTime * leanSpeed);
 
-        // Aplicar rotación horizontal (giro de cabeza)
         transform.Rotate(Vector3.up * yaw);
-
-        // Aplicar pitch y lean a la cámara
         camHolder.transform.localRotation = Quaternion.Euler(lookRotation, 0f, -currentLean);
     }
 
@@ -104,26 +116,28 @@ public class FP_Controller : MonoBehaviour
         if (moveInput.magnitude > 0.1f && isGrounded)
         {
             bobTimer += Time.deltaTime * bobFrequency;
-            float yOffset = Mathf.Sin(bobTimer) * bobAmplitude; // solo subida/bajada
+            float yOffset = Mathf.Sin(bobTimer) * bobAmplitude;
             targetPos.y += yOffset;
         }
         else
         {
-            bobTimer = 0f; // reset timer cuando no camina
+            bobTimer = 0f;
         }
 
-        // Aplicar lean lateral + head bob vertical
         targetPos.x += leanInput * leanOffset;
-        camHolder.transform.localPosition = Vector3.Lerp(camHolder.transform.localPosition, targetPos, Time.deltaTime * bobSmoothing);
+        camHolder.transform.localPosition =
+            Vector3.Lerp(camHolder.transform.localPosition, targetPos, Time.deltaTime * bobSmoothing);
     }
 
     void Movement()
     {
         Vector3 currentVelocity = rb.linearVelocity;
         Vector3 targetVelocity = new Vector3(moveInput.x, 0, moveInput.y);
-        targetVelocity *= isCrounching ? crouchSpeed : isSprinting ? sprintSpeed : speed;
+        targetVelocity *= isCrounching ? crouchSpeed :
+                          isSprinting ? sprintSpeed : speed;
 
         targetVelocity = transform.TransformDirection(targetVelocity);
+
         Vector3 velocityChange = (targetVelocity - currentVelocity);
         velocityChange = new Vector3(velocityChange.x, 0, velocityChange.z);
         velocityChange = Vector3.ClampMagnitude(velocityChange, maxForce);
@@ -133,7 +147,70 @@ public class FP_Controller : MonoBehaviour
 
     void Jump()
     {
-        if (isGrounded) rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        if (isGrounded)
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+    }
+
+    // =========================
+    // FOOTSTEPS SYSTEM CON FADE Y AGACHADO FUNCIONAL
+    // =========================
+
+    void HandleFootsteps()
+    {
+        if (!isGrounded || woodFootsteps.Length == 0) return;
+
+        bool hasMovementInput = moveInput.magnitude > 0.1f;
+
+        if (hasMovementInput)
+        {
+            float stepRate = walkStepRate;
+            float volume = walkVolume;
+
+            if (isSprinting)
+            {
+                stepRate = sprintStepRate;
+                volume = sprintVolume;
+                footstepSource.pitch = Random.Range(0.92f, 0.97f);
+            }
+            else if (isCrounching)
+            {
+                stepRate = crouchStepRate;
+                volume = crouchVolume;
+                footstepSource.pitch = Random.Range(0.98f, 1.02f);
+            }
+            else
+            {
+                footstepSource.pitch = Random.Range(0.96f, 1.04f);
+            }
+
+            stepTimer -= Time.deltaTime;
+
+            if (stepTimer <= 0f)
+            {
+                int index = Random.Range(0, woodFootsteps.Length);
+                footstepSource.clip = woodFootsteps[index];
+                footstepSource.volume = volume + Random.Range(-0.05f, 0.05f);
+                footstepSource.Play();
+                isFootstepPlaying = true;
+
+                stepTimer = stepRate + Random.Range(-0.05f, 0.05f);
+            }
+        }
+        else
+        {
+            stepTimer = 0f;
+            isFootstepPlaying = false;
+        }
+    }
+
+    void HandleFootstepFadeOut()
+    {
+        if (!isFootstepPlaying && footstepSource.isPlaying)
+        {
+            footstepSource.volume -= Time.deltaTime * fadeOutSpeed;
+            if (footstepSource.volume <= 0f)
+                footstepSource.Stop();
+        }
     }
 
     #region Input Methods
