@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -23,7 +24,7 @@ public class GunSystem : MonoBehaviour
     [Header("Bullet Management")]
     [SerializeField] int ammoSize = 30;
     [SerializeField] int bulletsPerTap = 1; //Cantidad de balas por disparo
-    int bulletsLeft;
+    [SerializeField] int bulletsLeft;
 
 
     [Header("Feedback References")]
@@ -45,7 +46,24 @@ public class GunSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+       if (canShoot && shooting && !reloading && bulletsLeft > 0)
+        {
+            StartCoroutine(ShootRoutine());
+        }
+    }
+
+    IEnumerator ShootRoutine()
+    {
+        canShoot = false;//Primera capa de seguridad que evita que apilemos disparos
+        if (!allowButtonHold) shooting = false; //Disparación por click
+        for(int i = 0; i < bulletsPerTap; i++)
+        {
+            if(bulletsLeft <= 0) break;//Cuando no hay balas no dispara
+            Shoot();
+            bulletsLeft--;
+        }
+        yield return new WaitForSeconds(shootingCooldown);//tiempo entre disparos
+        canShoot = true;
     }
 
     void Shoot()
@@ -62,17 +80,47 @@ public class GunSystem : MonoBehaviour
         if (Physics.Raycast(fpsCam.transform.position, direction, out hit, range, impactLayer))
         {
             Debug.Log(hit.collider.name);
+            if (hit.collider.CompareTag("Enemy"))
+            {
+                EnemyHealth enemyhealth = hit.collider.GetComponent<EnemyHealth>();
+                enemyhealth.TakeDamage(damage);
+            }
         }
     }
-    #region
+    IEnumerator ReloadRoutine()
+    {
+        reloading = true; //No se estaquea la recarga
+        //aqui iria Animacion de recarga
+        yield return new WaitForSeconds(reloadTime);
+        bulletsLeft = ammoSize;
+        reloading = false;
+    }
+
+    void Reload()
+    {
+        if (bulletsLeft < ammoSize && !reloading)
+        {
+            StartCoroutine(ReloadRoutine());
+        }
+    }
+
+    #region Input Methods
     public void OnShoot(InputAction.CallbackContext context)
     {
-        Shoot();
+        //Comprobar que el disparo se puede mantener o no
+        if (allowButtonHold)
+        {
+            shooting = context.ReadValueAsButton();
+        }
+        else
+        {
+            if (context.performed) shooting = true;
+        }
     }
 
     public void OnReload(InputAction.CallbackContext context)
     {
-
+        if (context.performed) Reload();
     }
     #endregion
 }
