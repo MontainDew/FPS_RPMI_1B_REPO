@@ -77,6 +77,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Flaslight",
+                    "type": "Button",
+                    "id": "a795aab2-fd2f-4d2c-b1cb-b3d14c3f6b9c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -310,6 +319,17 @@
                     "action": "Lean",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "4b9afa15-5fb6-4fff-8508-c8414f6d1ce5",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Flaslight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

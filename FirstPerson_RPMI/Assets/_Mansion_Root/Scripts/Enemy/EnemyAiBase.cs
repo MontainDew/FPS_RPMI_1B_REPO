@@ -1,87 +1,110 @@
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UIElements;
 
 public class EnemyAiBase : MonoBehaviour
 {
     #region General Variables
     [Header("AI Configuration")]
-    [SerializeField] NavMeshAgent agent; //Ref al cerebro
-    [SerializeField] Transform target; //Ref a el que persigue
-    [SerializeField] LayerMask targetLayer;
+    [SerializeField] NavMeshAgent agent;
+    [SerializeField] Transform target;
+    [SerializeField] FP_Controller playerScript; // Referencia para saber si el jugador está agachado
     [SerializeField] LayerMask groundLayer;
+    [SerializeField] LayerMask obstacleLayer; // Para comprobar paredes
 
     [Header("Patroling Stats")]
-    [SerializeField] float walkPointRange = 8f; //Radio de puntos navegables
+    [SerializeField] float walkPointRange = 10f;
+    [SerializeField] float patrolSpeed = 2.5f;
     Vector3 walkPoint;
     bool walkPointSet;
 
-    [Header("Attacking Stats")]
-    [SerializeField] float timeBetweenAttacks = 1f;
-    [SerializeField] GameObject projectile;
-    [SerializeField] Transform shootPoint;
-    [SerializeField] float shootSpeedY = 0;//Altura en Y
-    [SerializeField] float shootSpeedZ = 10f; //Altura en Z
-    bool alreadyAttacked;
+    [Header("Chasing & Attacking Stats")]
+    [SerializeField] float chaseSpeed = 5f;
+    [SerializeField] float attackRange = 2f;
+    bool isAttacking;
 
-    [Header("States & Detection Areas")]
-    [SerializeField] float sightRange = 8f; //Radio de deteccion
-    [SerializeField] float attacktRange =2; //Radio de ataque
-    [SerializeField] bool targetInSightRange;
-    [SerializeField] bool targetInAttackRange;
+    [Header("Senses (Sight & Hearing)")]
+    [SerializeField] float normalSightRange = 15f;
+    [SerializeField] float fieldOfViewAngle = 110f; // Cono de visión
+    [SerializeField] float hearingRange = 8f; // Radio para oírte correr
+    [SerializeField] bool targetDetected;
 
     [Header("Stuck Detection")]
     [SerializeField] float stuckCheckTime = 2f;
-    [SerializeField] float stuckThreshold = 0.1f; //margen de detencion e stuck
+    [SerializeField] float stuckThreshold = 0.1f;
     [SerializeField] float maxStuckDuration = 3f;
     float stuckTimer;
-    float lastCheckTime; //Tiempo de chequeo antes de estar stuck
-    Vector3 lastPosition;//Posicion del ltimo walkpoint perseguido
-
+    float lastCheckTime;
+    Vector3 lastPosition;
     #endregion
+
     private void Awake()
     {
-        target = GameObject.Find("Player").transform;
+        GameObject playerObj = GameObject.Find("Player");
+        target = playerObj.transform;
+        playerScript = playerObj.GetComponent<FP_Controller>();
         agent = GetComponent<NavMeshAgent>();
+
         lastPosition = transform.position;
         lastCheckTime = Time.time;
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
-        EnemyStateUpdater();
+        if (isAttacking) return; // Si te atrapó, deja de actualizar la IA normal
+
+        DetectPlayer();
         CheckIfStuck();
     }
 
-    void EnemyStateUpdater()
-    {   // como cambia de estado
-        //Esfera de detección fisica
-        Collider[] hits = Physics.OverlapSphere(transform.position, sightRange, targetLayer);
-        targetInSightRange = hits.Length > 0;
-        if (targetInSightRange)
+    void DetectPlayer()
+    {
+        float distanceToPlayer = Vector3.Distance(transform.position, target.position);
+        targetDetected = false;
+
+        // Si el jugador corre, hace ruido y lo detectamos de espaldas por el oído
+        if (playerScript.isSprinting && distanceToPlayer <= hearingRange)
         {
-            float distance = Vector3.Distance(transform.position, target.position);
-            targetInAttackRange = distance <= attacktRange;
+            targetDetected = true;
         }
-        //camnbio de estados
-        if (!targetInSightRange && !targetInAttackRange) Patroling();
-        else if (targetInSightRange && !targetInAttackRange) ChaseTarget();
-        else if (targetInSightRange && targetInAttackRange) AttackTarget();
+        else
+        {
+            // Ajustamos la visión si el jugador está agachado (más difícil de ver)
+            float currentSightRange = playerScript.isCrounching ? normalSightRange * 0.5f : normalSightRange;
+
+            if (distanceToPlayer <= currentSightRange)
+            {
+                Vector3 directionToPlayer = (target.position - transform.position).normalized;
+                float angleToPlayer = Vector3.Angle(transform.forward, directionToPlayer);
+
+                // Comprobar si está dentro del cono de visión
+                if (angleToPlayer < fieldOfViewAngle / 2f)
+                {
+                    // Trazar un rayo para asegurar que no hay paredes entre enemigo y jugador
+                    if (!Physics.Raycast(transform.position + Vector3.up, directionToPlayer, distanceToPlayer, obstacleLayer))
+                    {
+                        targetDetected = true;
+                    }
+                }
+            }
+        }
+
+        // Determinar Estado
+        if (targetDetected && distanceToPlayer > attackRange) ChaseTarget();
+        else if (targetDetected && distanceToPlayer <= attackRange) CatchPlayer(); // Jumpscare
+        else Patroling();
     }
+
     void Patroling()
     {
+        agent.speed = patrolSpeed;
+
         if (!walkPointSet)
         {
-            SearchWalkPoint();  
+            SearchWalkPoint();
         }
         else agent.SetDestination(walkPoint);
-        if ((transform.position - walkPoint).sqrMagnitude < 1f)
+
+        if ((transform.position - walkPoint).sqrMagnitude < 2f)
         {
             walkPointSet = false;
         }
@@ -96,11 +119,11 @@ public class EnemyAiBase : MonoBehaviour
         {
             attempts++;
             Vector3 randomPoint = transform.position + new Vector3(Random.Range(-walkPointRange, walkPointRange), 0, Random.Range(-walkPointRange, walkPointRange));
-            //Mira si el punto esta en un lugar con NavMesh
+
             if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, 2f, NavMesh.AllAreas))
             {
                 walkPoint = hit.position;
-                if (Physics.Raycast(walkPoint, -transform.up, 2f, groundLayer))
+                if (Physics.Raycast(walkPoint + Vector3.up * 2, -Vector3.up, 3f, groundLayer))
                 {
                     walkPointSet = true;
                 }
@@ -110,31 +133,24 @@ public class EnemyAiBase : MonoBehaviour
 
     void ChaseTarget()
     {
+        agent.speed = chaseSpeed;
         agent.SetDestination(target.position);
     }
 
-    void AttackTarget()
+    void CatchPlayer()
     {
-        agent.SetDestination(transform.position);
+        isAttacking = true;
+        agent.isStopped = true;
+
+        // Hacer que mire al jugador fijamente
         Vector3 direction = (target.position - transform.position).normalized;
-        if (direction != Vector3.zero)
-        {
-            Quaternion lookRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, agent.angularSpeed * Time.deltaTime);
-        }
-        if (!alreadyAttacked)
-        {
-            Rigidbody rb = Instantiate(projectile, shootPoint.position, Quaternion.identity).GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * shootSpeedZ, ForceMode.Impulse);
-            alreadyAttacked = true;
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
-        }
+        direction.y = 0;
+        transform.rotation = Quaternion.LookRotation(direction);
+
+        // AQUÍ PONDRÍAS TU LÓGICA DE JUMPSCARE O GAME OVER
+        Debug.Log("¡TE ATRAPÓ! Jumpscare / Game Over.");
     }
-    
-    void ResetAttack()
-    {
-        alreadyAttacked = false;
-    }
+
     void CheckIfStuck()
     {
         if (Time.time - lastCheckTime > stuckCheckTime)
@@ -159,12 +175,24 @@ public class EnemyAiBase : MonoBehaviour
             lastCheckTime = Time.time;
         }
     }
+
     private void OnDrawGizmosSelected()
     {
         if (Application.isPlaying) return;
+
+        // Rango de ataque (Rojo)
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attacktRange);
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+
+        // Rango de Oído (Azul)
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, hearingRange);
+
+        // Cono de Visión (Amarillo)
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, sightRange);
+        Vector3 leftBoundary = Quaternion.Euler(0, -fieldOfViewAngle / 2, 0) * transform.forward;
+        Vector3 rightBoundary = Quaternion.Euler(0, fieldOfViewAngle / 2, 0) * transform.forward;
+        Gizmos.DrawRay(transform.position, leftBoundary * normalSightRange);
+        Gizmos.DrawRay(transform.position, rightBoundary * normalSightRange);
     }
 }

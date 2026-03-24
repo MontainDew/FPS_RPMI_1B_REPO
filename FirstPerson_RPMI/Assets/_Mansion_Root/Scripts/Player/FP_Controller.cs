@@ -6,45 +6,48 @@ public class FP_Controller : MonoBehaviour
     #region General Variables
     [Header("Movement & Look")]
     [SerializeField] GameObject camHolder;
-    [SerializeField] float speed = 5f;
-    [SerializeField] float crouchSpeed = 3f;
-    [SerializeField] float sprintSpeed = 8f;
+    [SerializeField] float speed = 3f; // Más lento para terror
+    [SerializeField] float crouchSpeed = 1.5f;
+    [SerializeField] float sprintSpeed = 6f;
     [SerializeField] float maxForce = 1f;
     [SerializeField] float sensitivity = 0.1f;
 
     [Header("Jump and GroundCheck")]
     [SerializeField] bool isGrounded;
-    [SerializeField] float jumpForce = 5f;
+    [SerializeField] float jumpForce = 4f;
     [SerializeField] Transform groundCheck;
     [SerializeField] float groundCheckRadius = 0.3f;
     [SerializeField] LayerMask groundLayer;
 
     [Header("Player State Bools")]
-    [SerializeField] bool isSprinting;
-    [SerializeField] bool isCrounching;
+    public bool isSprinting;
+    public bool isCrounching; // Hecho público para que el enemigo lo lea
+
+    [Header("Horror Mechanics")]
+    [SerializeField] Light flashlight; // Linterna
+    [SerializeField] float standingHeight = 0.6f; // Altura normal de la cámara
+    [SerializeField] float crouchingHeight = -0.2f; // Altura de la cámara al agacharse
+    [SerializeField] float crouchTransitionSpeed = 5f;
 
     [Header("Lean Settings")]
     [SerializeField] float leanAngle = 10f;
     [SerializeField] float leanSpeed = 4f;
     [SerializeField] float leanOffset = 0.1f;
 
-    [Header("Head Bob Y Offset Settings")]
+    [Header("Head Bob Settings")]
     [SerializeField] float bobAmplitude = 0.02f;
     [SerializeField] float bobFrequency = 6f;
     [SerializeField] float bobSmoothing = 5f;
 
-    [Header("Footsteps - Wood Interior")]
+    [Header("Footsteps - Sounds")]
     [SerializeField] AudioSource footstepSource;
     [SerializeField] AudioClip[] woodFootsteps;
-
-    [SerializeField] float walkStepRate = 0.55f;
-    [SerializeField] float sprintStepRate = 0.32f;
-    [SerializeField] float crouchStepRate = 0.85f;
-
-    [SerializeField] float walkVolume = 0.6f;
-    [SerializeField] float sprintVolume = 0.95f;
-    [SerializeField] float crouchVolume = 0.25f;
-
+    [SerializeField] float walkStepRate = 0.6f;
+    [SerializeField] float sprintStepRate = 0.4f;
+    [SerializeField] float crouchStepRate = 0.9f;
+    [SerializeField] float walkVolume = 0.5f;
+    [SerializeField] float sprintVolume = 0.8f;
+    [SerializeField] float crouchVolume = 0.15f; // Más silencioso al agacharse
     [SerializeField] float fadeOutSpeed = 3f;
 
     float stepTimer;
@@ -62,6 +65,7 @@ public class FP_Controller : MonoBehaviour
     float currentLean;
     Vector3 initialCamPos;
     float bobTimer;
+    float targetCamHeight;
 
     private void Awake()
     {
@@ -74,6 +78,7 @@ public class FP_Controller : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         initialCamPos = camHolder.transform.localPosition;
+        targetCamHeight = standingHeight;
     }
 
     void Update()
@@ -91,7 +96,7 @@ public class FP_Controller : MonoBehaviour
     private void LateUpdate()
     {
         CameraLook();
-        ApplyHeadBob();
+        ApplyHeadBobAndCrouch();
     }
 
     void CameraLook()
@@ -100,7 +105,7 @@ public class FP_Controller : MonoBehaviour
         float pitch = -lookInput.y * sensitivity;
 
         lookRotation += pitch;
-        lookRotation = Mathf.Clamp(lookRotation, -90f, 90f);
+        lookRotation = Mathf.Clamp(lookRotation, -85f, 85f); // Restringido para que no se rompa el cuello
 
         float targetLean = leanInput * leanAngle;
         currentLean = Mathf.Lerp(currentLean, targetLean, Time.deltaTime * leanSpeed);
@@ -109,8 +114,12 @@ public class FP_Controller : MonoBehaviour
         camHolder.transform.localRotation = Quaternion.Euler(lookRotation, 0f, -currentLean);
     }
 
-    void ApplyHeadBob()
+    void ApplyHeadBobAndCrouch()
     {
+        // Transición suave al agacharse
+        targetCamHeight = isCrounching ? crouchingHeight : standingHeight;
+        initialCamPos.y = Mathf.Lerp(initialCamPos.y, targetCamHeight, Time.deltaTime * crouchTransitionSpeed);
+
         Vector3 targetPos = initialCamPos;
 
         if (moveInput.magnitude > 0.1f && isGrounded)
@@ -125,17 +134,15 @@ public class FP_Controller : MonoBehaviour
         }
 
         targetPos.x += leanInput * leanOffset;
-        camHolder.transform.localPosition =
-            Vector3.Lerp(camHolder.transform.localPosition, targetPos, Time.deltaTime * bobSmoothing);
+        camHolder.transform.localPosition = Vector3.Lerp(camHolder.transform.localPosition, targetPos, Time.deltaTime * bobSmoothing);
     }
 
     void Movement()
     {
         Vector3 currentVelocity = rb.linearVelocity;
         Vector3 targetVelocity = new Vector3(moveInput.x, 0, moveInput.y);
-        targetVelocity *= isCrounching ? crouchSpeed :
-                          isSprinting ? sprintSpeed : speed;
 
+        targetVelocity *= isCrounching ? crouchSpeed : isSprinting ? sprintSpeed : speed;
         targetVelocity = transform.TransformDirection(targetVelocity);
 
         Vector3 velocityChange = (targetVelocity - currentVelocity);
@@ -147,13 +154,9 @@ public class FP_Controller : MonoBehaviour
 
     void Jump()
     {
-        if (isGrounded)
+        if (isGrounded && !isCrounching) // No saltar si está agachado
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
-
-    // =========================
-    // FOOTSTEPS SYSTEM CON FADE Y AGACHADO FUNCIONAL
-    // =========================
 
     void HandleFootsteps()
     {
@@ -163,25 +166,8 @@ public class FP_Controller : MonoBehaviour
 
         if (hasMovementInput)
         {
-            float stepRate = walkStepRate;
-            float volume = walkVolume;
-
-            if (isSprinting)
-            {
-                stepRate = sprintStepRate;
-                volume = sprintVolume;
-                footstepSource.pitch = Random.Range(0.92f, 0.97f);
-            }
-            else if (isCrounching)
-            {
-                stepRate = crouchStepRate;
-                volume = crouchVolume;
-                footstepSource.pitch = Random.Range(0.98f, 1.02f);
-            }
-            else
-            {
-                footstepSource.pitch = Random.Range(0.96f, 1.04f);
-            }
+            float stepRate = isSprinting ? sprintStepRate : isCrounching ? crouchStepRate : walkStepRate;
+            float volume = isSprinting ? sprintVolume : isCrounching ? crouchVolume : walkVolume;
 
             stepTimer -= Time.deltaTime;
 
@@ -190,6 +176,7 @@ public class FP_Controller : MonoBehaviour
                 int index = Random.Range(0, woodFootsteps.Length);
                 footstepSource.clip = woodFootsteps[index];
                 footstepSource.volume = volume + Random.Range(-0.05f, 0.05f);
+                footstepSource.pitch = Random.Range(0.9f, 1.1f);
                 footstepSource.Play();
                 isFootstepPlaying = true;
 
@@ -214,27 +201,18 @@ public class FP_Controller : MonoBehaviour
     }
 
     #region Input Methods
-    public void OnMove(InputAction.CallbackContext context)
-    {
-        moveInput = context.ReadValue<Vector2>();
-    }
-
-    public void OnLook(InputAction.CallbackContext context)
-    {
-        lookInput = context.ReadValue<Vector2>();
-    }
-
-    public void OnJump(InputAction.CallbackContext context)
-    {
-        if (context.performed) Jump();
-    }
+    public void OnMove(InputAction.CallbackContext context) { moveInput = context.ReadValue<Vector2>(); }
+    public void OnLook(InputAction.CallbackContext context) { lookInput = context.ReadValue<Vector2>(); }
+    public void OnJump(InputAction.CallbackContext context) { if (context.performed) Jump(); }
+    public void OnLean(InputAction.CallbackContext context) { leanInput = context.ReadValue<float>(); }
 
     public void OnCrouch(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
             isCrounching = !isCrounching;
-            anim.SetBool("isCrouching", isCrounching);
+            if (anim != null) anim.SetBool("isCrouching", isCrounching);
+            if (isCrounching) isSprinting = false; // Cancelar sprint al agacharse
         }
     }
 
@@ -244,9 +222,13 @@ public class FP_Controller : MonoBehaviour
         if (context.canceled) isSprinting = false;
     }
 
-    public void OnLean(InputAction.CallbackContext context)
+    // Nuevo input para la linterna (necesitas mapearlo en el Input System, por ejemplo, tecla 'F')
+    public void OnFlashlight(InputAction.CallbackContext context)
     {
-        leanInput = context.ReadValue<float>();
+        if (context.performed && flashlight != null)
+        {
+            flashlight.enabled = !flashlight.enabled;
+        }
     }
     #endregion
 }
