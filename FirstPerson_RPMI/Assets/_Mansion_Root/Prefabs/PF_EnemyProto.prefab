@@ -480,7 +480,7 @@ MonoBehaviour:
   attackRange: 2
   normalSightRange: 100
   fieldOfViewAngle: 110
-  hearingRange: 200
+  hearingRange: 150
   targetDetected: 0
   stuckCheckTime: 2
   stuckThreshold: 0.1
