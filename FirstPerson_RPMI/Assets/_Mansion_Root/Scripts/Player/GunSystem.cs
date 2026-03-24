@@ -17,9 +17,7 @@ public class GunSystem : MonoBehaviour
     [SerializeField] int damage = 10;
     [SerializeField] float range = 100f;
     [SerializeField] float spread = 0f; //Radio de dispersión
-    [SerializeField] float shootingCooldown = 0.2f;
-    [SerializeField] float reloadTime = 1.5f;
-    [SerializeField] bool allowButtonHold = false; // El disparo se puede mantener o no 
+    [SerializeField] float flashCooldown = 0.2f;
 
     [Header("Bullet Management")]
     [SerializeField] int ammoSize = 30;
@@ -33,7 +31,6 @@ public class GunSystem : MonoBehaviour
     [Header("Dev - Gun State Bools")]
     [SerializeField] bool shooting; //Pone si estamos disparando
     [SerializeField] bool canShoot;  //Pone si podemos disparar
-    [SerializeField] bool reloading;
 
     #endregion
 
@@ -46,23 +43,22 @@ public class GunSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       if (canShoot && shooting && !reloading && bulletsLeft > 0)
+       if (canShoot && shooting && bulletsLeft > 0)
         {
-            StartCoroutine(ShootRoutine());
+            StartCoroutine(FlashRoutine());
         }
     }
 
-    IEnumerator ShootRoutine()
+    IEnumerator FlashRoutine()
     {
         canShoot = false;//Primera capa de seguridad que evita que apilemos disparos
-        if (!allowButtonHold) shooting = false; //Disparación por click
         for(int i = 0; i < bulletsPerTap; i++)
         {
             if(bulletsLeft <= 0) break;//Cuando no hay balas no dispara
             Shoot();
             bulletsLeft--;
         }
-        yield return new WaitForSeconds(shootingCooldown);//tiempo entre disparos
+        yield return new WaitForSeconds(flashCooldown);//tiempo entre disparos
         canShoot = true;
     }
 
@@ -87,40 +83,11 @@ public class GunSystem : MonoBehaviour
             }
         }
     }
-    IEnumerator ReloadRoutine()
-    {
-        reloading = true; //No se estaquea la recarga
-        //aqui iria Animacion de recarga
-        yield return new WaitForSeconds(reloadTime);
-        bulletsLeft = ammoSize;
-        reloading = false;
-    }
-
-    void Reload()
-    {
-        if (bulletsLeft < ammoSize && !reloading)
-        {
-            StartCoroutine(ReloadRoutine());
-        }
-    }
 
     #region Input Methods
     public void OnShoot(InputAction.CallbackContext context)
     {
-        //Comprobar que el disparo se puede mantener o no
-        if (allowButtonHold)
-        {
-            shooting = context.ReadValueAsButton();
-        }
-        else
-        {
-            if (context.performed) shooting = true;
-        }
-    }
-
-    public void OnReload(InputAction.CallbackContext context)
-    {
-        if (context.performed) Reload();
+        if (context.performed) shooting = true;
     }
     #endregion
 }
