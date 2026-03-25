@@ -14,16 +14,9 @@ public class GunSystem : MonoBehaviour
     RaycastHit hit; //Almacén de la información de los objetos ocn los que el raycast puede chocar
 
     [Header("Weapon Parameters")]
-    [SerializeField] int damage = 10;
     [SerializeField] float range = 100f;
     [SerializeField] float spread = 0f; //Radio de dispersión
     [SerializeField] float flashCooldown = 0.2f;
-
-    [Header("Bullet Management")]
-    [SerializeField] int ammoSize = 30;
-    [SerializeField] int bulletsPerTap = 1; //Cantidad de balas por disparo
-    [SerializeField] int bulletsLeft;
-
 
     [Header("Feedback References")]
     [SerializeField] GameObject impactEffect;//Impacto de bala visual
@@ -36,14 +29,13 @@ public class GunSystem : MonoBehaviour
 
     private void Awake()
     {
-        bulletsLeft = ammoSize;
         canShoot = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-       if (canShoot && shooting && bulletsLeft > 0)
+       if (canShoot && shooting)
         {
             StartCoroutine(FlashRoutine());
         }
@@ -52,13 +44,13 @@ public class GunSystem : MonoBehaviour
     IEnumerator FlashRoutine()
     {
         canShoot = false;//Primera capa de seguridad que evita que apilemos disparos
-        for(int i = 0; i < bulletsPerTap; i++)
-        {
-            if(bulletsLeft <= 0) break;//Cuando no hay balas no dispara
+            //Sonido flash pequeño
+            //Particulas flash
+            //Sonido flash grande
+            //Animacion Luz con Flash
             Shoot();
-            bulletsLeft--;
-        }
-        yield return new WaitForSeconds(flashCooldown);//tiempo entre disparos
+            //Sonido recarga flash
+        yield return new WaitForSeconds(flashCooldown);//tiempo entre fotos
         canShoot = true;
     }
 
@@ -79,7 +71,6 @@ public class GunSystem : MonoBehaviour
             if (hit.collider.CompareTag("Enemy"))
             {
                 EnemyHealth enemyhealth = hit.collider.GetComponent<EnemyHealth>();
-                enemyhealth.TakeDamage(damage);
             }
         }
     }
