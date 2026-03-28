@@ -1,5 +1,4 @@
 using System.Collections;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,22 +7,25 @@ public class GunSystem : MonoBehaviour
 
     #region General Variables
     [Header("General References")]
-    [SerializeField] Camera fpsCam; //Ref si disparamos desde el centro de la camara
-    [SerializeField] Transform shootPoint; //Ref si disparamos desde la punta del cañon
-    [SerializeField] LayerMask impactLayer; //Layer con la que interactua el raycast
-    RaycastHit hit; //Almacén de la información de los objetos ocn los que el raycast puede chocar
+    [SerializeField] Camera fpsCam;
+    [SerializeField] Transform shootPoint;
+    [SerializeField] LayerMask impactLayer;
+    RaycastHit hit;
 
     [Header("Weapon Parameters")]
     [SerializeField] float range = 100f;
-    [SerializeField] float spread = 0f; //Radio de dispersión
+    [SerializeField] float spread = 0f;
     [SerializeField] float flashCooldown = 0.2f;
 
+    [Header("Flash Box Settings")]
+    [SerializeField] Vector3 flashBoxSize = new Vector3(2f, 2f, 2f);
+
     [Header("Feedback References")]
-    [SerializeField] GameObject impactEffect;//Impacto de bala visual
+    [SerializeField] GameObject impactEffect;
 
     [Header("Dev - Gun State Bools")]
-    [SerializeField] bool shooting; //Pone si estamos disparando
-    [SerializeField] bool canShoot;  //Pone si podemos disparar
+    [SerializeField] bool shooting;
+    [SerializeField] bool canShoot;
 
     #endregion
 
@@ -32,10 +34,9 @@ public class GunSystem : MonoBehaviour
         canShoot = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
-       if (canShoot && shooting)
+        if (canShoot && shooting)
         {
             StartCoroutine(FlashRoutine());
         }
@@ -43,34 +44,46 @@ public class GunSystem : MonoBehaviour
 
     IEnumerator FlashRoutine()
     {
-        canShoot = false;//Primera capa de seguridad que evita que apilemos disparos
-            //Sonido flash pequeño
-            //Particulas flash
-            //Sonido flash grande
-            //Animacion Luz con Flash
-            Shoot();
-            //Sonido recarga flash
-        yield return new WaitForSeconds(flashCooldown);//tiempo entre fotos
+        canShoot = false;
+
+        //Sonido flash pequeño
+        //Particulas flash
+        //Sonido flash grande
+        //Animacion Luz con Flash
+
+        Shoot(); // Ahora usa BoxCast
+
+        //Sonido recarga flash
+
+        yield return new WaitForSeconds(flashCooldown);
         canShoot = true;
     }
 
     void Shoot()
     {
-        //!!!!!!!!!!!! pium pium raycast wow disparo y toco cosas
         Vector3 direction = fpsCam.transform.forward;
 
-        //Dispersion aleatoria
-        direction.x += Random.Range(-spread, spread);
-        direction.y += Random.Range(-spread, spread);
+        // Origen del BoxCast
+        Vector3 origin = fpsCam.transform.position;
 
-        //rayo
-        //Physics.Raycast(Origen del rayo, dirección, almacén de la info del impacto, longitud del rayo, layer con la que impacta el rayo)
-        if (Physics.Raycast(fpsCam.transform.position, direction, out hit, range, impactLayer))
+        // BoxCastAll para detectar múltiples objetos
+        RaycastHit[] hits = Physics.BoxCastAll(origin, flashBoxSize * 0.5f, direction, fpsCam.transform.rotation, range, impactLayer);
+
+        foreach (RaycastHit h in hits)
         {
-            Debug.Log(hit.collider.name);
-            if (hit.collider.CompareTag("Enemy"))
+            Debug.Log("Flash impactó: " + h.collider.name);
+
+            // Si es enemigo
+            if (h.collider.CompareTag("Enemy"))
             {
-                EnemyHealth enemyhealth = hit.collider.GetComponent<EnemyHealth>();
+                EnemyHealth enemyhealth = h.collider.GetComponent<EnemyHealth>();
+                // Aquí puedes hacer que reaccione al flash
+            }
+
+            // Efecto visual opcional
+            if (impactEffect != null)
+            {
+                Instantiate(impactEffect, h.point, Quaternion.identity);
             }
         }
     }
@@ -79,6 +92,7 @@ public class GunSystem : MonoBehaviour
     public void OnShoot(InputAction.CallbackContext context)
     {
         if (context.performed) shooting = true;
+        if (context.canceled) shooting = false;
     }
     #endregion
 }
