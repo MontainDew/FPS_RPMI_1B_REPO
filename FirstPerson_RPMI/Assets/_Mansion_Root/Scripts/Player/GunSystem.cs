@@ -15,7 +15,7 @@ public class GunSystem : MonoBehaviour
     [Header("Weapon Parameters")]
     [SerializeField] float range = 100f;
     [SerializeField] float spread = 0f;
-    [SerializeField] float flashCooldown = 0.2f;
+    [SerializeField] float flashCooldown = 2f;
 
     [Header("Flash Box Settings")]
     [SerializeField] Vector3 flashBoxSize = new Vector3(2f, 2f, 2f);
@@ -26,6 +26,10 @@ public class GunSystem : MonoBehaviour
     [Header("Dev - Gun State Bools")]
     [SerializeField] bool shooting;
     [SerializeField] bool canShoot;
+
+    [Header("Various References")]
+    [SerializeField] GameObject camLight; //ref al objeto luz
+    [SerializeField] GameObject camParticles; //Ref a las particulas del flash
 
     #endregion
 
@@ -38,24 +42,25 @@ public class GunSystem : MonoBehaviour
     {
         if (canShoot && shooting)
         {
+            canShoot = false;
             StartCoroutine(FlashRoutine());
         }
+        else if (!canShoot && shooting) Debug.Log("Cam is recharging...");
+
     }
 
     IEnumerator FlashRoutine()
     {
-        canShoot = false;
-
-        //Sonido flash pequeño
-        //Particulas flash
-        //Sonido flash grande
-        //Animacion Luz con Flash
-
-        Shoot(); // Ahora usa BoxCast
-
-        //Sonido recarga flash
-
+        camParticles.SetActive(true);
+        yield return new WaitForSeconds(0.6f);
+        AudioManager.Instance.Playsfx(0);
+        camLight.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        Shoot(); //BoxCast
+        AudioManager.Instance.Playsfx(1);
         yield return new WaitForSeconds(flashCooldown);
+        camParticles.SetActive(false);
+        camLight.SetActive(false);
         canShoot = true;
     }
 
@@ -63,24 +68,23 @@ public class GunSystem : MonoBehaviour
     {
         Vector3 direction = fpsCam.transform.forward;
 
-        // Origen del BoxCast
+        //Origen
         Vector3 origin = fpsCam.transform.position;
 
-        // BoxCastAll para detectar múltiples objetos
+        //BoxCast para detectar multiples objetos
         RaycastHit[] hits = Physics.BoxCastAll(origin, flashBoxSize * 0.5f, direction, fpsCam.transform.rotation, range, impactLayer);
 
         foreach (RaycastHit h in hits)
         {
-            Debug.Log("Flash impactó: " + h.collider.name);
+            Debug.Log("Flash impacto: " + h.collider.name);
 
-            // Si es enemigo
+            //Si es enemigo
             if (h.collider.CompareTag("Enemy"))
             {
                 EnemyHealth enemyhealth = h.collider.GetComponent<EnemyHealth>();
-                // Aquí puedes hacer que reaccione al flash
+                
             }
 
-            // Efecto visual opcional
             if (impactEffect != null)
             {
                 Instantiate(impactEffect, h.point, Quaternion.identity);
@@ -91,6 +95,7 @@ public class GunSystem : MonoBehaviour
     #region Input Methods
     public void OnShoot(InputAction.CallbackContext context)
     {
+       
         if (context.performed) shooting = true;
         if (context.canceled) shooting = false;
     }
