@@ -28,8 +28,8 @@ public class GunSystem : MonoBehaviour
     [SerializeField] bool canShoot;
 
     [Header("Various References")]
-    [SerializeField] GameObject camLight; //ref al objeto luz
-    [SerializeField] GameObject camParticles; //Ref a las particulas del flash
+    [SerializeField] GameObject camLight;
+    [SerializeField] GameObject camParticles;
 
     #endregion
 
@@ -46,7 +46,6 @@ public class GunSystem : MonoBehaviour
             StartCoroutine(FlashRoutine());
         }
         else if (!canShoot && shooting) Debug.Log("Cam is recharging...");
-
     }
 
     IEnumerator FlashRoutine()
@@ -56,7 +55,7 @@ public class GunSystem : MonoBehaviour
         AudioManager.Instance.Playsfx(0);
         camLight.SetActive(true);
         yield return new WaitForSeconds(1.5f);
-        Shoot(); //BoxCast
+        Shoot();
         AudioManager.Instance.Playsfx(1);
         yield return new WaitForSeconds(flashCooldown);
         camParticles.SetActive(false);
@@ -67,22 +66,24 @@ public class GunSystem : MonoBehaviour
     void Shoot()
     {
         Vector3 direction = fpsCam.transform.forward;
-
-        //Origen
         Vector3 origin = fpsCam.transform.position;
 
-        //BoxCast para detectar multiples objetos
-        RaycastHit[] hits = Physics.BoxCastAll(origin, flashBoxSize * 0.5f, direction, fpsCam.transform.rotation, range, impactLayer);
+        RaycastHit[] hits = Physics.BoxCastAll(
+            origin,
+            flashBoxSize * 0.5f,
+            direction,
+            fpsCam.transform.rotation,
+            range,
+            impactLayer
+        );
 
         foreach (RaycastHit h in hits)
         {
             Debug.Log("Flash impacto: " + h.collider.name);
 
-            //Si es enemigo
             if (h.collider.CompareTag("Enemy"))
             {
                 EnemyHealth enemyhealth = h.collider.GetComponent<EnemyHealth>();
-                
             }
 
             if (impactEffect != null)
@@ -92,10 +93,32 @@ public class GunSystem : MonoBehaviour
         }
     }
 
+    
+    private void OnDrawGizmos()
+    {
+        if (fpsCam == null) return;
+
+        Gizmos.color = Color.cyan;
+
+        Vector3 origin = fpsCam.transform.position;
+        Vector3 direction = fpsCam.transform.forward;
+
+        // Dibuja la caja en su posición inicial
+        Gizmos.matrix = Matrix4x4.TRS(origin, fpsCam.transform.rotation, Vector3.one);
+        Gizmos.DrawWireCube(Vector3.zero, flashBoxSize);
+
+        // Dibuja la caja al final del rango
+        Gizmos.matrix = Matrix4x4.TRS(origin + direction * range, fpsCam.transform.rotation, Vector3.one);
+        Gizmos.DrawWireCube(Vector3.zero, flashBoxSize);
+
+        // Línea entre ambas cajas
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(origin, origin + direction * range);
+    }
+
     #region Input Methods
     public void OnShoot(InputAction.CallbackContext context)
     {
-       
         if (context.performed) shooting = true;
         if (context.canceled) shooting = false;
     }
