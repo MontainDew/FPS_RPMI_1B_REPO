@@ -13,7 +13,7 @@ public class GunSystem : MonoBehaviour
     RaycastHit hit;
 
     [Header("Weapon Parameters")]
-    [SerializeField] float range = 10f;
+    [SerializeField] float range = 6f;
     [SerializeField] float spread = 0f;
     [SerializeField] float flashCooldown = 2f;
 
@@ -68,22 +68,15 @@ public class GunSystem : MonoBehaviour
         Vector3 direction = fpsCam.transform.forward;
         Vector3 origin = fpsCam.transform.position;
 
-        RaycastHit[] hits = Physics.BoxCastAll(
-            origin,
-            flashBoxSize * 0.5f,
-            direction,
-            fpsCam.transform.rotation,
-            range,
-            impactLayer
-        );
+        RaycastHit[] hits = Physics.BoxCastAll(origin, flashBoxSize * 0.5f, direction, fpsCam.transform.rotation, range, impactLayer);
 
         foreach (RaycastHit h in hits)
         {
             Debug.Log("Flash impacto: " + h.collider.name);
 
-            if (h.collider.CompareTag("Enemy"))
+            if (h.collider.CompareTag("LightPannel"))
             {
-                EnemyHealth enemyhealth = h.collider.GetComponent<EnemyHealth>();
+                //HACER QUE APAREZCA EL FUSIBLE
             }
 
             if (impactEffect != null)
