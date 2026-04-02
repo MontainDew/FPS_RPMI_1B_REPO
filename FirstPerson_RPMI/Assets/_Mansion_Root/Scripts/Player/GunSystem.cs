@@ -13,12 +13,12 @@ public class GunSystem : MonoBehaviour
     RaycastHit hit;
 
     [Header("Weapon Parameters")]
-    [SerializeField] float range = 6f;
+    [SerializeField] float range  = 2f;
     [SerializeField] float spread = 0f;
     [SerializeField] float flashCooldown = 2f;
 
     [Header("Flash Box Settings")]
-    [SerializeField] Vector3 flashBoxSize = new Vector3(2f, 2f, 2f);
+    [SerializeField] Vector3 flashBoxSize = new Vector3(5f, 5f, 1f);
 
     [Header("Feedback References")]
     [SerializeField] GameObject impactEffect;
