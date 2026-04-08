@@ -94,13 +94,20 @@ public class GunSystem : MonoBehaviour
         Vector3 origin = fpsCam.transform.position;
         Vector3 direction = fpsCam.transform.forward;
 
-        // Línea principal del "raycast"
         Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(origin, origin + direction * range);
 
-        // Punto final del raycast
+        int steps = 1; // cantidad de cubos para visualizar el recorrido
+        float stepDistance = range / steps;
+
+        for (int i = 0; i <= steps; i++)
+        {
+            Vector3 center = origin + direction * (stepDistance * i);
+            Gizmos.DrawWireCube(center, flashBoxSize);
+        }
+
+        // Cubo final (impacto máximo)
         Gizmos.color = Color.red;
-        Gizmos.DrawSphere(origin + direction * range, 0.2f);
+        Gizmos.DrawWireCube(origin + direction * range, flashBoxSize);
     }
 
     #region Input Methods
