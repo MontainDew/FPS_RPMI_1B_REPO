@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class NewMonoBehaviourScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class Slots : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public bool hovering;
 
