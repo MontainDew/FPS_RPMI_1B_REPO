@@ -79,6 +79,7 @@ public class FP_Controller : MonoBehaviour
         Cursor.visible = false;
         initialCamPos = camHolder.transform.localPosition;
         targetCamHeight = standingHeight;
+        
     }
 
     void Update()
@@ -86,6 +87,7 @@ public class FP_Controller : MonoBehaviour
         isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayer);
         HandleFootsteps();
         HandleFootstepFadeOut();
+
     }
 
     private void FixedUpdate()

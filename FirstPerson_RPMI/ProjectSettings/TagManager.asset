@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Enemy
   - LightPannel
+  - Fusible1
+  - Fusible2
+  - Fusible3
+  - SensorRoom
   layers:
   - Default
   - TransparentFX
