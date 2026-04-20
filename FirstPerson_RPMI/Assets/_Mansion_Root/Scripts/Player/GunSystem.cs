@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.UI.Image;
 
 public class GunSystem : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class GunSystem : MonoBehaviour
     [SerializeField] Camera fpsCam;
     [SerializeField] Transform shootPoint;
     [SerializeField] LayerMask impactLayer;
+    [SerializeField] LayerMask interactLayer;
     RaycastHit hit;
 
     [Header("Weapon Parameters")]
@@ -127,6 +129,18 @@ public class GunSystem : MonoBehaviour
     {
         if (context.performed) shooting = true;
         if (context.canceled) shooting = false;
+    }
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        
+        Vector3 origin = fpsCam.transform.position;
+        Vector3 direction = fpsCam.transform.forward;
+
+        if (Physics.Raycast(origin, direction, out hit, range, interactLayer))
+        {
+
+        }
     }
     #endregion
 }

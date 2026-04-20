@@ -211,6 +211,7 @@ GameObject:
   - component: {fileID: 5295112097514557594}
   - component: {fileID: 7723284726935233986}
   - component: {fileID: 7479790115333899189}
+  - component: {fileID: 1335716578772510659}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -428,9 +429,25 @@ MonoBehaviour:
     m_ActionId: 3230e7e8-970d-4e23-94fa-d620f14bd759
     m_ActionName: 'Gameplay/Lean[/Keyboard/q,/Keyboard/e]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6863050712185925095}
+        m_TargetAssemblyTypeName: FP_Controller, Assembly-CSharp
+        m_MethodName: OnFlashlight
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: a795aab2-fd2f-4d2c-b1cb-b3d14c3f6b9c
     m_ActionName: 'Gameplay/Flaslight[/Keyboard/f]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a0695e84-2a4d-4a87-90df-8a1b03264532
+    m_ActionName: 'Gameplay/Inventory[/Keyboard/i]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -531,6 +548,7 @@ MonoBehaviour:
   canShoot: 0
   camLight: {fileID: 4627878820845966788}
   camParticles: {fileID: 8309767105478890218}
+  puzzleManager: {fileID: 0}
 --- !u!114 &7479790115333899189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -552,6 +570,21 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   sensors: {fileID: 0}
+--- !u!114 &1335716578772510659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4102560840254363106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: debe1bdc39d137b40ada0b43abd51a48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PuzzleManager
+  fusible1: {fileID: 0}
+  fusible2: {fileID: 0}
+  fusible3: {fileID: 0}
 --- !u!1 &4627878820845966788
 GameObject:
   m_ObjectHideFlags: 0
@@ -5766,6 +5799,7 @@ MonoBehaviour:
   canShoot: 0
   camLight: {fileID: 4627878820845966788}
   camParticles: {fileID: 8309767105478890218}
+  puzzleManager: {fileID: 0}
 --- !u!4 &2949219499383306526 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9941c2051f6add8409f16473bd52bfb8, type: 3}
