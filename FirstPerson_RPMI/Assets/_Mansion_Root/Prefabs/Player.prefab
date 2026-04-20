@@ -210,6 +210,7 @@ GameObject:
   - component: {fileID: 6863050712185925095}
   - component: {fileID: 5295112097514557594}
   - component: {fileID: 7723284726935233986}
+  - component: {fileID: 7479790115333899189}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -530,6 +531,27 @@ MonoBehaviour:
   canShoot: 0
   camLight: {fileID: 4627878820845966788}
   camParticles: {fileID: 8309767105478890218}
+--- !u!114 &7479790115333899189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4102560840254363106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c57556f8da9405d46ad5ea5594193f4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomManagement
+  fusible1Room: 0
+  fusible2Room: 0
+  fusible3Room: 0
+  sensorRoom: 0
+  fusiblePanels:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  sensors: {fileID: 0}
 --- !u!1 &4627878820845966788
 GameObject:
   m_ObjectHideFlags: 0

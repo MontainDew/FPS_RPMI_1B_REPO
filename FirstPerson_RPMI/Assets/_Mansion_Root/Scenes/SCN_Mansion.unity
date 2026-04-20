@@ -3675,9 +3675,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 507932038652671738, guid: 448c2f733f2eb394a94883b5b4a4e3bc, type: 3}
+      propertyPath: m_TagString
+      value: LightPannel3
+      objectReference: {fileID: 0}
     - target: {fileID: 714122055397029636, guid: 448c2f733f2eb394a94883b5b4a4e3bc, type: 3}
       propertyPath: m_Name
       value: Light_Pannel (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 714122055397029636, guid: 448c2f733f2eb394a94883b5b4a4e3bc, type: 3}
+      propertyPath: m_TagString
+      value: LightPannel3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2401286798278995907, guid: 448c2f733f2eb394a94883b5b4a4e3bc, type: 3}
+      propertyPath: m_TagString
+      value: LightPannel3
       objectReference: {fileID: 0}
     - target: {fileID: 3276616081266706944, guid: 448c2f733f2eb394a94883b5b4a4e3bc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7367,6 +7379,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7479790115333899189, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
+      propertyPath: 'fusiblePanels.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8769445080810912636}
+    - target: {fileID: 7479790115333899189, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
+      propertyPath: 'fusiblePanels.Array.data[1]'
+      value: 
+      objectReference: {fileID: 585940271}
+    - target: {fileID: 7479790115333899189, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
+      propertyPath: 'fusiblePanels.Array.data[2]'
+      value: 
+      objectReference: {fileID: 109848232}
     - target: {fileID: 7723284726935233986, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
       propertyPath: range
       value: 6
@@ -7409,18 +7433,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 231546793}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c57556f8da9405d46ad5ea5594193f4b, type: 3}
+  m_Script: {fileID: 11500000, guid: debe1bdc39d137b40ada0b43abd51a48, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RoomManagement
-  fusible1Room: 0
-  fusible2Room: 0
-  fusible3Room: 0
-  sensorRoom: 0
-  fusiblePanels:
-  - {fileID: 8769445080810912636}
-  - {fileID: 109848232}
-  - {fileID: 585940271}
-  sensors: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::PuzzleManager
+  fusible1: {fileID: 0}
+  fusible2: {fileID: 0}
+  fusible3: {fileID: 0}
 --- !u!1 &232575397 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7273087425032351647, guid: 2746cc77170c0434c96d64572db649d2, type: 3}
@@ -18551,9 +18569,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 507932038652671738, guid: 448c2f733f2eb394a94883b5b4a4e3bc, type: 3}
+      propertyPath: m_TagString
+      value: LightPannel2
+      objectReference: {fileID: 0}
     - target: {fileID: 714122055397029636, guid: 448c2f733f2eb394a94883b5b4a4e3bc, type: 3}
       propertyPath: m_Name
       value: Light_Pannel (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 714122055397029636, guid: 448c2f733f2eb394a94883b5b4a4e3bc, type: 3}
+      propertyPath: m_TagString
+      value: LightPannel2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2401286798278995907, guid: 448c2f733f2eb394a94883b5b4a4e3bc, type: 3}
+      propertyPath: m_TagString
+      value: LightPannel2
       objectReference: {fileID: 0}
     - target: {fileID: 3276616081266706944, guid: 448c2f733f2eb394a94883b5b4a4e3bc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -73153,6 +73183,66 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de9788876f67ee041939157bb153b79b, type: 3}
+--- !u!1001 &578790416751827572
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3613633006472802072, guid: 6608eff02da2b1b4fa62ea9e088ec9a6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 26.345
+      objectReference: {fileID: 0}
+    - target: {fileID: 3613633006472802072, guid: 6608eff02da2b1b4fa62ea9e088ec9a6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.632
+      objectReference: {fileID: 0}
+    - target: {fileID: 3613633006472802072, guid: 6608eff02da2b1b4fa62ea9e088ec9a6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10.636
+      objectReference: {fileID: 0}
+    - target: {fileID: 3613633006472802072, guid: 6608eff02da2b1b4fa62ea9e088ec9a6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3613633006472802072, guid: 6608eff02da2b1b4fa62ea9e088ec9a6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3613633006472802072, guid: 6608eff02da2b1b4fa62ea9e088ec9a6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3613633006472802072, guid: 6608eff02da2b1b4fa62ea9e088ec9a6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3613633006472802072, guid: 6608eff02da2b1b4fa62ea9e088ec9a6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3613633006472802072, guid: 6608eff02da2b1b4fa62ea9e088ec9a6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3613633006472802072, guid: 6608eff02da2b1b4fa62ea9e088ec9a6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912323171501394711, guid: 6608eff02da2b1b4fa62ea9e088ec9a6, type: 3}
+      propertyPath: m_Name
+      value: FusibleBox
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects:
+    - {fileID: 1267724525109211250, guid: 6608eff02da2b1b4fa62ea9e088ec9a6, type: 3}
+    - {fileID: 5784160495955961649, guid: 6608eff02da2b1b4fa62ea9e088ec9a6, type: 3}
+    - {fileID: 2148600790258842565, guid: 6608eff02da2b1b4fa62ea9e088ec9a6, type: 3}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6608eff02da2b1b4fa62ea9e088ec9a6, type: 3}
 --- !u!1001 &8769445080810912635
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -73161,9 +73251,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 507932038652671738, guid: 448c2f733f2eb394a94883b5b4a4e3bc, type: 3}
+      propertyPath: m_TagString
+      value: LightPannel1
+      objectReference: {fileID: 0}
     - target: {fileID: 714122055397029636, guid: 448c2f733f2eb394a94883b5b4a4e3bc, type: 3}
       propertyPath: m_Name
       value: Light_Pannel
+      objectReference: {fileID: 0}
+    - target: {fileID: 714122055397029636, guid: 448c2f733f2eb394a94883b5b4a4e3bc, type: 3}
+      propertyPath: m_TagString
+      value: LightPannel1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2401286798278995907, guid: 448c2f733f2eb394a94883b5b4a4e3bc, type: 3}
+      propertyPath: m_TagString
+      value: LightPannel1
       objectReference: {fileID: 0}
     - target: {fileID: 3276616081266706944, guid: 448c2f733f2eb394a94883b5b4a4e3bc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -73230,9 +73332,10 @@ SceneRoots:
   - {fileID: 558206292}
   - {fileID: 231546792}
   - {fileID: 8769445080810912635}
-  - {fileID: 109848231}
   - {fileID: 585940270}
+  - {fileID: 109848231}
   - {fileID: 1802225720}
   - {fileID: 607254891}
   - {fileID: 97104926}
   - {fileID: 1240388796}
+  - {fileID: 578790416751827572}

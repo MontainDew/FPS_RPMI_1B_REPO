@@ -25,23 +25,26 @@ public class RoomManagement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (fusible1Room == true && fusible2Room == false && fusible3Room == false && sensors == false)
+        if (fusible1Room == true && fusible2Room == false && fusible3Room == false && sensorRoom == false)
         {
+            Debug.Log("FUSIBLES 1");
             fusiblePanels[0].SetActive(true);
             fusiblePanels[1].SetActive(false);
             fusiblePanels[2].SetActive(false);
             sensors.SetActive(false);
         }
 
-        else if (fusible2Room == true && fusible1Room == false && fusible3Room == false && sensors == false)
+        else if (fusible2Room == true && fusible1Room == false && fusible3Room == false && sensorRoom == false)
         {
+            Debug.Log("FUSIBLES 2");
             fusiblePanels[0].SetActive(false);
             fusiblePanels[1].SetActive(true);
             fusiblePanels[2].SetActive(false);
             sensors.SetActive(false);
         }
-        else if (fusible3Room == true && fusible1Room == false && fusible2Room == false && sensors == false)
+        else if (fusible3Room == true && fusible1Room == false && fusible2Room == false && sensorRoom == false)
         {
+            Debug.Log("FUSIBLES 3");
             fusiblePanels[0].SetActive(false);
             fusiblePanels[1].SetActive(false);
             fusiblePanels[2].SetActive(true);
@@ -49,6 +52,7 @@ public class RoomManagement : MonoBehaviour
         }
         else if (sensorRoom == true && fusible1Room == false && fusible2Room == false && fusible3Room == false)
         {
+            Debug.Log("SENSORES");
             fusiblePanels[0].SetActive(false);
             fusiblePanels[1].SetActive(false);
             fusiblePanels[2].SetActive(false);
@@ -56,6 +60,7 @@ public class RoomManagement : MonoBehaviour
         }
         else
         {
+            Debug.Log("EN NINGUNA");
             fusiblePanels[0].SetActive(false);
             fusiblePanels[1].SetActive(false);
             fusiblePanels[2].SetActive(false);
@@ -65,6 +70,7 @@ public class RoomManagement : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        
         if (other.gameObject.CompareTag("Fusible1"))
         {
             fusible1Room = true;
@@ -97,7 +103,7 @@ public class RoomManagement : MonoBehaviour
             fusible3Room = false;
             sensorRoom = true;
         }
-        else other.gameObject.CompareTag("SensorRoom");
+        else
         {
             fusible1Room = false;
             fusible2Room = false;

@@ -5,11 +5,13 @@ TagManager:
   serializedVersion: 3
   tags:
   - Enemy
-  - LightPannel
   - Fusible1
   - Fusible2
   - Fusible3
   - SensorRoom
+  - LightPannel1
+  - LightPannel2
+  - LightPannel3
   layers:
   - Default
   - TransparentFX

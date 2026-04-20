@@ -31,6 +31,8 @@ public class GunSystem : MonoBehaviour
     [SerializeField] GameObject camLight;
     [SerializeField] GameObject camParticles;
 
+    [Header("Scripts References")]
+    public PuzzleManager puzzleManager;
     #endregion
 
     private void Awake()
@@ -74,9 +76,19 @@ public class GunSystem : MonoBehaviour
         {
             Debug.Log("Flash impacto: " + h.collider.name);
 
-            if (h.collider.CompareTag("LightPannel"))
+            if (h.collider.CompareTag("LightPannel1"))
             {
-                //HACER QUE APAREZCA EL FUSIBLE
+                puzzleManager.fusible1.SetActive(true);
+            }
+
+            if (h.collider.CompareTag("LightPannel2"))
+            {
+                puzzleManager.fusible2.SetActive(true);
+            }
+
+            if (h.collider.CompareTag("LightPannel3"))
+            {
+                puzzleManager.fusible3.SetActive(true);
             }
 
             if (impactEffect != null)
