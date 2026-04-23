@@ -35,6 +35,7 @@ public class GunSystem : MonoBehaviour
 
     [Header("Scripts References")]
     public PuzzleManager puzzleManager;
+    public SensorsDetection sensorsDetection;
     #endregion
 
     private void Awake()
@@ -91,6 +92,11 @@ public class GunSystem : MonoBehaviour
             if (h.collider.CompareTag("LightPannel3"))
             {
                 puzzleManager.fusible3.SetActive(true);
+            }
+
+            if (h.collider.CompareTag("Sensor"))
+            {
+                sensorsDetection.isDeactivated = true;
             }
 
             if (impactEffect != null)

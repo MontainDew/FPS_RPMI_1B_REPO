@@ -7382,7 +7382,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6848693870807386463, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 33.69
+      value: 30.9
       objectReference: {fileID: 0}
     - target: {fileID: 6848693870807386463, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7390,7 +7390,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6848693870807386463, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.74
+      value: -5.57
       objectReference: {fileID: 0}
     - target: {fileID: 6848693870807386463, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -23114,6 +23114,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 326eb8f025dfa0842a1a7c6ea455b6e3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b78e8a730b8a9654f99ecd5d33fbc3d8, type: 2}
     - target: {fileID: 919132149155446097, guid: 326eb8f025dfa0842a1a7c6ea455b6e3, type: 3}
       propertyPath: m_Name
       value: Detection_Area_30M
@@ -27875,6 +27879,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: b64d74af6e5a774448f35b63b25e43da, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b78e8a730b8a9654f99ecd5d33fbc3d8, type: 2}
     - target: {fileID: 919132149155446097, guid: b64d74af6e5a774448f35b63b25e43da, type: 3}
       propertyPath: m_Name
       value: Detection_Area_10M
@@ -39781,6 +39789,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: b64d74af6e5a774448f35b63b25e43da, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b78e8a730b8a9654f99ecd5d33fbc3d8, type: 2}
     - target: {fileID: 919132149155446097, guid: b64d74af6e5a774448f35b63b25e43da, type: 3}
       propertyPath: m_Name
       value: Detection_Area_10M
@@ -40783,7 +40795,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1249266369
 Transform:
   m_ObjectHideFlags: 0
@@ -52278,6 +52290,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 8381b185c44d73842a7bd45d6e270a45, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b78e8a730b8a9654f99ecd5d33fbc3d8, type: 2}
     - target: {fileID: 919132149155446097, guid: 8381b185c44d73842a7bd45d6e270a45, type: 3}
       propertyPath: m_Name
       value: Detection_Area_33M
