@@ -101,6 +101,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sensor_Movimiento
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7a34163395bbe1545b480c463a845178, type: 3}
+      propertyPath: m_TagString
+      value: Sensor
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -190,8 +194,63 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 56da189cc4261ae4aa7d4adf0595ed78, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4966712109008863882}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 56da189cc4261ae4aa7d4adf0595ed78, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7999212528172454888}
   m_SourcePrefab: {fileID: 100100000, guid: 56da189cc4261ae4aa7d4adf0595ed78, type: 3}
+--- !u!1 &8266222165507777159 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 56da189cc4261ae4aa7d4adf0595ed78, type: 3}
+  m_PrefabInstance: {fileID: 9112731010079924182}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &4966712109008863882
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8266222165507777159}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4493585093827132993, guid: 56da189cc4261ae4aa7d4adf0595ed78, type: 3}
+--- !u!114 &7999212528172454888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8266222165507777159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ba8092c585bc9345a00defd9ced1a28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SensorsDetection
+  detectionCollider: {fileID: 0}
+  materialRenderer: {fileID: 0}
+  playerDetected: 0
+  isDeactivated: 0
+  deactivationTime: 0
+  normalMat: {fileID: 2100000, guid: b78e8a730b8a9654f99ecd5d33fbc3d8, type: 2}
+  detectedMat: {fileID: 2100000, guid: 8d99e4de7619a56478eab4a5a7725877, type: 2}
+  deactivatedMat: {fileID: 2100000, guid: 3b0e3d621d7f4874b955d569c41ff18d, type: 2}
+  rewardCage: {fileID: 0}
+  rewardPickable: 0
 --- !u!4 &8789995061921019965 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 56da189cc4261ae4aa7d4adf0595ed78, type: 3}

@@ -5,10 +5,16 @@ public class SensorsDetection : MonoBehaviour
 {
 
     [Header("Sensors Detection Variables")]
-    [SerializeField] Material detectionArea;
+    public MeshCollider detectionCollider;
+    public MeshRenderer materialRenderer;
     [SerializeField] bool playerDetected;
     public bool isDeactivated;
     [SerializeField] float deactivationTime;
+
+    [Header("Material Varibles")]
+    public Material normalMat;
+    public Material detectedMat;
+    public Material deactivatedMat;
 
     [Header("Puzzle Reward Objects")]
     [SerializeField] GameObject rewardCage;
@@ -23,12 +29,17 @@ public class SensorsDetection : MonoBehaviour
         rewardPickable = true;
     }
 
-    // Update is called once per frame
+    private void Awake()
+    {
+        detectionCollider = GetComponent<MeshCollider>();
+        materialRenderer = GetComponent<MeshRenderer>();
+    }
+
     void Update()
     {
         if (playerDetected == false && isDeactivated == true)
         {
-            StartCoroutine(FlashedRoutine);
+            StartCoroutine(FlashedRoutine());
         }
     }
 
@@ -38,18 +49,20 @@ public class SensorsDetection : MonoBehaviour
         playerDetected = false;
         rewardPickable = true;
         //Animacion abrir baul llave
-        //Cambiar material a no detectado
-        //Reactivar todos los collider
+        materialRenderer.material = normalMat; //A todos los sensores a la vez
+        detectionCollider.enabled = false; //A todos los sensores a la vez
     }
 
     IEnumerator FlashedRoutine()
     {
         //Sonido desactivado
-        //Desactivar collider
+        detectionCollider.enabled = false;
+        materialRenderer.material = deactivatedMat;
         //Animacion desactivado
         yield return new WaitForSeconds(deactivationTime);
         //Sonido reactivado
-        //Reactivar collider
+        detectionCollider.enabled = true;
+        materialRenderer.material = normalMat;
         //Animacion reactivado
         isDeactivated = false;
     }
@@ -62,8 +75,8 @@ public class SensorsDetection : MonoBehaviour
             rewardPickable = false;
             //ANIMACION CERRAR BAUL LLAVE
             //Sonido detectado
-            detectionArea = new Material(); //Material detectado 
-            //Desactivar colliders para que no repita el sonido con otros sensores si ya ha sido detectado con uno
+            materialRenderer.material = detectedMat;
+            detectionCollider.enabled = false; //De todos los sensores a la vez
         }
     }
 
