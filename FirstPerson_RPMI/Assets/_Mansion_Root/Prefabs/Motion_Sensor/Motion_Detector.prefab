@@ -97,24 +97,73 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -8391222552659086748, guid: 7a34163395bbe1545b480c463a845178, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -8391222552659086748, guid: 7a34163395bbe1545b480c463a845178, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: -5568371526223589888, guid: 7a34163395bbe1545b480c463a845178, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -5568371526223589888, guid: 7a34163395bbe1545b480c463a845178, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 7a34163395bbe1545b480c463a845178, type: 3}
       propertyPath: m_Name
       value: Sensor_Movimiento
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 7a34163395bbe1545b480c463a845178, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7a34163395bbe1545b480c463a845178, type: 3}
       propertyPath: m_TagString
-      value: Sensor
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7a34163395bbe1545b480c463a845178, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8831992473010828342}
   m_SourcePrefab: {fileID: 100100000, guid: 7a34163395bbe1545b480c463a845178, type: 3}
 --- !u!4 &55045344894868992 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7a34163395bbe1545b480c463a845178, type: 3}
   m_PrefabInstance: {fileID: 525010267105540587}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &831019545019745466 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 7a34163395bbe1545b480c463a845178, type: 3}
+  m_PrefabInstance: {fileID: 525010267105540587}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &8831992473010828342
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831019545019745466}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.45, y: 0.55, z: 0.55}
+  m_Center: {x: 0.000000430478, y: -0.04, z: -0.09}
 --- !u!1001 &9112731010079924182
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -200,7 +249,7 @@ PrefabInstance:
       addedObject: {fileID: 4966712109008863882}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 56da189cc4261ae4aa7d4adf0595ed78, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7999212528172454888}
+      addedObject: {fileID: 5655067494648080043}
   m_SourcePrefab: {fileID: 100100000, guid: 56da189cc4261ae4aa7d4adf0595ed78, type: 3}
 --- !u!1 &8266222165507777159 stripped
 GameObject:
@@ -229,7 +278,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4493585093827132993, guid: 56da189cc4261ae4aa7d4adf0595ed78, type: 3}
---- !u!114 &7999212528172454888
+--- !u!114 &5655067494648080043
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -245,7 +294,7 @@ MonoBehaviour:
   materialRenderer: {fileID: 0}
   playerDetected: 0
   isDeactivated: 0
-  deactivationTime: 0
+  deactivationTime: 2
   normalMat: {fileID: 2100000, guid: b78e8a730b8a9654f99ecd5d33fbc3d8, type: 2}
   detectedMat: {fileID: 2100000, guid: 8d99e4de7619a56478eab4a5a7725877, type: 2}
   deactivatedMat: {fileID: 2100000, guid: 3b0e3d621d7f4874b955d569c41ff18d, type: 2}
