@@ -39,6 +39,7 @@ public class SensorsDetection : MonoBehaviour
     {
         if (playerDetected == false && isDeactivated == true)
         {
+            Debug.Log("LISTO PARA DESCTIVAR");
             StartCoroutine(FlashedRoutine());
         }
     }
@@ -55,6 +56,8 @@ public class SensorsDetection : MonoBehaviour
 
     IEnumerator FlashedRoutine()
     {
+        Debug.Log("CAMBIO DE ESTADO");
+
         //Sonido desactivado
         detectionCollider.enabled = false;
         materialRenderer.material = deactivatedMat;
