@@ -5,11 +5,19 @@ TagManager:
   serializedVersion: 3
   tags:
   - Enemy
-  - LightPannel
   - Fusible1
   - Fusible2
   - Fusible3
   - SensorRoom
+  - LightPannel1
+  - LightPannel2
+  - LightPannel3
+  - LightPannel
+  - Sensor1
+  - Sensor2
+  - Sensor3
+  - Sensor4
+  - Sensor5
   layers:
   - Default
   - TransparentFX
@@ -20,7 +28,7 @@ TagManager:
   - Interactable
   - Player
   - obstacleLayer
-  - 
+  - ItemsLayer
   - 
   - 
   - 

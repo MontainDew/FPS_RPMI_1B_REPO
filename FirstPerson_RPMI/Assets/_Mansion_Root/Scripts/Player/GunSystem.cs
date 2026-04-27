@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.UI.Image;
 
 public class GunSystem : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class GunSystem : MonoBehaviour
     [SerializeField] Camera fpsCam;
     [SerializeField] Transform shootPoint;
     [SerializeField] LayerMask impactLayer;
+    [SerializeField] LayerMask interactLayer;
     RaycastHit hit;
 
     [Header("Weapon Parameters")]
@@ -31,6 +33,13 @@ public class GunSystem : MonoBehaviour
     [SerializeField] GameObject camLight;
     [SerializeField] GameObject camParticles;
 
+    [Header("Scripts References")]
+    public PuzzleManager puzzleManager;
+    public SensorsDetection sensorsDetection1;
+    public SensorsDetection sensorsDetection2;
+    public SensorsDetection sensorsDetection3;
+    public SensorsDetection sensorsDetection4;
+    public SensorsDetection sensorsDetection5;
     #endregion
 
     private void Awake()
@@ -74,9 +83,44 @@ public class GunSystem : MonoBehaviour
         {
             Debug.Log("Flash impacto: " + h.collider.name);
 
-            if (h.collider.CompareTag("LightPannel"))
+            if (h.collider.CompareTag("LightPannel1"))
             {
-                //HACER QUE APAREZCA EL FUSIBLE
+                puzzleManager.fusible1.SetActive(true);
+            }
+
+            if (h.collider.CompareTag("LightPannel2"))
+            {
+                puzzleManager.fusible2.SetActive(true);
+            }
+
+            if (h.collider.CompareTag("LightPannel3"))
+            {
+                puzzleManager.fusible3.SetActive(true);
+            }
+
+            if (h.collider.CompareTag("Sensor1"))
+            {
+                sensorsDetection1.isDeactivated = true;
+            }
+
+            if (h.collider.CompareTag("Sensor2"))
+            {
+                sensorsDetection2.isDeactivated = true;
+            }
+
+            if (h.collider.CompareTag("Sensor3"))
+            {
+                sensorsDetection3.isDeactivated = true;
+            }
+
+            if (h.collider.CompareTag("Sensor4"))
+            {
+                sensorsDetection4.isDeactivated = true;
+            }
+
+            if (h.collider.CompareTag("Sensor5"))
+            {
+                sensorsDetection5.isDeactivated = true;
             }
 
             if (impactEffect != null)
@@ -115,6 +159,18 @@ public class GunSystem : MonoBehaviour
     {
         if (context.performed) shooting = true;
         if (context.canceled) shooting = false;
+    }
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        
+        Vector3 origin = fpsCam.transform.position;
+        Vector3 direction = fpsCam.transform.forward;
+
+        if (Physics.Raycast(origin, direction, out hit, range, interactLayer))
+        {
+
+        }
     }
     #endregion
 }
