@@ -10,6 +10,7 @@ TagManager:
   - Fusible2
   - Fusible3
   - SensorRoom
+  - Estatua
   layers:
   - Default
   - TransparentFX
