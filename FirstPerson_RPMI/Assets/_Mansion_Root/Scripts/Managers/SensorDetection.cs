@@ -27,6 +27,7 @@ public class SensorDetection : MonoBehaviour
         playerDetected = false;
         isDeactivated = false;
         rewardPickable = true;
+        materialRenderer.material = normalMat;
     }
 
     private void Awake()

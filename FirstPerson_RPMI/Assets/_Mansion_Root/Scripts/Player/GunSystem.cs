@@ -35,7 +35,6 @@ public class GunSystem : MonoBehaviour
 
     [Header("Scripts References")]
     public PuzzleManager puzzleManager;
-    public SensorDetection sensorsDetection;
     public SensorDetection sensorsDetection1;
     public SensorDetection sensorsDetection2;
     public SensorDetection sensorsDetection3;
@@ -99,12 +98,10 @@ public class GunSystem : MonoBehaviour
                 puzzleManager.fusible3.SetActive(true);
             }
 
-            if (h.collider.CompareTag("Sensor"))
-                if (h.collider.CompareTag("Sensor1"))
-                {
-                    sensorsDetection.isDeactivated = true;
-                    sensorsDetection1.isDeactivated = true;
-                }
+            if (h.collider.CompareTag("Sensor1"))
+            {
+                sensorsDetection1.isDeactivated = true;
+            }
 
             if (h.collider.CompareTag("Sensor2"))
             {
