@@ -79,18 +79,9 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Interact",
+                    "name": "Flaslight",
                     "type": "Button",
                     "id": "a795aab2-fd2f-4d2c-b1cb-b3d14c3f6b9c",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Inventory",
-                    "type": "Button",
-                    "id": "a0695e84-2a4d-4a87-90df-8a1b03264532",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -336,18 +327,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6d3e34d8-cfa6-469d-a2f6-0177d980626e",
-                    "path": "<Keyboard>/i",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Inventory",
+                    "action": "Flaslight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

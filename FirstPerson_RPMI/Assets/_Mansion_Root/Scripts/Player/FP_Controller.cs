@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEngine.UI.Image;
 
 public class FP_Controller : MonoBehaviour
 {
@@ -226,6 +225,12 @@ public class FP_Controller : MonoBehaviour
     }
 
     // Nuevo input para la linterna (necesitas mapearlo en el Input System, por ejemplo, tecla 'F')
-    
+    public void OnFlashlight(InputAction.CallbackContext context)
+    {
+        if (context.performed && flashlight != null)
+        {
+            flashlight.enabled = !flashlight.enabled;
+        }
+    }
     #endregion
 }
