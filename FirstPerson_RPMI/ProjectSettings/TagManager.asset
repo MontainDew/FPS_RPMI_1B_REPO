@@ -17,6 +17,7 @@ TagManager:
   - Sensor3
   - Sensor4
   - Sensor5
+  - Button
   layers:
   - Default
   - TransparentFX
