@@ -5,9 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/_Mansion_Root/Scenes/SCN_Menu.unity
-    guid: cae73078368e60d46bcd398a3eddb1ac
+  - enabled: 0
+    path: Assets/NADA QUE VER/Assets/_FPS_RPMI_/Scenes/SCN_PruebasParticle.unity
+    guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
     path: Assets/_Mansion_Root/Scenes/SCN_IA_Test.unity
     guid: 4174c542e66a4f84b97700b6b9c4cc4d
