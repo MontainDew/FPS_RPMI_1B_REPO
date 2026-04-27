@@ -169,7 +169,10 @@ public class GunSystem : MonoBehaviour
 
         if (Physics.Raycast(origin, direction, out hit, range, interactLayer))
         {
-            //LLAMAR A SENSOR RESET DEL SENSOR DETECTION
+            if (hit.collider.CompareTag("Button"))
+            {
+                sensorsDetection1.ResetSensors();
+            }
         }
     }
     #endregion

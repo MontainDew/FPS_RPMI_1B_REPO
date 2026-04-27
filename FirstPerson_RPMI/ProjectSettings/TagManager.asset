@@ -18,6 +18,8 @@ TagManager:
   - Sensor4
   - Sensor5
   - Button
+  - LightPannel
+  - DetectionArea
   layers:
   - Default
   - TransparentFX

@@ -52,7 +52,22 @@ public class SensorDetection : MonoBehaviour
         rewardPickable = true;
         //Animacion abrir baul llave
         materialRenderer.material = normalMat; //A todos los sensores a la vez
-        detectionCollider.enabled = false; //A todos los sensores a la vez
+        GameObject[] detectionAreas = GameObject.FindGameObjectsWithTag("DetectionArea"); //Vuelve a activar los colliders de todas las detection areas
+
+        foreach (GameObject area in detectionAreas)
+        {
+            MeshCollider col = area.GetComponent<MeshCollider>();
+            MeshRenderer rend = area.GetComponent<MeshRenderer>();
+            if (col != null)
+            {
+                col.enabled = true;
+            }
+
+            if (rend != null)
+            {
+                rend.material = normalMat;
+            }
+        }
     }
 
     IEnumerator FlashedRoutine()
@@ -80,7 +95,16 @@ public class SensorDetection : MonoBehaviour
             //ANIMACION CERRAR BAUL LLAVE
             //Sonido detectado
             materialRenderer.material = detectedMat;
-            detectionCollider.enabled = false; //De todos los sensores a la vez
+            GameObject[] detectionAreas = GameObject.FindGameObjectsWithTag("DetectionArea");
+
+            foreach (GameObject area in detectionAreas)
+            {
+                MeshCollider col = area.GetComponent<MeshCollider>();
+                if (col != null)
+                {
+                    col.enabled = false;
+                }
+            }
         }
     }
 

@@ -2943,6 +2943,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Detection_Area_15M
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6ad72cbd5b3f2a24bb59602c5208379f, type: 3}
+      propertyPath: m_TagString
+      value: DetectionArea
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11511,6 +11515,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Detection_Area_15M
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6ad72cbd5b3f2a24bb59602c5208379f, type: 3}
+      propertyPath: m_TagString
+      value: DetectionArea
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16898,6 +16906,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6ad72cbd5b3f2a24bb59602c5208379f, type: 3}
       propertyPath: m_Name
       value: Detection_Area_15M
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6ad72cbd5b3f2a24bb59602c5208379f, type: 3}
+      propertyPath: m_TagString
+      value: DetectionArea
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -50475,6 +50487,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Detection_Area_15M
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6ad72cbd5b3f2a24bb59602c5208379f, type: 3}
+      propertyPath: m_TagString
+      value: DetectionArea
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -67421,6 +67437,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: bea8a56b120e5f449946f78189a931d6, type: 3}
       propertyPath: m_Name
       value: Detection_Area_30M
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bea8a56b120e5f449946f78189a931d6, type: 3}
+      propertyPath: m_TagString
+      value: DetectionArea
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -79,7 +79,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Flaslight",
+                    "name": "Interact",
                     "type": "Button",
                     "id": "a795aab2-fd2f-4d2c-b1cb-b3d14c3f6b9c",
                     "expectedControlType": "",
@@ -336,7 +336,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Flaslight",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

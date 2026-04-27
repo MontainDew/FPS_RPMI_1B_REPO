@@ -429,9 +429,25 @@ MonoBehaviour:
     m_ActionId: 3230e7e8-970d-4e23-94fa-d620f14bd759
     m_ActionName: 'Gameplay/Lean[/Keyboard/q,/Keyboard/e]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7723284726935233986}
+        m_TargetAssemblyTypeName: GunSystem, Assembly-CSharp
+        m_MethodName: OnInteract
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: a795aab2-fd2f-4d2c-b1cb-b3d14c3f6b9c
     m_ActionName: 'Gameplay/Flaslight[/Keyboard/f]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2c6fbb90-29fe-4b61-8d67-3d646266b3d9
+    m_ActionName: 'Gameplay/Inventory[/Keyboard/i]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -536,7 +552,6 @@ MonoBehaviour:
   camLight: {fileID: 4627878820845966788}
   camParticles: {fileID: 8309767105478890218}
   puzzleManager: {fileID: 0}
-  sensorsDetection: {fileID: 0}
   sensorsDetection1: {fileID: 0}
   sensorsDetection2: {fileID: 0}
   sensorsDetection3: {fileID: 0}
@@ -5796,7 +5811,6 @@ MonoBehaviour:
   camLight: {fileID: 4627878820845966788}
   camParticles: {fileID: 8309767105478890218}
   puzzleManager: {fileID: 0}
-  sensorsDetection: {fileID: 0}
   sensorsDetection1: {fileID: 0}
   sensorsDetection2: {fileID: 0}
   sensorsDetection3: {fileID: 0}
