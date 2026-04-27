@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.SceneManagement;
-using UnityEngine.Video;
-using System.Collections;
+using UnityEngine.SceneManagement; // Necesario para reiniciar o cambiar de escena
+using UnityEngine.Video; // Necesario para reproducir el vÌdeo del jumpscare
+using System.Collections; // Necesario para las corrutinas (esperar tiempo)
 
 public class EnemyAiBase : MonoBehaviour
 {
@@ -13,24 +13,24 @@ public class EnemyAiBase : MonoBehaviour
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Transform target;
     [SerializeField] FP_Controller playerScript;
-    [SerializeField] LayerMask obstacleLayer;
-
-    [Header("Patrol Points")]
-    [SerializeField] Transform[] patrolPoints;
-    int currentPatrolIndex = 0;
+    [SerializeField] LayerMask groundLayer;
+    [SerializeField] LayerMask obstacleLayer; // Capa para las paredes
 
     [Header("Jumpscare & Game Over")]
-    [SerializeField] GameObject jumpscareUI;
-    [SerializeField] VideoPlayer jumpscareVideo;
-    [SerializeField] float jumpscareDuration = 2.5f;
-    [SerializeField] string sceneToLoad = "";
+    [SerializeField] GameObject jumpscareUI; // El Canvas o Panel que contiene tu vÌdeo/imagen
+    [SerializeField] VideoPlayer jumpscareVideo; // Tu reproductor de vÌdeo
+    [SerializeField] float jumpscareDuration = 2.5f; // Cu·nto dura el vÌdeo antes de cargar escena
+    [SerializeField] string sceneToLoad = ""; // Si lo dejas vacÌo, recarga la escena actual
 
     [Header("Current State")]
     public EnemyState currentState;
     Vector3 lastKnownPosition;
 
     [Header("Patroling Stats")]
+    [SerializeField] float walkPointRange = 15f;
     [SerializeField] float patrolSpeed = 2f;
+    Vector3 walkPoint;
+    bool walkPointSet;
 
     [Header("Investigating Stats")]
     [SerializeField] float investigateSpeed = 3f;
@@ -53,7 +53,15 @@ public class EnemyAiBase : MonoBehaviour
     [SerializeField] float walkNoiseRange = 8f;
     [SerializeField] float crouchNoiseRange = 1.5f;
 
-    // Velocidad real del jugador
+    [Header("Stuck Detection")]
+    [SerializeField] float stuckCheckTime = 2f;
+    [SerializeField] float stuckThreshold = 0.1f;
+    [SerializeField] float maxStuckDuration = 3f;
+    float stuckTimer;
+    float lastCheckTime;
+    Vector3 lastPosition;
+
+    // --- VARIABLES PARA VELOCIDAD REAL ---
     Vector3 previousPlayerPosition;
     float currentPlayerSpeed;
     #endregion
@@ -65,17 +73,20 @@ public class EnemyAiBase : MonoBehaviour
         playerScript = playerObj.GetComponent<FP_Controller>();
         agent = GetComponent<NavMeshAgent>();
 
+        lastPosition = transform.position;
+        lastCheckTime = Time.time;
         currentState = EnemyState.Patrol;
         previousPlayerPosition = target.position;
 
+        // Asegurarnos de que el UI del jumpscare estÈ apagado al empezar a jugar
         if (jumpscareUI != null) jumpscareUI.SetActive(false);
     }
 
     void Update()
     {
-        if (isAttacking) return;
+        if (isAttacking) return; // Si ya te atrapÛ, deja de pensar
 
-        // Calcular velocidad del jugador
+        // Calcula la velocidad real del jugador para el sonido
         if (Time.deltaTime > 0f)
         {
             currentPlayerSpeed = Vector3.Distance(target.position, previousPlayerPosition) / Time.deltaTime;
@@ -84,10 +95,11 @@ public class EnemyAiBase : MonoBehaviour
 
         CheckSenses();
         UpdateState();
+        CheckIfStuck();
     }
 
     // ==========================================
-    // SISTEMA DE SENTIDOS
+    // SISTEMA DE SENTIDOS (VISTA Y OÕDO)
     // ==========================================
     void CheckSenses()
     {
@@ -95,7 +107,7 @@ public class EnemyAiBase : MonoBehaviour
         bool canSeePlayer = false;
         bool canHearPlayer = false;
 
-        // VISI√ìN
+        // --- VISI”N ---
         if (distanceToPlayer <= sightRange)
         {
             Vector3 enemyEyes = transform.position + Vector3.up * 1.5f;
@@ -114,7 +126,7 @@ public class EnemyAiBase : MonoBehaviour
             }
         }
 
-        // O√çDO
+        // --- OÕDO ---
         bool playerIsMoving = currentPlayerSpeed > 0.1f;
 
         if (playerIsMoving)
@@ -128,7 +140,7 @@ public class EnemyAiBase : MonoBehaviour
             }
         }
 
-        // DECISIONES
+        // --- TOMA DE DECISIONES ---
         if (canSeePlayer)
         {
             lastKnownPosition = target.position;
@@ -154,7 +166,7 @@ public class EnemyAiBase : MonoBehaviour
     }
 
     // ==========================================
-    // M√ÅQUINA DE ESTADOS
+    // M¡QUINA DE ESTADOS
     // ==========================================
     void UpdateState()
     {
@@ -162,7 +174,7 @@ public class EnemyAiBase : MonoBehaviour
 
         if (distanceToPlayer <= attackRange && currentState == EnemyState.Chase)
         {
-            CatchPlayer();
+            CatchPlayer(); // TE ATRAP”
             return;
         }
 
@@ -174,40 +186,38 @@ public class EnemyAiBase : MonoBehaviour
         }
     }
 
-    // ==========================================
-    // PATRULLA (WAYPOINTS)
-    // ==========================================
-   void PatrolLogic()
-{
-    agent.speed = patrolSpeed;
-
-    if (patrolPoints.Length == 0) return;
-
-    if (!agent.hasPath || HasReachedDestination())
+    void PatrolLogic()
     {
-        currentPatrolIndex = Random.Range(0, patrolPoints.Length);
-        agent.SetDestination(patrolPoints[currentPatrolIndex].position);
-    }
-}
+        agent.speed = patrolSpeed;
 
-    // ==========================================
-    // INVESTIGACI√ìN
-    // ==========================================
+        if (!walkPointSet)
+        {
+            SearchWalkPoint();
+        }
+
+        if (walkPointSet && HasReachedDestination())
+        {
+            walkPointSet = false;
+        }
+    }
+
     void InvestigateLogic()
     {
         agent.speed = investigateSpeed;
 
-        agent.SetDestination(lastKnownPosition);
+        if (Vector3.Distance(agent.destination, lastKnownPosition) > 1f)
+        {
+            agent.SetDestination(lastKnownPosition);
+        }
 
         if (HasReachedDestination())
         {
             investigateTimer += Time.deltaTime;
-
             if (investigateTimer >= waitTimeAtInvestigation)
             {
                 investigateTimer = 0;
                 currentState = EnemyState.Patrol;
-                agent.ResetPath();
+                walkPointSet = false;
             }
         }
         else
@@ -216,13 +226,19 @@ public class EnemyAiBase : MonoBehaviour
         }
     }
 
-    // ==========================================
-    // PERSECUCI√ìN
-    // ==========================================
     void ChaseLogic()
     {
         agent.speed = chaseSpeed;
-        agent.SetDestination(target.position);
+
+        if (Vector3.Distance(agent.destination, lastKnownPosition) > 0.5f)
+        {
+            agent.SetDestination(lastKnownPosition);
+        }
+
+        if (HasReachedDestination())
+        {
+            currentState = EnemyState.Investigate;
+        }
     }
 
     bool HasReachedDestination()
@@ -237,8 +253,30 @@ public class EnemyAiBase : MonoBehaviour
         return false;
     }
 
+    void SearchWalkPoint()
+    {
+        int attempts = 0;
+        const int maxAttempts = 5;
+
+        while (!walkPointSet && attempts < maxAttempts)
+        {
+            attempts++;
+            Vector3 randomPoint = transform.position + new Vector3(Random.Range(-walkPointRange, walkPointRange), 0, Random.Range(-walkPointRange, walkPointRange));
+
+            if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, 2f, NavMesh.AllAreas))
+            {
+                walkPoint = hit.position;
+                if (Physics.Raycast(walkPoint + Vector3.up * 2, -Vector3.up, 3f, groundLayer))
+                {
+                    walkPointSet = true;
+                    agent.SetDestination(walkPoint);
+                }
+            }
+        }
+    }
+
     // ==========================================
-    // JUMPSCARE
+    // L”GICA DE JUMPSCARE Y GAME OVER
     // ==========================================
     void CatchPlayer()
     {
@@ -246,33 +284,93 @@ public class EnemyAiBase : MonoBehaviour
         currentState = EnemyState.Attack;
         agent.isStopped = true;
 
+        // 1. Bloqueamos al jugador para que no pueda moverse ni mover la c·mara
         playerScript.enabled = false;
 
+        // 2. Hacemos que el enemigo mire fijamente al jugador
         Vector3 direction = (target.position - transform.position).normalized;
         direction.y = 0;
         transform.rotation = Quaternion.LookRotation(direction);
 
+        // 3. Iniciamos la secuencia de Jumpscare (Video + Recarga de escena)
         StartCoroutine(JumpscareSequence());
     }
 
     IEnumerator JumpscareSequence()
     {
+        // Encendemos el panel del vÌdeo/animaciÛn
         if (jumpscareUI != null) jumpscareUI.SetActive(true);
 
+        // Si hay un vÌdeo asignado, lo reproducimos
         if (jumpscareVideo != null) jumpscareVideo.Play();
 
+        // Esperamos el tiempo que dure el vÌdeo (jumpscareDuration)
         yield return new WaitForSeconds(jumpscareDuration);
 
+        // Liberamos el cursor por si vas a un men˙ principal
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
+        // Si dejaste la variable vacÌa en el inspector, recarga la escena actual
         if (string.IsNullOrEmpty(sceneToLoad))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
-        else
+        else // Si escribiste un nombre (ej: "Menu"), carga esa escena
         {
             SceneManager.LoadScene(sceneToLoad);
         }
+    }
+
+    // ==========================================
+    // SISTEMA ANTI-ATASCOS Y GIZMOS
+    // ==========================================
+    void CheckIfStuck()
+    {
+        if (Time.time - lastCheckTime > stuckCheckTime)
+        {
+            float distanceMoved = Vector3.Distance(transform.position, lastPosition);
+
+            if (distanceMoved < stuckThreshold && agent.hasPath && !agent.pathPending)
+            {
+                stuckTimer += stuckCheckTime;
+            }
+            else
+            {
+                stuckTimer = 0;
+            }
+
+            if (stuckTimer >= maxStuckDuration)
+            {
+                walkPointSet = false;
+                agent.ResetPath();
+                stuckTimer = 0;
+            }
+
+            lastPosition = transform.position;
+            lastCheckTime = Time.time;
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (Application.isPlaying) return;
+
+        // VisiÛn Visual
+        Gizmos.color = Color.yellow;
+        Vector3 leftBoundary = Quaternion.Euler(0, -fieldOfViewAngle / 2, 0) * transform.forward;
+        Vector3 rightBoundary = Quaternion.Euler(0, fieldOfViewAngle / 2, 0) * transform.forward;
+        Gizmos.DrawRay(transform.position + Vector3.up * 1.5f, leftBoundary * sightRange);
+        Gizmos.DrawRay(transform.position + Vector3.up * 1.5f, rightBoundary * sightRange);
+
+        // Rangos de Ruido (Esferas visuales para que puedas calibrar el tamaÒo)
+        Gizmos.color = new Color(1, 0, 0, 0.1f); // Rojo: Esprintar
+        Gizmos.DrawWireSphere(transform.position, sprintNoiseRange);
+
+        Gizmos.color = new Color(0, 0, 1, 0.1f); // Azul: Caminar
+        Gizmos.DrawWireSphere(transform.position, walkNoiseRange);
+
+        Gizmos.color = new Color(0, 1, 0, 0.1f); // Verde: Agachado
+        Gizmos.DrawWireSphere(transform.position, crouchNoiseRange);
     }
 }

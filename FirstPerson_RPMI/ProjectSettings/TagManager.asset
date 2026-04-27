@@ -13,11 +13,7 @@ TagManager:
   - LightPannel2
   - LightPannel3
   - LightPannel
-  - Sensor1
-  - Sensor2
-  - Sensor3
-  - Sensor4
-  - Sensor5
+  - Sensor
   layers:
   - Default
   - TransparentFX
