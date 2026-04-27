@@ -177,18 +177,18 @@ public class EnemyAiBase : MonoBehaviour
     // ==========================================
     // PATRULLA (WAYPOINTS)
     // ==========================================
-    void PatrolLogic()
+   void PatrolLogic()
+{
+    agent.speed = patrolSpeed;
+
+    if (patrolPoints.Length == 0) return;
+
+    if (!agent.hasPath || HasReachedDestination())
     {
-        agent.speed = patrolSpeed;
-
-        if (patrolPoints.Length == 0) return;
-
-        if (!agent.hasPath || HasReachedDestination())
-        {
-            currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
-            agent.SetDestination(patrolPoints[currentPatrolIndex].position);
-        }
+        currentPatrolIndex = Random.Range(0, patrolPoints.Length);
+        agent.SetDestination(patrolPoints[currentPatrolIndex].position);
     }
+}
 
     // ==========================================
     // INVESTIGACIÓN
