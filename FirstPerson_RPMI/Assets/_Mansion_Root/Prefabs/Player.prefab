@@ -539,9 +539,6 @@ MonoBehaviour:
   impactLayer:
     serializedVersion: 2
     m_Bits: 64
-  interactLayer:
-    serializedVersion: 2
-    m_Bits: 512
   range: 100
   spread: 0
   flashCooldown: 0.2
@@ -552,7 +549,6 @@ MonoBehaviour:
   camLight: {fileID: 4627878820845966788}
   camParticles: {fileID: 8309767105478890218}
   puzzleManager: {fileID: 0}
-  sensorsDetection: {fileID: 0}
 --- !u!114 &7479790115333899189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5794,9 +5790,6 @@ MonoBehaviour:
   impactLayer:
     serializedVersion: 2
     m_Bits: 0
-  interactLayer:
-    serializedVersion: 2
-    m_Bits: 0
   range: 100
   spread: 0
   flashCooldown: 0.2
@@ -5807,7 +5800,6 @@ MonoBehaviour:
   camLight: {fileID: 4627878820845966788}
   camParticles: {fileID: 8309767105478890218}
   puzzleManager: {fileID: 0}
-  sensorsDetection: {fileID: 0}
 --- !u!4 &2949219499383306526 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9941c2051f6add8409f16473bd52bfb8, type: 3}

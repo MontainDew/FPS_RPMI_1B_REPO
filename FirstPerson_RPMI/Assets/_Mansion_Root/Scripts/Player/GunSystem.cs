@@ -35,11 +35,7 @@ public class GunSystem : MonoBehaviour
 
     [Header("Scripts References")]
     public PuzzleManager puzzleManager;
-    public SensorsDetection sensorsDetection1;
-    public SensorsDetection sensorsDetection2;
-    public SensorsDetection sensorsDetection3;
-    public SensorsDetection sensorsDetection4;
-    public SensorsDetection sensorsDetection5;
+    public SensorsDetection sensorsDetection;
     #endregion
 
     private void Awake()
@@ -98,29 +94,9 @@ public class GunSystem : MonoBehaviour
                 puzzleManager.fusible3.SetActive(true);
             }
 
-            if (h.collider.CompareTag("Sensor1"))
+            if (h.collider.CompareTag("Sensor"))
             {
-                sensorsDetection1.isDeactivated = true;
-            }
-
-            if (h.collider.CompareTag("Sensor2"))
-            {
-                sensorsDetection2.isDeactivated = true;
-            }
-
-            if (h.collider.CompareTag("Sensor3"))
-            {
-                sensorsDetection3.isDeactivated = true;
-            }
-
-            if (h.collider.CompareTag("Sensor4"))
-            {
-                sensorsDetection4.isDeactivated = true;
-            }
-
-            if (h.collider.CompareTag("Sensor5"))
-            {
-                sensorsDetection5.isDeactivated = true;
+                sensorsDetection.isDeactivated = true;
             }
 
             if (impactEffect != null)
