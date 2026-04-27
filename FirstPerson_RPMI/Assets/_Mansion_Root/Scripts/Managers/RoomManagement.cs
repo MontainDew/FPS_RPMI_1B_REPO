@@ -97,7 +97,7 @@ public class RoomManagement : MonoBehaviour
             fusible3Room = false;
             sensorRoom = true;
         }
-        else other.gameObject.CompareTag("SensorRoom");
+        else 
         {
             fusible1Room = false;
             fusible2Room = false;

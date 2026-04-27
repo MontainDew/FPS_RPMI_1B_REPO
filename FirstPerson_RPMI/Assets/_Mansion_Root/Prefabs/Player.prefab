@@ -210,6 +210,8 @@ GameObject:
   - component: {fileID: 6863050712185925095}
   - component: {fileID: 5295112097514557594}
   - component: {fileID: 7723284726935233986}
+  - component: {fileID: 5409152161172677556}
+  - component: {fileID: 7094604789849959735}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -521,6 +523,9 @@ MonoBehaviour:
   impactLayer:
     serializedVersion: 2
     m_Bits: 64
+  interactLayer:
+    serializedVersion: 2
+    m_Bits: 0
   range: 100
   spread: 0
   flashCooldown: 0.2
@@ -530,6 +535,49 @@ MonoBehaviour:
   canShoot: 0
   camLight: {fileID: 4627878820845966788}
   camParticles: {fileID: 8309767105478890218}
+  puzzleManager: {fileID: 0}
+  sensorsDetection: {fileID: 0}
+  sensorsDetection1: {fileID: 0}
+  sensorsDetection2: {fileID: 0}
+  sensorsDetection3: {fileID: 0}
+  sensorsDetection4: {fileID: 0}
+  sensorsDetection5: {fileID: 0}
+--- !u!114 &5409152161172677556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4102560840254363106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c57556f8da9405d46ad5ea5594193f4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomManagement
+  fusible1Room: 0
+  fusible2Room: 0
+  fusible3Room: 0
+  sensorRoom: 0
+  fusiblePanels:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  sensors: {fileID: 0}
+--- !u!114 &7094604789849959735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4102560840254363106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c433a3a76871a0246b993368ad642365, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PuzzleManager
+  fusible1: {fileID: 0}
+  fusible2: {fileID: 0}
+  fusible3: {fileID: 0}
 --- !u!1 &4627878820845966788
 GameObject:
   m_ObjectHideFlags: 0
@@ -5735,6 +5783,9 @@ MonoBehaviour:
   impactLayer:
     serializedVersion: 2
     m_Bits: 0
+  interactLayer:
+    serializedVersion: 2
+    m_Bits: 0
   range: 100
   spread: 0
   flashCooldown: 0.2
@@ -5744,6 +5795,13 @@ MonoBehaviour:
   canShoot: 0
   camLight: {fileID: 4627878820845966788}
   camParticles: {fileID: 8309767105478890218}
+  puzzleManager: {fileID: 0}
+  sensorsDetection: {fileID: 0}
+  sensorsDetection1: {fileID: 0}
+  sensorsDetection2: {fileID: 0}
+  sensorsDetection3: {fileID: 0}
+  sensorsDetection4: {fileID: 0}
+  sensorsDetection5: {fileID: 0}
 --- !u!4 &2949219499383306526 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9941c2051f6add8409f16473bd52bfb8, type: 3}
