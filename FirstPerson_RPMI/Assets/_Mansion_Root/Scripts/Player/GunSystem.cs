@@ -203,6 +203,17 @@ public class GunSystem : MonoBehaviour
                 Destroy(puzzleManager.fusible3);
                 inventory.FuseCuantity++;
             }
+
+            if (hit.collider.CompareTag("FuseBox"))
+            {
+                if (inventory.FuseCuantity >= 3)
+                {
+                    Debug.Log("Fusibles colocados");
+                    fuseBox.greenFuse.SetActive(true);
+                    fuseBox.blueFuse.SetActive(true);
+                    fuseBox.redFuse.SetActive(true);
+                }
+            }
         }
     }
     #endregion

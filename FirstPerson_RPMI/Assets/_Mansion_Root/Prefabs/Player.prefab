@@ -211,6 +211,7 @@ GameObject:
   - component: {fileID: 7723284726935233986}
   - component: {fileID: 5409152161172677556}
   - component: {fileID: 7094604789849959735}
+  - component: {fileID: 3573164558944869355}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -552,6 +553,7 @@ MonoBehaviour:
   camParticles: {fileID: 8309767105478890218}
   puzzleManager: {fileID: 0}
   inventory: {fileID: 0}
+  fuseBox: {fileID: 0}
   sensorsDetection1: {fileID: 0}
   sensorsDetection2: {fileID: 0}
   sensorsDetection3: {fileID: 0}
@@ -593,6 +595,33 @@ MonoBehaviour:
   fusible1: {fileID: 0}
   fusible2: {fileID: 0}
   fusible3: {fileID: 0}
+--- !u!114 &3573164558944869355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4102560840254363106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c47d6dffd2c9c51429a203dc6d885772, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Inv_Logic
+  Camera: 0
+  FuseCuantity: 0
+  Key: 0
+  HColorCode: 0
+  ColorCode: 0
+  DoorCode: 0
+  CameraSlot: {fileID: 0}
+  FuseSlot: {fileID: 0}
+  FuseCuantityText: {fileID: 0}
+  KeySlot: {fileID: 0}
+  HColorCodeSlot: {fileID: 0}
+  ColorCodeSlot: {fileID: 0}
+  DoorCodeSlot: {fileID: 0}
+  Inventory: {fileID: 0}
+  onoff: 1
 --- !u!1 &4627878820845966788
 GameObject:
   m_ObjectHideFlags: 0

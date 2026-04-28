@@ -3,9 +3,9 @@ using UnityEngine;
 public class GardenDoor : MonoBehaviour
 {
     [Header("Fuse Box References")]
-    [SerializeField] GameObject greenFuse;
-    [SerializeField] GameObject blueFuse;
-    [SerializeField] GameObject redFuse;
+    public GameObject greenFuse;
+    public GameObject blueFuse;
+    public GameObject redFuse;
 
     [Header("Script References")]
     public Inv_Logic inventory;
@@ -18,9 +18,16 @@ public class GardenDoor : MonoBehaviour
         redFuse.SetActive(false);
     }
 
+    
+
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void OpenDoor()
+    {
+
     }
 }

@@ -20,6 +20,10 @@ TagManager:
   - Button
   - LightPannel
   - DetectionArea
+  - FuseBox
+  - Fuse1
+  - Fuse2
+  - Fuse3
   layers:
   - Default
   - TransparentFX
