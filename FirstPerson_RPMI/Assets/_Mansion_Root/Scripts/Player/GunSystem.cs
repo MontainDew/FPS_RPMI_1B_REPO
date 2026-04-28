@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.UI.Image;
@@ -36,6 +37,7 @@ public class GunSystem : MonoBehaviour
     [Header("Scripts References")]
     public PuzzleManager puzzleManager;
     public Inv_Logic inventory;
+    public GardenDoor fuseBox;
     public SensorDetection sensorsDetection1;
     public SensorDetection sensorsDetection2;
     public SensorDetection sensorsDetection3;
@@ -86,16 +88,20 @@ public class GunSystem : MonoBehaviour
 
             if (h.collider.CompareTag("LightPannel1"))
             {
+                if (puzzleManager.fusible1 == null) return;
+
                 puzzleManager.fusible1.SetActive(true);
             }
 
             if (h.collider.CompareTag("LightPannel2"))
             {
+                if (puzzleManager.fusible2 == null) return;
                 puzzleManager.fusible2.SetActive(true);
             }
 
             if (h.collider.CompareTag("LightPannel3"))
             {
+                if (puzzleManager.fusible3 == null) return;
                 puzzleManager.fusible3.SetActive(true);
             }
 
@@ -182,18 +188,20 @@ public class GunSystem : MonoBehaviour
 
             if (hit.collider.CompareTag("Fuse1"))
             {
-                puzzleManager.fusible1.SetActive(false);
-                //Aparecer en inventario
+                Destroy(puzzleManager.fusible1);
+                inventory.FuseCuantity++;
             }
 
             if (hit.collider.CompareTag("Fuse2"))
             {
-                puzzleManager.fusible2.SetActive(false);
+                Destroy(puzzleManager.fusible2);
+                inventory.FuseCuantity++;
             }
 
             if (hit.collider.CompareTag("Fuse3"))
             {
-                puzzleManager.fusible3.SetActive(false);
+                Destroy(puzzleManager.fusible3);
+                inventory.FuseCuantity++;
             }
         }
     }
