@@ -12,9 +12,11 @@ public class ClockPuzzle : MonoBehaviour
 
     public void AddNumber(string number)
     {
-        currentInput += number;
-        UpdateDisplay();
-        
+        if (currentInput.Length < 4)
+        {
+            currentInput += number;
+            UpdateDisplay();
+        }
     }
 
    public void ClearInput()
@@ -44,5 +46,23 @@ public class ClockPuzzle : MonoBehaviour
     {
         currentInput = "";
         UpdateDisplay();
+    }
+    private void Update()
+    {
+        foreach (char c in Input.inputString)
+        {
+            if (char.IsDigit(c))
+            {
+                AddNumber(c.ToString());
+            }
+            else if (c == '\b' && currentInput.Length == 4)
+            {
+                ClearInput();
+            }
+            if (c == '\n' || c == '\r')
+            {
+                SubmitCode();
+            }
+        }
     }
 }
