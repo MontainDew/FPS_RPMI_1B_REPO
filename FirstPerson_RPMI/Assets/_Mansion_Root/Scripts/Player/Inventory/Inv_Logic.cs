@@ -7,12 +7,12 @@ public class Inv_Logic : MonoBehaviour
 {
     #region Variables
     [Header("Checker")]
-    [SerializeField] private bool Camera;
-    [SerializeField] private int FuseCuantity;
-    [SerializeField] private bool Key;
-    [SerializeField] private bool HColorCode;
-    [SerializeField] private bool ColorCode;
-    [SerializeField] private bool DoorCode;
+     public bool Camera;
+     public int FuseCuantity;
+     public bool Key;
+     public bool HColorCode;
+     public bool ColorCode;
+     public bool DoorCode;
 
     [Header("ItemSlots")]
     [SerializeField] private GameObject CameraSlot;
