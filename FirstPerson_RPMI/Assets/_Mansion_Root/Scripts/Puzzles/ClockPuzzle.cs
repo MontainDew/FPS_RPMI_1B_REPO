@@ -55,7 +55,7 @@ public class ClockPuzzle : MonoBehaviour
             {
                 AddNumber(c.ToString());
             }
-            else if (c == '\b' && currentInput.Length == 4)
+            if (c == '\b' && currentInput.Length == 4)
             {
                 ClearInput();
             }
