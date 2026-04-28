@@ -43,15 +43,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Reload",
-                    "type": "Button",
-                    "id": "79a89ce2-d465-464a-a5bd-b9171b1108d3",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Crouch",
                     "type": "Button",
                     "id": "4341bd7b-3745-4e75-928e-cd20e8fcf333",
@@ -79,7 +70,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Flaslight",
+                    "name": "Interact",
                     "type": "Button",
                     "id": "a795aab2-fd2f-4d2c-b1cb-b3d14c3f6b9c",
                     "expectedControlType": "",
@@ -232,28 +223,6 @@
                 },
                 {
                     "name": "",
-                    "id": "052354b4-de53-4b41-bfc7-122f8086ad9b",
-                    "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Reload",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "5fdfbc9c-e044-4a7b-9ac2-0293ebcbcbd9",
-                    "path": "<Keyboard>/r",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Reload",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "e4163622-473d-4fdc-93df-9b41508e8a0e",
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
@@ -336,7 +305,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Flaslight",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

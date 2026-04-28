@@ -12,6 +12,14 @@ TagManager:
   - LightPannel1
   - LightPannel2
   - LightPannel3
+  - Sensor1
+  - Sensor2
+  - Sensor3
+  - Sensor4
+  - Sensor5
+  - Button
+  - LightPannel
+  - DetectionArea
   layers:
   - Default
   - TransparentFX
@@ -22,7 +30,7 @@ TagManager:
   - Interactable
   - Player
   - obstacleLayer
-  - 
+  - InteractLayer
   - 
   - 
   - 

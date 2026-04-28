@@ -35,7 +35,7 @@ public class GunSystem : MonoBehaviour
 
     [Header("Scripts References")]
     public PuzzleManager puzzleManager;
-    public SensorDetection sensorsDetection;
+    public Inv_Logic inventory;
     public SensorDetection sensorsDetection1;
     public SensorDetection sensorsDetection2;
     public SensorDetection sensorsDetection3;
@@ -99,12 +99,10 @@ public class GunSystem : MonoBehaviour
                 puzzleManager.fusible3.SetActive(true);
             }
 
-            if (h.collider.CompareTag("Sensor"))
-                if (h.collider.CompareTag("Sensor1"))
-                {
-                    sensorsDetection.isDeactivated = true;
-                    sensorsDetection1.isDeactivated = true;
-                }
+            if (h.collider.CompareTag("Sensor1"))
+            {
+                sensorsDetection1.isDeactivated = true;
+            }
 
             if (h.collider.CompareTag("Sensor2"))
             {
@@ -166,13 +164,37 @@ public class GunSystem : MonoBehaviour
 
     public void OnInteract(InputAction.CallbackContext context)
     {
+        if (!context.performed) return;
 
         Vector3 origin = fpsCam.transform.position;
         Vector3 direction = fpsCam.transform.forward;
 
         if (Physics.Raycast(origin, direction, out hit, range, interactLayer))
         {
+            Debug.Log("Golpea primero: " + hit.collider.name);
+        
+            Debug.Log("Interactuando");
 
+            if (hit.collider.CompareTag("Button"))
+            {
+                sensorsDetection1.ResetSensors();
+            }
+
+            if (hit.collider.CompareTag("Fuse1"))
+            {
+                puzzleManager.fusible1.SetActive(false);
+                //Aparecer en inventario
+            }
+
+            if (hit.collider.CompareTag("Fuse2"))
+            {
+                puzzleManager.fusible2.SetActive(false);
+            }
+
+            if (hit.collider.CompareTag("Fuse3"))
+            {
+                puzzleManager.fusible3.SetActive(false);
+            }
         }
     }
     #endregion
