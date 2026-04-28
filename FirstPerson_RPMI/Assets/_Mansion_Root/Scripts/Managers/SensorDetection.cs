@@ -48,10 +48,10 @@ public class SensorDetection : MonoBehaviour
     public void ResetSensors()
     {
         //SFX Reset
+        //Animacion reset boton
         playerDetected = false;
         rewardPickable = true;
         //Animacion abrir baul llave
-        materialRenderer.material = normalMat; //A todos los sensores a la vez
         GameObject[] detectionAreas = GameObject.FindGameObjectsWithTag("DetectionArea"); //Vuelve a activar los colliders de todas las detection areas
 
         foreach (GameObject area in detectionAreas)

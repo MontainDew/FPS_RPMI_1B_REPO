@@ -7443,6 +7443,98 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1198256679342410192, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1198256679342410192, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_ActionId
+      value: 4341bd7b-3745-4e75-928e-cd20e8fcf333
+      objectReference: {fileID: 0}
+    - target: {fileID: 1198256679342410192, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_ActionId
+      value: eec1bdc8-8c60-4680-945c-4853bb4c0b74
+      objectReference: {fileID: 0}
+    - target: {fileID: 1198256679342410192, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionId
+      value: 3230e7e8-970d-4e23-94fa-d620f14bd759
+      objectReference: {fileID: 0}
+    - target: {fileID: 1198256679342410192, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionId
+      value: a795aab2-fd2f-4d2c-b1cb-b3d14c3f6b9c
+      objectReference: {fileID: 0}
+    - target: {fileID: 1198256679342410192, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_ActionId
+      value: 2c6fbb90-29fe-4b61-8d67-3d646266b3d9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1198256679342410192, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_ActionName
+      value: 'Gameplay/Crouch[/Keyboard/ctrl]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1198256679342410192, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_ActionName
+      value: 'Gameplay/Sprint[/Keyboard/shift]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1198256679342410192, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionName
+      value: 'Gameplay/Lean[/Keyboard/q,/Keyboard/e]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1198256679342410192, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionName
+      value: 'Gameplay/Flaslight[/Keyboard/f]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1198256679342410192, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_ActionName
+      value: 'Gameplay/Inventory[/Keyboard/i]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1198256679342410192, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1198256679342410192, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1198256679342410192, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 231546799}
+    - target: {fileID: 1198256679342410192, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1545448297}
+    - target: {fileID: 1198256679342410192, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1198256679342410192, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnCrouch
+      objectReference: {fileID: 0}
+    - target: {fileID: 1198256679342410192, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnSprint
+      objectReference: {fileID: 0}
+    - target: {fileID: 1198256679342410192, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnLean
+      objectReference: {fileID: 0}
+    - target: {fileID: 1198256679342410192, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnInteract
+      objectReference: {fileID: 0}
+    - target: {fileID: 1198256679342410192, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: FP_Controller, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1198256679342410192, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GunSystem, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1198256679342410192, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4102560840254363106, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
       propertyPath: m_Name
       value: Player
@@ -7567,6 +7659,10 @@ PrefabInstance:
       propertyPath: sensorsDetection5
       value: 
       objectReference: {fileID: 2000739760}
+    - target: {fileID: 7723284726935233986, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
+      propertyPath: interactLayer.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 2568858486193906596, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
@@ -16906,6 +17002,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6ad72cbd5b3f2a24bb59602c5208379f, type: 3}
       propertyPath: m_Name
       value: Detection_Area_15M
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6ad72cbd5b3f2a24bb59602c5208379f, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6ad72cbd5b3f2a24bb59602c5208379f, type: 3}
       propertyPath: m_TagString
@@ -51985,6 +52085,17 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 5380808721245990964, guid: 3adc8ae31a0b08e4289c37f375d86646, type: 3}
+--- !u!114 &1545448297 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7723284726935233986, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
+  m_PrefabInstance: {fileID: 231546792}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc799494f4706984c841cf87545d5126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GunSystem
 --- !u!1 &1546308730 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7273087425032351647, guid: 2746cc77170c0434c96d64572db649d2, type: 3}

@@ -163,12 +163,17 @@ public class GunSystem : MonoBehaviour
 
     public void OnInteract(InputAction.CallbackContext context)
     {
+        if (!context.performed) return;
 
         Vector3 origin = fpsCam.transform.position;
         Vector3 direction = fpsCam.transform.forward;
 
         if (Physics.Raycast(origin, direction, out hit, range, interactLayer))
         {
+            Debug.Log("Golpea primero: " + hit.collider.name);
+        
+            Debug.Log("Interactuando");
+
             if (hit.collider.CompareTag("Button"))
             {
                 sensorsDetection1.ResetSensors();
