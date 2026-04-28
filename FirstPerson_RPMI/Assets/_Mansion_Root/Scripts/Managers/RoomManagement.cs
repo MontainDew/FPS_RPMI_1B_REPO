@@ -25,7 +25,7 @@ public class RoomManagement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (fusible1Room == true && fusible2Room == false && fusible3Room == false && sensors == false)
+        if (fusible1Room == true && fusible2Room == false && fusible3Room == false && sensorRoom == false)
         {
             fusiblePanels[0].SetActive(true);
             fusiblePanels[1].SetActive(false);
@@ -33,14 +33,14 @@ public class RoomManagement : MonoBehaviour
             sensors.SetActive(false);
         }
 
-        else if (fusible2Room == true && fusible1Room == false && fusible3Room == false && sensors == false)
+        else if (fusible2Room == true && fusible1Room == false && fusible3Room == false && sensorRoom == false)
         {
             fusiblePanels[0].SetActive(false);
             fusiblePanels[1].SetActive(true);
             fusiblePanels[2].SetActive(false);
             sensors.SetActive(false);
         }
-        else if (fusible3Room == true && fusible1Room == false && fusible2Room == false && sensors == false)
+        else if (fusible3Room == true && fusible1Room == false && fusible2Room == false && sensorRoom == false)
         {
             fusiblePanels[0].SetActive(false);
             fusiblePanels[1].SetActive(false);
