@@ -35,6 +35,7 @@ public class GunSystem : MonoBehaviour
 
     [Header("Scripts References")]
     public PuzzleManager puzzleManager;
+    public Inv_Logic inventory;
     public SensorDetection sensorsDetection1;
     public SensorDetection sensorsDetection2;
     public SensorDetection sensorsDetection3;
@@ -177,6 +178,22 @@ public class GunSystem : MonoBehaviour
             if (hit.collider.CompareTag("Button"))
             {
                 sensorsDetection1.ResetSensors();
+            }
+
+            if (hit.collider.CompareTag("Fuse1"))
+            {
+                puzzleManager.fusible1.SetActive(false);
+                //Aparecer en inventario
+            }
+
+            if (hit.collider.CompareTag("Fuse2"))
+            {
+                puzzleManager.fusible2.SetActive(false);
+            }
+
+            if (hit.collider.CompareTag("Fuse3"))
+            {
+                puzzleManager.fusible3.SetActive(false);
             }
         }
     }
