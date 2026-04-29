@@ -9,8 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3310457866875237904}
-  - component: {fileID: 9010497423595838593}
-  - component: {fileID: 7858145176663119330}
   m_Layer: 0
   m_Name: CajaFusibles
   m_TagString: Untagged
@@ -37,43 +35,6 @@ Transform:
   - {fileID: 507430406292576920}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &9010497423595838593
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4859454037451000326}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.13, y: 0.68, z: 0.56}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7858145176663119330
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4859454037451000326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f03f27150efaa20468c6af75496ae3d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GardenDoor
-  greenFuse: {fileID: 0}
-  blueFuse: {fileID: 0}
-  redFuse: {fileID: 0}
-  inventory: {fileID: 0}
 --- !u!1001 &36160984937692531
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -146,6 +107,11 @@ PrefabInstance:
 --- !u!4 &507430406292576920 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 23d801b3aab7efc48a26868026825193, type: 3}
+  m_PrefabInstance: {fileID: 36160984937692531}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &883006692252270626 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 23d801b3aab7efc48a26868026825193, type: 3}
   m_PrefabInstance: {fileID: 36160984937692531}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2334835238889541850
@@ -222,6 +188,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: be11b4892a857f444a290759cd48e475, type: 3}
   m_PrefabInstance: {fileID: 2334835238889541850}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3217375079371271563 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: be11b4892a857f444a290759cd48e475, type: 3}
+  m_PrefabInstance: {fileID: 2334835238889541850}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6030311388007991840
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -293,13 +264,61 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9bab7a9982458a742a1f09a106e10439, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1152215895927629396}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9bab7a9982458a742a1f09a106e10439, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7701142842748081583}
   m_SourcePrefab: {fileID: 100100000, guid: 9bab7a9982458a742a1f09a106e10439, type: 3}
 --- !u!4 &6063324201853971915 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9bab7a9982458a742a1f09a106e10439, type: 3}
   m_PrefabInstance: {fileID: 6030311388007991840}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6876593728756692849 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9bab7a9982458a742a1f09a106e10439, type: 3}
+  m_PrefabInstance: {fileID: 6030311388007991840}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1152215895927629396
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6876593728756692849}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.13, y: 0.68, z: 0.56}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7701142842748081583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6876593728756692849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f03f27150efaa20468c6af75496ae3d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GardenDoor
+  greenFuse: {fileID: 3217375079371271563}
+  blueFuse: {fileID: 6851007854702234376}
+  redFuse: {fileID: 883006692252270626}
+  inventory: {fileID: 0}
 --- !u!1001 &6040103946490295897
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -372,5 +391,10 @@ PrefabInstance:
 --- !u!4 &6077743988901695922 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 275ed1d8fc1bca54fbcb39e6a39f13b4, type: 3}
+  m_PrefabInstance: {fileID: 6040103946490295897}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6851007854702234376 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 275ed1d8fc1bca54fbcb39e6a39f13b4, type: 3}
   m_PrefabInstance: {fileID: 6040103946490295897}
   m_PrefabAsset: {fileID: 0}
