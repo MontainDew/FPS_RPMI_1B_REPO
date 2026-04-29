@@ -2,7 +2,7 @@ using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
 
-public class ClockPuzzle : MonoBehaviour
+public class NumberPuzzle : MonoBehaviour
 {
     public TextMeshProUGUI displayText;
     public Inv_Logic Inventario;
@@ -31,7 +31,6 @@ public class ClockPuzzle : MonoBehaviour
         {
             Debug.Log("Codigo correcto");
             Inventario.DoorCode = true;
-            Inventario.ColorCode = false;
         }
         else
         {
@@ -47,23 +46,5 @@ public class ClockPuzzle : MonoBehaviour
     {
         currentInput = "";
         UpdateDisplay();
-    }
-    private void Update()
-    {
-        foreach (char c in Input.inputString)
-        {
-            if (char.IsDigit(c))
-            {
-                AddNumber(c.ToString());
-            }
-            if (c == '\b' && currentInput.Length >= 4)
-            {
-                ClearInput();
-            }
-            if (c == '\n' || c == '\r')
-            {
-                SubmitCode();
-            }
-        }
     }
 }
