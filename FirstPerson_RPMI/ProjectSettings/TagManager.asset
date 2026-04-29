@@ -24,6 +24,9 @@ TagManager:
   - Fuse1
   - Fuse2
   - Fuse3
+  - Estatua
+  - Clock
+  - DoorPanel
   layers:
   - Default
   - TransparentFX

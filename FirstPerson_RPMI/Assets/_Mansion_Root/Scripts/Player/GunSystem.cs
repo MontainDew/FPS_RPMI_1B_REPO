@@ -33,6 +33,8 @@ public class GunSystem : MonoBehaviour
     [Header("Various References")]
     [SerializeField] GameObject camLight;
     [SerializeField] GameObject camParticles;
+    [SerializeField] GameObject CPuzzleInterface;
+    [SerializeField] GameObject DPuzzleInterface;
 
     [Header("Scripts References")]
     public PuzzleManager puzzleManager;
@@ -212,6 +214,26 @@ public class GunSystem : MonoBehaviour
                     fuseBox.greenFuse.SetActive(true);
                     fuseBox.blueFuse.SetActive(true);
                     fuseBox.redFuse.SetActive(true);
+                }
+            }
+            if (hit.collider.CompareTag("Clock"))
+            {
+                if (inventory.ColorCode)
+                {
+                    CPuzzleInterface.SetActive(true);
+                    Cursor.lockState = CursorLockMode.Confined;
+                    Cursor.visible = true;
+                    inventory.Pause();
+                }
+            }
+            if (hit.collider.CompareTag("DoorPanel"))
+            {
+                if (inventory.DoorCode)
+                {
+                    DPuzzleInterface.SetActive(true);
+                    Cursor.lockState = CursorLockMode.Confined;
+                    Cursor.visible = true;
+                    inventory.Pause();
                 }
             }
         }

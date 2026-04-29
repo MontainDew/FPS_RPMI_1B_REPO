@@ -80,6 +80,16 @@ public class Inv_Logic : MonoBehaviour
             ColorCodeSlot.SetActive(false);
         }
     }
+
+    public void Pause()
+    {
+        Time.timeScale = 0;
+    }
+
+    public void Resume()
+    {
+        Time.timeScale = 1;
+    }
     #region inventory
     public void OnInventory(InputAction.CallbackContext context)
     {
@@ -92,6 +102,7 @@ public class Inv_Logic : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Confined;
                 Cursor.visible = true;
                 onoff++;
+                Pause();
             }
             else
             {
@@ -100,6 +111,7 @@ public class Inv_Logic : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
                 onoff--;
+                Resume();
             }
         }
     }

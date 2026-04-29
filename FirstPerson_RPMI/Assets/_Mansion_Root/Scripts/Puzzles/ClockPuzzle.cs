@@ -8,11 +8,11 @@ public class ClockPuzzle : MonoBehaviour
     public Inv_Logic Inventario;
 
     [SerializeField] string currentInput = "";
-    [SerializeField] string correctCode = "1120";
+    [SerializeField] string correctCode = "XIXX";
 
     public void AddNumber(string number)
     {
-        if (currentInput.Length < 4)
+        if (currentInput.Length < 12)
         {
             currentInput += number;
             UpdateDisplay();
@@ -31,6 +31,7 @@ public class ClockPuzzle : MonoBehaviour
         {
             Debug.Log("Codigo correcto");
             Inventario.DoorCode = true;
+            Inventario.ColorCode = false;
         }
         else
         {
@@ -55,7 +56,7 @@ public class ClockPuzzle : MonoBehaviour
             {
                 AddNumber(c.ToString());
             }
-            if (c == '\b' && currentInput.Length == 4)
+            if (c == '\b' && currentInput.Length >= 4)
             {
                 ClearInput();
             }
