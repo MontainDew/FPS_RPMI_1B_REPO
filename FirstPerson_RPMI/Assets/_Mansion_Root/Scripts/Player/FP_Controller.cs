@@ -232,5 +232,13 @@ public class FP_Controller : MonoBehaviour
             flashlight.enabled = !flashlight.enabled;
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Estatua"))
+        {
+            AudioManager.Instance.Playsfx(15);
+        }
+    }
     #endregion
 }
