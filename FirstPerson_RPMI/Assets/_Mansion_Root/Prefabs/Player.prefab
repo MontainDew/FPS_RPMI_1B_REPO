@@ -60,6 +60,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2303449193853202349}
   - {fileID: 8117492148930647040}
   - {fileID: 5938388813885040665}
   - {fileID: 2558891659970425486}
@@ -377,10 +378,6 @@ MonoBehaviour:
     m_ActionId: a9526293-2c5a-4faf-ac04-a86d7ba6be14
     m_ActionName: 'Gameplay/Shoot[/Mouse/leftButton]'
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 79a89ce2-d465-464a-a5bd-b9171b1108d3
-    m_ActionName: 'Gameplay/Reload[/Keyboard/r]'
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6863050712185925095}
         m_TargetAssemblyTypeName: FP_Controller, Assembly-CSharp
@@ -551,6 +548,8 @@ MonoBehaviour:
   canShoot: 0
   camLight: {fileID: 4627878820845966788}
   camParticles: {fileID: 8309767105478890218}
+  CPuzzleInterface: {fileID: 0}
+  DPuzzleInterface: {fileID: 0}
   puzzleManager: {fileID: 0}
   inventory: {fileID: 0}
   fuseBox: {fileID: 0}
@@ -5745,3 +5744,77 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1001 &1764786166579251270
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 432115626898878748}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: de3044449343bce42822fe8d5ef2e97b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.7645178
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: de3044449343bce42822fe8d5ef2e97b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.764518
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: de3044449343bce42822fe8d5ef2e97b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.7645178
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: de3044449343bce42822fe8d5ef2e97b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.41600022
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: de3044449343bce42822fe8d5ef2e97b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.07800004
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: de3044449343bce42822fe8d5ef2e97b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.549
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: de3044449343bce42822fe8d5ef2e97b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7933541
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: de3044449343bce42822fe8d5ef2e97b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: de3044449343bce42822fe8d5ef2e97b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.6087604
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: de3044449343bce42822fe8d5ef2e97b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: de3044449343bce42822fe8d5ef2e97b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: de3044449343bce42822fe8d5ef2e97b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: de3044449343bce42822fe8d5ef2e97b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: de3044449343bce42822fe8d5ef2e97b, type: 3}
+      propertyPath: m_Name
+      value: Camara
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: de3044449343bce42822fe8d5ef2e97b, type: 3}
+--- !u!4 &2303449193853202349 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: de3044449343bce42822fe8d5ef2e97b, type: 3}
+  m_PrefabInstance: {fileID: 1764786166579251270}
+  m_PrefabAsset: {fileID: 0}

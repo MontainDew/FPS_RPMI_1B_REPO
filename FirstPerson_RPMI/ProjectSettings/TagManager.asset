@@ -27,6 +27,8 @@ TagManager:
   - Estatua
   - Clock
   - DoorPanel
+  - Key
+  - ColorCode1
   layers:
   - Default
   - TransparentFX

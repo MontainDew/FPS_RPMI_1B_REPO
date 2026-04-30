@@ -14,6 +14,7 @@ public class EnemyAiBase : MonoBehaviour
     [SerializeField] Transform target;
     [SerializeField] FP_Controller playerScript;
     [SerializeField] LayerMask obstacleLayer;
+    [SerializeField] Animator animator;
 
     [Header("Patrol Points")]
     [SerializeField] Transform[] patrolPoints;
@@ -84,6 +85,7 @@ public class EnemyAiBase : MonoBehaviour
 
         CheckSenses();
         UpdateState();
+        ChooseAnimation();
     }
 
     // ==========================================
@@ -273,6 +275,18 @@ public class EnemyAiBase : MonoBehaviour
         else
         {
             SceneManager.LoadScene(sceneToLoad);
+        }
+    }
+    void ChooseAnimation()
+    {
+        if (currentState == EnemyState.Chase || currentState == EnemyState.Attack)
+        {
+            animator.SetBool("Attack", true);
+        }
+        else
+        {
+            animator.SetBool("Investigate", true);
+            animator.SetBool("Attack", false);
         }
     }
 }

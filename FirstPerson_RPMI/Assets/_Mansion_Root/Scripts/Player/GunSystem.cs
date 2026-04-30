@@ -40,6 +40,7 @@ public class GunSystem : MonoBehaviour
     public PuzzleManager puzzleManager;
     public Inv_Logic inventory;
     public GardenDoor fuseBox;
+    public Cofre cofre;
     public SensorDetection sensorsDetection1;
     public SensorDetection sensorsDetection2;
     public SensorDetection sensorsDetection3;
@@ -214,6 +215,7 @@ public class GunSystem : MonoBehaviour
                     fuseBox.greenFuse.SetActive(true);
                     fuseBox.blueFuse.SetActive(true);
                     fuseBox.redFuse.SetActive(true);
+                    fuseBox.enemy.SetActive(true);
                 }
             }
             if (hit.collider.CompareTag("Clock"))
@@ -235,6 +237,18 @@ public class GunSystem : MonoBehaviour
                     Cursor.visible = true;
                     inventory.Pause();
                 }
+            }
+             if (hit.collider.CompareTag("Key"))
+            {
+                Debug.Log("llavero epico");
+                Destroy(hit.collider.gameObject);
+                inventory.Key = true;
+            }
+             if (hit.collider.CompareTag("ColorCode1"))
+            {
+                Debug.Log("cacamod minecraft");
+                Destroy(hit.collider.gameObject);
+                inventory.HColorCode = true;
             }
         }
     }
