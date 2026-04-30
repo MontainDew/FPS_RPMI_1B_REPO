@@ -6,6 +6,7 @@ public class GardenDoor : MonoBehaviour
     public GameObject greenFuse;
     public GameObject blueFuse;
     public GameObject redFuse;
+    public GameObject enemy;
 
     [Header("Script References")]
     public Inv_Logic inventory;
@@ -16,6 +17,8 @@ public class GardenDoor : MonoBehaviour
         greenFuse.SetActive(false);
         blueFuse.SetActive(false);
         redFuse.SetActive(false);
+        enemy.SetActive(false);
+
     }
 
     

@@ -8,7 +8,6 @@ public class BotonSuelo : MonoBehaviour
     {
         if (other.CompareTag("Estatua"))
         {
-            Debug.Log("Intentando abrir cofre");
             cofre.AbrirCofre();
         }
     }
