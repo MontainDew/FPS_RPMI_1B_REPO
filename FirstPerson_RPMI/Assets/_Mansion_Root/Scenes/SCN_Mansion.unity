@@ -31508,6 +31508,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: malvado
       objectReference: {fileID: 0}
+    - target: {fileID: 5334323772743492536, guid: efc515d8c33977b49823b22fe3c7981e, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d66a4ddd44c78ae488ddaa21e8eb21c1, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: -8700617353114198275, guid: efc515d8c33977b49823b22fe3c7981e, type: 3}
