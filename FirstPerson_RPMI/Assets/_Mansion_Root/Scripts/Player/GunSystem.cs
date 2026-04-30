@@ -110,26 +110,31 @@ public class GunSystem : MonoBehaviour
 
             if (h.collider.CompareTag("Sensor1"))
             {
+                AudioManager.Instance.Playsfx(5);
                 sensorsDetection1.isDeactivated = true;
             }
 
             if (h.collider.CompareTag("Sensor2"))
             {
+                AudioManager.Instance.Playsfx(5);
                 sensorsDetection2.isDeactivated = true;
             }
 
             if (h.collider.CompareTag("Sensor3"))
             {
+                AudioManager.Instance.Playsfx(5);
                 sensorsDetection3.isDeactivated = true;
             }
 
             if (h.collider.CompareTag("Sensor4"))
             {
+                AudioManager.Instance.Playsfx(5);
                 sensorsDetection4.isDeactivated = true;
             }
 
             if (h.collider.CompareTag("Sensor5"))
             {
+                AudioManager.Instance.Playsfx(5);
                 sensorsDetection5.isDeactivated = true;
             }
 
@@ -186,23 +191,27 @@ public class GunSystem : MonoBehaviour
 
             if (hit.collider.CompareTag("Button"))
             {
+                AudioManager.Instance.Playsfx(4);
                 sensorsDetection1.ResetSensors();
             }
 
             if (hit.collider.CompareTag("Fuse1"))
             {
+                AudioManager.Instance.Playsfx(2);
                 Destroy(puzzleManager.fusible1);
                 inventory.FuseCuantity++;
             }
 
             if (hit.collider.CompareTag("Fuse2"))
             {
+                AudioManager.Instance.Playsfx(2);
                 Destroy(puzzleManager.fusible2);
                 inventory.FuseCuantity++;
             }
 
             if (hit.collider.CompareTag("Fuse3"))
             {
+                AudioManager.Instance.Playsfx(2);
                 Destroy(puzzleManager.fusible3);
                 inventory.FuseCuantity++;
             }
@@ -211,6 +220,7 @@ public class GunSystem : MonoBehaviour
             {
                 if (inventory.FuseCuantity >= 3)
                 {
+                    AudioManager.Instance.Playsfx(3);
                     Debug.Log("Fusibles colocados");
                     fuseBox.greenFuse.SetActive(true);
                     fuseBox.blueFuse.SetActive(true);
@@ -223,6 +233,7 @@ public class GunSystem : MonoBehaviour
                 if (inventory.ColorCode)
                 {
                     CPuzzleInterface.SetActive(true);
+                    AudioManager.Instance.PlayMusic(3);
                     Cursor.lockState = CursorLockMode.Confined;
                     Cursor.visible = true;
                     inventory.Pause();
@@ -241,12 +252,14 @@ public class GunSystem : MonoBehaviour
              if (hit.collider.CompareTag("Key"))
             {
                 Debug.Log("llavero epico");
+                AudioManager.Instance.Playsfx(8);
                 Destroy(hit.collider.gameObject);
                 inventory.Key = true;
             }
              if (hit.collider.CompareTag("ColorCode1"))
             {
                 Debug.Log("cacamod minecraft");
+                AudioManager.Instance.Playsfx(9);
                 Destroy(hit.collider.gameObject);
                 inventory.HColorCode = true;
             }

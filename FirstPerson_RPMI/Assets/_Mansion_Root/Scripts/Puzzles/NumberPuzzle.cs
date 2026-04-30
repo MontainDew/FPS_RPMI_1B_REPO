@@ -30,6 +30,7 @@ public class NumberPuzzle : MonoBehaviour
         if (currentInput == correctCode)
         {
             Debug.Log("Codigo correcto");
+            AudioManager.Instance.Playsfx(11);
             Inventario.DoorCode = true;
         }
         else

@@ -19,6 +19,7 @@ public class Cofre : MonoBehaviour
     public void AbrirCofre()
     {
         if (!abierto)
+            AudioManager.Instance.Playsfx(10);
         {   Debug.Log("Intentando abrir cofre");
             animator.SetTrigger("Abrir");
             abierto = true;

@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class SensorDetection : MonoBehaviour
 {
-
     [Header("Sensors Detection Variables")]
     public MeshCollider detectionCollider;
     public MeshRenderer materialRenderer;
@@ -11,7 +10,9 @@ public class SensorDetection : MonoBehaviour
     public bool isDeactivated;
     [SerializeField] float deactivationTime;
 
-    [Header("Material Varibles")]
+    private bool isFlashing = false;
+
+    [Header("Material Variables")]
     public Material normalMat;
     public Material detectedMat;
     public Material deactivatedMat;
@@ -20,8 +21,12 @@ public class SensorDetection : MonoBehaviour
     [SerializeField] GameObject rewardCage;
     [SerializeField] bool rewardPickable;
 
+    void Awake()
+    {
+        detectionCollider = GetComponent<MeshCollider>();
+        materialRenderer = GetComponent<MeshRenderer>();
+    }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerDetected = false;
@@ -30,71 +35,71 @@ public class SensorDetection : MonoBehaviour
         materialRenderer.material = normalMat;
     }
 
-    private void Awake()
-    {
-        detectionCollider = GetComponent<MeshCollider>();
-        materialRenderer = GetComponent<MeshRenderer>();
-    }
-
     void Update()
     {
-        if (playerDetected == false && isDeactivated == true)
+        // Solo lanza la corrutina una vez cuando se desactiva
+        if (isDeactivated && !isFlashing)
         {
-            Debug.Log("LISTO PARA DESCTIVAR");
             StartCoroutine(FlashedRoutine());
         }
     }
 
+    public void DeactivateSensor() // <-- LLAMA A ESTO cuando haces la foto
+    {
+        playerDetected = false; // IMPORTANTE: resetear esto
+        isDeactivated = true;
+    }
+
     public void ResetSensors()
     {
-        //SFX Reset
-        //Animacion reset boton
         playerDetected = false;
         rewardPickable = true;
-        //Animacion abrir baul llave
-        GameObject[] detectionAreas = GameObject.FindGameObjectsWithTag("DetectionArea"); //Vuelve a activar los colliders de todas las detection areas
 
+        GameObject[] detectionAreas = GameObject.FindGameObjectsWithTag("DetectionArea");
+        AudioManager.Instance.Playsfx(7);
         foreach (GameObject area in detectionAreas)
         {
             MeshCollider col = area.GetComponent<MeshCollider>();
             MeshRenderer rend = area.GetComponent<MeshRenderer>();
+
             if (col != null)
-            {
                 col.enabled = true;
-            }
 
             if (rend != null)
-            {
                 rend.material = normalMat;
-            }
         }
     }
 
     IEnumerator FlashedRoutine()
     {
+        isFlashing = true;
+
         Debug.Log("CAMBIO DE ESTADO");
 
-        //Sonido desactivado
         detectionCollider.enabled = false;
         materialRenderer.material = deactivatedMat;
-        //Animacion desactivado
+
         yield return new WaitForSeconds(deactivationTime);
-        //Sonido reactivado
+
         detectionCollider.enabled = true;
         materialRenderer.material = normalMat;
-        //Animacion reactivado
+        AudioManager.Instance.Playsfx(7);
         isDeactivated = false;
+        isFlashing = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             playerDetected = true;
             rewardPickable = false;
-            //ANIMACION CERRAR BAUL LLAVE
-            //Sonido detectado
+
+            // ANIMACION CERRAR BAUL LLAVE
+            AudioManager.Instance.Playsfx(6);
+
             materialRenderer.material = detectedMat;
+
             GameObject[] detectionAreas = GameObject.FindGameObjectsWithTag("DetectionArea");
 
             foreach (GameObject area in detectionAreas)
@@ -107,5 +112,4 @@ public class SensorDetection : MonoBehaviour
             }
         }
     }
-
 }
