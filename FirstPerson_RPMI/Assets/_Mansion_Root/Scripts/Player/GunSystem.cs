@@ -14,6 +14,7 @@ public class GunSystem : MonoBehaviour
     [SerializeField] LayerMask impactLayer;
     [SerializeField] LayerMask interactLayer;
     RaycastHit hit;
+    [SerializeField] int stuningTime;
 
     [Header("Weapon Parameters")]
     [SerializeField] float range = 2f;
@@ -35,6 +36,7 @@ public class GunSystem : MonoBehaviour
     [SerializeField] GameObject camParticles;
     [SerializeField] GameObject CPuzzleInterface;
     [SerializeField] GameObject DPuzzleInterface;
+    [SerializeField] EnemyAiBase Enemy;
 
     [Header("Scripts References")]
     public PuzzleManager puzzleManager;
@@ -108,6 +110,12 @@ public class GunSystem : MonoBehaviour
                 puzzleManager.fusible3.SetActive(true);
             }
 
+            if (h.collider.CompareTag("Enemy"))
+            {
+                StartCoroutine(FlashedEnemy());
+
+            }
+
             if (h.collider.CompareTag("Sensor1"))
             {
                 AudioManager.Instance.Playsfx(5);
@@ -145,7 +153,14 @@ public class GunSystem : MonoBehaviour
         }
     }
 
-
+    IEnumerator FlashedEnemy()
+    {
+        Enemy.animator.SetBool("Stun", true);
+        Enemy.enabled = false;
+        yield return new WaitForSeconds(stuningTime);
+        Enemy.enabled = true;
+        Enemy.animator.SetBool("Stun", false);
+    }
     private void OnDrawGizmos()
     {
         if (fpsCam == null) return;

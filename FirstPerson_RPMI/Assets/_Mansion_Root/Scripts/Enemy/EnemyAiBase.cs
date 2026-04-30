@@ -14,7 +14,7 @@ public class EnemyAiBase : MonoBehaviour
     [SerializeField] Transform target;
     [SerializeField] FP_Controller playerScript;
     [SerializeField] LayerMask obstacleLayer;
-    [SerializeField] Animator animator;
+    public Animator animator;
 
     [Header("Patrol Points")]
     [SerializeField] Transform[] patrolPoints;
