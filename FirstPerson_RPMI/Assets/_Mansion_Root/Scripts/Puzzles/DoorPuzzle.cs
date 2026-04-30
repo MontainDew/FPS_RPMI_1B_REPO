@@ -28,6 +28,7 @@ public class DoorPuzzle : MonoBehaviour
     {
         if (currentInput == correctCode)
         {
+            AudioManager.Instance.Playsfx(14);
             Debug.Log("Pli Open de dor");
         }
         else
@@ -43,6 +44,7 @@ public class DoorPuzzle : MonoBehaviour
     void Fail()
     {
         currentInput = "";
+        AudioManager.Instance.Playsfx(13);
         UpdateDisplay();
     }
     private void Update()
@@ -62,5 +64,10 @@ public class DoorPuzzle : MonoBehaviour
                 SubmitCode();
             }
         }
+    }
+
+    public void Sound()
+    {
+        AudioManager.Instance.Playsfx(12);
     }
 }

@@ -29,6 +29,7 @@ TagManager:
   - DoorPanel
   - Key
   - ColorCode1
+  - FullColorCode
   layers:
   - Default
   - TransparentFX

@@ -245,7 +245,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4102560840254363106}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: d42fffdad742c2646884947762c099ab, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -553,6 +553,7 @@ MonoBehaviour:
   puzzleManager: {fileID: 0}
   inventory: {fileID: 0}
   fuseBox: {fileID: 0}
+  cofre: {fileID: 0}
   sensorsDetection1: {fileID: 0}
   sensorsDetection2: {fileID: 0}
   sensorsDetection3: {fileID: 0}

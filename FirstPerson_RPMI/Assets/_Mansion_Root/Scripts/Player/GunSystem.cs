@@ -263,6 +263,14 @@ public class GunSystem : MonoBehaviour
                 Destroy(hit.collider.gameObject);
                 inventory.HColorCode = true;
             }
+
+            if (hit.collider.CompareTag("FullColorCode"))
+            {
+                Debug.Log("cacamod minecraft");
+                AudioManager.Instance.Playsfx(9);
+                Destroy(hit.collider.gameObject);
+                inventory.ColorCode = true;
+            }
         }
     }
     #endregion

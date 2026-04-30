@@ -28,6 +28,12 @@ public class Inv_Logic : MonoBehaviour
     [SerializeField] private int onoff = 1;
     #endregion
 
+
+    private void Start()
+    {
+        AudioManager.Instance.PlayMusic(1);
+    }
+
     private void Update()
     {
         if (FuseCuantity > 0)
