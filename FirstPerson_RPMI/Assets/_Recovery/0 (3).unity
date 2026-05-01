@@ -20521,7 +20521,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: da32da050a73a49428c77519c304bf58, type: 3}
   - {fileID: 8300000, guid: bd630ca56ae4cb84a904d75b9e004246, type: 3}
   - {fileID: 8300000, guid: a76053a1d07bfff4f945168e7a8e424e, type: 3}
-  - {fileID: 8300000, guid: 60323313b9581074c9e49defeee09c25, type: 3}
 --- !u!1001 &559447916
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41999,7 +41998,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1157406987
 MonoBehaviour:
   m_ObjectHideFlags: 0

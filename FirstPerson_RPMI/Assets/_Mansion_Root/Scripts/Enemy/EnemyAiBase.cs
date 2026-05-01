@@ -263,6 +263,8 @@ public class EnemyAiBase : MonoBehaviour
 
         if (jumpscareVideo != null) jumpscareVideo.Play();
 
+        AudioManager.Instance.Playsfx(17);
+
         yield return new WaitForSeconds(jumpscareDuration);
 
         Cursor.lockState = CursorLockMode.None;
