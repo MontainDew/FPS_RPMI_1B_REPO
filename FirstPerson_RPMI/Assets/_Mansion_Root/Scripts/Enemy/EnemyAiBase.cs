@@ -42,6 +42,7 @@ public class EnemyAiBase : MonoBehaviour
     [SerializeField] float chaseSpeed = 6f;
     [SerializeField] float attackRange = 1.8f;
     [SerializeField] float timeToLoseAggro = 3f;
+    public bool inChase;
     float timeSinceLastSeen;
     bool isAttacking;
 
@@ -170,9 +171,15 @@ public class EnemyAiBase : MonoBehaviour
 
         switch (currentState)
         {
-            case EnemyState.Patrol: PatrolLogic(); break;
-            case EnemyState.Investigate: InvestigateLogic(); break;
-            case EnemyState.Chase: ChaseLogic(); break;
+            case EnemyState.Patrol: PatrolLogic();
+                inChase = false;
+                break;
+            case EnemyState.Investigate: InvestigateLogic();
+                inChase = false;
+                break;
+            case EnemyState.Chase: ChaseLogic();
+                inChase = true;
+                break;
         }
     }
 

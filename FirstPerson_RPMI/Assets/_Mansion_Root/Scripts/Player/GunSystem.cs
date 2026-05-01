@@ -258,7 +258,6 @@ public class GunSystem : MonoBehaviour
                 if (inventory.ColorCode)
                 {
                     CPuzzleInterface.SetActive(true);
-                    AudioManager.Instance.PlayMusic(3);
                     Cursor.lockState = CursorLockMode.Confined;
                     Cursor.visible = true;
                     inventory.Pause();
