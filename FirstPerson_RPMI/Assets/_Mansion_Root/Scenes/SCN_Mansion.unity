@@ -8917,6 +8917,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 231546793}
     - target: {fileID: 7723284726935233986, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
+      propertyPath: stuningTime
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7723284726935233986, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
       propertyPath: flashCooldown
       value: 2
       objectReference: {fileID: 0}
@@ -43826,7 +43830,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1157406987
 MonoBehaviour:
   m_ObjectHideFlags: 0
