@@ -36,7 +36,9 @@ public class GunSystem : MonoBehaviour
     [SerializeField] GameObject camParticles;
     [SerializeField] GameObject CPuzzleInterface;
     [SerializeField] GameObject DPuzzleInterface;
-    [SerializeField] EnemyAiBase Enemy;
+    [SerializeField] GameObject LeftDoor;
+    [SerializeField] GameObject RightDoor;
+    private bool doorChecker = true;
 
     [Header("Scripts References")]
     public PuzzleManager puzzleManager;
@@ -48,6 +50,7 @@ public class GunSystem : MonoBehaviour
     public SensorDetection sensorsDetection3;
     public SensorDetection sensorsDetection4;
     public SensorDetection sensorsDetection5;
+    [SerializeField] EnemyAiBase Enemy;
     #endregion
 
     private void Awake()
@@ -292,6 +295,28 @@ public class GunSystem : MonoBehaviour
                 AudioManager.Instance.Playsfx(9);
                 Destroy(hit.collider.gameObject);
                 inventory.ColorCode = true;
+            }
+
+            if (hit.collider.CompareTag("PuertaSalonIZQ"))
+            {
+                if (inventory.Key && doorChecker)
+                {
+                    LeftDoor.transform.Rotate(0f, 90, 0f);
+                    RightDoor.transform.Rotate(0f, -90, 0f);
+                    AudioManager.Instance.Playsfx(16);
+                    doorChecker = false;
+                }
+            }
+
+            if (hit.collider.CompareTag("PuertaSalonDER"))
+            {
+                if (inventory.Key && doorChecker)
+                {
+                    LeftDoor.transform.Rotate(0f, 90, 0f);
+                    RightDoor.transform.Rotate(0f, -90, 0f);
+                    AudioManager.Instance.Playsfx(16);
+                    doorChecker = false;
+                }
             }
         }
     }
