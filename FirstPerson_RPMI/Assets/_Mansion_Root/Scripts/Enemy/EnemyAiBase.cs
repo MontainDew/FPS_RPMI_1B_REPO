@@ -8,7 +8,7 @@ public class EnemyAiBase : MonoBehaviour
 {
     public enum EnemyState { Patrol, Investigate, Chase, Attack }
 
-    #region General Variables
+    #region Variables
     [Header("AI Configuration")]
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Transform target;
@@ -20,149 +20,171 @@ public class EnemyAiBase : MonoBehaviour
     [SerializeField] Transform[] patrolPoints;
     int currentPatrolIndex = 0;
 
-    [Header("Jumpscare & Game Over")]
+    [Header("Jumpscare")]
     [SerializeField] GameObject jumpscareUI;
     [SerializeField] VideoPlayer jumpscareVideo;
     [SerializeField] float jumpscareDuration = 2.5f;
     [SerializeField] string sceneToLoad = "";
 
-    [Header("Current State")]
+    [Header("State")]
     public EnemyState currentState;
     Vector3 lastKnownPosition;
 
-    [Header("Patroling Stats")]
+    [Header("Speeds")]
     [SerializeField] float patrolSpeed = 2f;
-
-    [Header("Investigating Stats")]
     [SerializeField] float investigateSpeed = 3f;
+    [SerializeField] float chaseSpeed = 6f;
+
+    [Header("Investigate")]
     [SerializeField] float waitTimeAtInvestigation = 4f;
     float investigateTimer;
 
-    [Header("Chasing & Attacking Stats")]
-    [SerializeField] float chaseSpeed = 6f;
+    [Header("Combat")]
     [SerializeField] float attackRange = 1.8f;
     [SerializeField] float timeToLoseAggro = 3f;
     float timeSinceLastSeen;
     bool isAttacking;
 
-    [Header("Senses: Vision")]
+    [Header("Vision")]
     [SerializeField] float sightRange = 20f;
     [SerializeField] float fieldOfViewAngle = 120f;
 
-    [Header("Senses: Hearing")]
+    [Header("Hearing")]
     [SerializeField] float sprintNoiseRange = 20f;
     [SerializeField] float walkNoiseRange = 8f;
     [SerializeField] float crouchNoiseRange = 1.5f;
 
-    // Velocidad real del jugador
     Vector3 previousPlayerPosition;
     float currentPlayerSpeed;
     #endregion
 
-    private void Awake()
+    void Awake()
     {
         GameObject playerObj = GameObject.Find("Player");
-        target = playerObj.transform;
-        playerScript = playerObj.GetComponent<FP_Controller>();
+
+        if (playerObj != null)
+        {
+            target = playerObj.transform;
+            playerScript = playerObj.GetComponent<FP_Controller>();
+        }
+
         agent = GetComponent<NavMeshAgent>();
-
         currentState = EnemyState.Patrol;
-        previousPlayerPosition = target.position;
 
-        if (jumpscareUI != null) jumpscareUI.SetActive(false);
+        if (target != null)
+            previousPlayerPosition = target.position;
+
+        if (jumpscareUI != null)
+            jumpscareUI.SetActive(false);
     }
 
     void Update()
     {
-        if (isAttacking) return;
+        if (isAttacking || target == null) return;
 
-        // Calcular velocidad del jugador
-        if (Time.deltaTime > 0f)
-        {
-            currentPlayerSpeed = Vector3.Distance(target.position, previousPlayerPosition) / Time.deltaTime;
-        }
-        previousPlayerPosition = target.position;
-
+        CalculatePlayerSpeed();
         CheckSenses();
         UpdateState();
         ChooseAnimation();
     }
 
-    // ==========================================
-    // SISTEMA DE SENTIDOS
-    // ==========================================
+    void CalculatePlayerSpeed()
+    {
+        if (Time.deltaTime > 0f)
+        {
+            currentPlayerSpeed = Vector3.Distance(target.position, previousPlayerPosition) / Time.deltaTime;
+        }
+
+        previousPlayerPosition = target.position;
+    }
+
+    // ========================= SENSES =========================
     void CheckSenses()
     {
         float distanceToPlayer = Vector3.Distance(transform.position, target.position);
+
         bool canSeePlayer = false;
         bool canHearPlayer = false;
 
-        // VISIÓN
+        // ===== VISION =====
         if (distanceToPlayer <= sightRange)
         {
-            Vector3 enemyEyes = transform.position + Vector3.up * 1.5f;
-            Vector3 playerChest = target.position + Vector3.up * 1.0f;
+            Vector3 eyes = transform.position + Vector3.up * 1.5f;
+            Vector3 playerPos = target.position + Vector3.up;
 
-            Vector3 directionToPlayer = (playerChest - enemyEyes).normalized;
-            float angleToPlayer = Vector3.Angle(transform.forward, directionToPlayer);
-            float trueDistance = Vector3.Distance(enemyEyes, playerChest);
+            Vector3 dir = (playerPos - eyes).normalized;
+            float angle = Vector3.Angle(transform.forward, dir);
+            float realDist = Vector3.Distance(eyes, playerPos);
 
-            if (angleToPlayer < fieldOfViewAngle / 2f)
+            if (angle < fieldOfViewAngle / 2f)
             {
-                if (!Physics.Raycast(enemyEyes, directionToPlayer, trueDistance, obstacleLayer))
+                if (!Physics.Raycast(eyes, dir, realDist, obstacleLayer))
                 {
                     canSeePlayer = true;
                 }
             }
         }
 
-        // OÍDO
+        // ===== HEARING =====
         bool playerIsMoving = currentPlayerSpeed > 0.1f;
 
         if (playerIsMoving)
         {
-            float currentNoiseRange = playerScript.isSprinting ? sprintNoiseRange :
-                                      playerScript.isCrounching ? crouchNoiseRange : walkNoiseRange;
+            float noiseRange = playerScript.isSprinting ? sprintNoiseRange :
+                               playerScript.isCrounching ? crouchNoiseRange :
+                               walkNoiseRange;
 
-            if (distanceToPlayer <= currentNoiseRange)
+            if (distanceToPlayer <= noiseRange)
             {
                 canHearPlayer = true;
             }
         }
 
-        // DECISIONES
+        // ===== DECISIONES =====
+
+        // 🔥 PRIORIDAD TOTAL: VISIÓN
         if (canSeePlayer)
         {
             lastKnownPosition = target.position;
             currentState = EnemyState.Chase;
             timeSinceLastSeen = 0f;
+            return;
         }
-        else
+
+        // 🔥 SI LO ESTABA PERSIGUIENDO Y LO PIERDE
+        if (currentState == EnemyState.Chase)
         {
-            if (currentState == EnemyState.Chase)
+            timeSinceLastSeen += Time.deltaTime;
+
+            if (timeSinceLastSeen >= timeToLoseAggro)
             {
-                timeSinceLastSeen += Time.deltaTime;
-                if (timeSinceLastSeen >= timeToLoseAggro)
-                {
-                    currentState = EnemyState.Investigate;
-                }
-            }
-            else if (canHearPlayer && currentState != EnemyState.Chase)
-            {
-                lastKnownPosition = target.position;
                 currentState = EnemyState.Investigate;
             }
+
+            return;
+        }
+
+        // 🔥 SI ESCUCHA
+        if (canHearPlayer)
+        {
+            lastKnownPosition = target.position;
+            currentState = EnemyState.Investigate;
+            return;
+        }
+
+        // 🔥 SI NO DETECTA NADA
+        if (currentState != EnemyState.Investigate)
+        {
+            currentState = EnemyState.Patrol;
         }
     }
 
-    // ==========================================
-    // MÁQUINA DE ESTADOS
-    // ==========================================
+    // ========================= STATES =========================
     void UpdateState()
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, target.position);
+        float distance = Vector3.Distance(transform.position, target.position);
 
-        if (distanceToPlayer <= attackRange && currentState == EnemyState.Chase)
+        if (distance <= attackRange && currentState == EnemyState.Chase)
         {
             CatchPlayer();
             return;
@@ -176,32 +198,25 @@ public class EnemyAiBase : MonoBehaviour
         }
     }
 
-    // ==========================================
-    // PATRULLA (WAYPOINTS)
-    // ==========================================
-   void PatrolLogic()
-{
-    agent.speed = patrolSpeed;
-
-    if (patrolPoints.Length == 0) return;
-
-    if (!agent.hasPath || HasReachedDestination())
+    void PatrolLogic()
     {
-        currentPatrolIndex = Random.Range(0, patrolPoints.Length);
-        agent.SetDestination(patrolPoints[currentPatrolIndex].position);
-    }
-}
+        agent.speed = patrolSpeed;
 
-    // ==========================================
-    // INVESTIGACIÓN
-    // ==========================================
+        if (patrolPoints.Length == 0) return;
+
+        if (!agent.hasPath || HasReached())
+        {
+            currentPatrolIndex = Random.Range(0, patrolPoints.Length);
+            agent.SetDestination(patrolPoints[currentPatrolIndex].position);
+        }
+    }
+
     void InvestigateLogic()
     {
         agent.speed = investigateSpeed;
-
         agent.SetDestination(lastKnownPosition);
 
-        if (HasReachedDestination())
+        if (HasReached())
         {
             investigateTimer += Time.deltaTime;
 
@@ -218,52 +233,43 @@ public class EnemyAiBase : MonoBehaviour
         }
     }
 
-    // ==========================================
-    // PERSECUCIÓN
-    // ==========================================
     void ChaseLogic()
     {
         agent.speed = chaseSpeed;
         agent.SetDestination(target.position);
     }
 
-    bool HasReachedDestination()
+    bool HasReached()
     {
         if (agent.pathPending) return false;
 
-        if (agent.remainingDistance <= agent.stoppingDistance + 0.2f)
-        {
-            return true;
-        }
-
-        return false;
+        return agent.remainingDistance <= agent.stoppingDistance + 0.2f;
     }
 
-    // ==========================================
-    // JUMPSCARE
-    // ==========================================
+    // ========================= JUMPSCARE =========================
     void CatchPlayer()
     {
         isAttacking = true;
         currentState = EnemyState.Attack;
         agent.isStopped = true;
 
-        playerScript.enabled = false;
+        if (playerScript != null)
+            playerScript.enabled = false;
 
-        Vector3 direction = (target.position - transform.position).normalized;
-        direction.y = 0;
-        transform.rotation = Quaternion.LookRotation(direction);
+        Vector3 dir = (target.position - transform.position).normalized;
+        dir.y = 0;
+        transform.rotation = Quaternion.LookRotation(dir);
 
-        StartCoroutine(JumpscareSequence());
+        StartCoroutine(Jumpscare());
     }
 
-    IEnumerator JumpscareSequence()
+    IEnumerator Jumpscare()
     {
         if (jumpscareUI != null) jumpscareUI.SetActive(true);
-
         if (jumpscareVideo != null) jumpscareVideo.Play();
 
-        AudioManager.Instance.Playsfx(17);
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.Playsfx(17);
 
         yield return new WaitForSeconds(jumpscareDuration);
 
@@ -271,24 +277,17 @@ public class EnemyAiBase : MonoBehaviour
         Cursor.visible = true;
 
         if (string.IsNullOrEmpty(sceneToLoad))
-        {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
         else
-        {
             SceneManager.LoadScene(sceneToLoad);
-        }
     }
+
+    // ========================= ANIMACIONES =========================
     void ChooseAnimation()
     {
-        if (currentState == EnemyState.Chase || currentState == EnemyState.Attack)
-        {
-            animator.SetBool("Attack", true);
-        }
-        else
-        {
-            animator.SetBool("Investigate", true);
-            animator.SetBool("Attack", false);
-        }
+        if (animator == null) return;
+
+        animator.SetBool("Attack", currentState == EnemyState.Chase || currentState == EnemyState.Attack);
+        animator.SetBool("Investigate", currentState == EnemyState.Investigate);
     }
 }
