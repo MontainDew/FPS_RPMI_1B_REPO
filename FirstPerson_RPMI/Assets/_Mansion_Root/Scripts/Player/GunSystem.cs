@@ -241,6 +241,14 @@ public class GunSystem : MonoBehaviour
                     fuseBox.blueFuse.SetActive(true);
                     fuseBox.redFuse.SetActive(true);
                     fuseBox.enemy.SetActive(true);
+
+                    GameObject[] puertas = GameObject.FindGameObjectsWithTag("PuertaPatio");
+
+                     foreach (GameObject puerta in puertas)
+                    {   
+                         puerta.transform.Rotate(0f, 90f, 0f);
+                         AudioManager.Instance.Playsfx(16);
+                    }
                 }
             }
             if (hit.collider.CompareTag("Clock"))

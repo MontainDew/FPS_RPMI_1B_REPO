@@ -30,6 +30,7 @@ TagManager:
   - Key
   - ColorCode1
   - FullColorCode
+  - PuertaPatio
   layers:
   - Default
   - TransparentFX

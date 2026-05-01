@@ -30,7 +30,7 @@ public class GardenDoor : MonoBehaviour
     }
 
     public void OpenDoor()
-    {
-
-    }
+{
+    
+}
 }
