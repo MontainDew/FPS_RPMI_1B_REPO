@@ -14,7 +14,7 @@ public class GunSystem : MonoBehaviour
     [SerializeField] LayerMask impactLayer;
     [SerializeField] LayerMask interactLayer;
     RaycastHit hit;
-    [SerializeField] int stuningTime;
+    [SerializeField] int stuningTime = 5;
 
     [Header("Weapon Parameters")]
     [SerializeField] float range = 2f;
@@ -113,7 +113,6 @@ public class GunSystem : MonoBehaviour
             if (h.collider.CompareTag("Enemy"))
             {
                 StartCoroutine(FlashedEnemy());
-
             }
 
             if (h.collider.CompareTag("Sensor1"))
@@ -155,11 +154,11 @@ public class GunSystem : MonoBehaviour
 
     IEnumerator FlashedEnemy()
     {
-        Enemy.animator.SetBool("Stun", true);
+        Enemy.animator.SetTrigger("Stun");
         Enemy.enabled = false;
         yield return new WaitForSeconds(stuningTime);
         Enemy.enabled = true;
-        Enemy.animator.SetBool("Stun", false);
+        
     }
     private void OnDrawGizmos()
     {
