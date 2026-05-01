@@ -8897,6 +8897,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 426816574491162025}
     - target: {fileID: 7723284726935233986, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
+      propertyPath: Enemy
+      value: 
+      objectReference: {fileID: 275848207}
+    - target: {fileID: 7723284726935233986, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
       propertyPath: cofre
       value: 
       objectReference: {fileID: 1831584818}
@@ -10410,6 +10414,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7273087425032351647, guid: 2746cc77170c0434c96d64572db649d2, type: 3}
   m_PrefabInstance: {fileID: 974097939}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &275848207 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3016294631886548266, guid: 7b5274cf2899cf741825f5be22445edd, type: 3}
+  m_PrefabInstance: {fileID: 1046987076}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6a7fb3f1542cbe49acd08d0c5efebe4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAiBase
 --- !u!1 &276470782 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7273087425032351647, guid: 2746cc77170c0434c96d64572db649d2, type: 3}
@@ -16317,12 +16332,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monster
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 486206f66a745724dba3a9d152c3e437, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 65702495048144492, guid: 486206f66a745724dba3a9d152c3e437, type: 3}
     - {fileID: -8700617353114198275, guid: 486206f66a745724dba3a9d152c3e437, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 486206f66a745724dba3a9d152c3e437, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1318291921}
   m_SourcePrefab: {fileID: 100100000, guid: 486206f66a745724dba3a9d152c3e437, type: 3}
 --- !u!4 &440558709 stripped
 Transform:
@@ -38322,6 +38344,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 685340464873046502, guid: 7b5274cf2899cf741825f5be22445edd, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 825042239570970227, guid: 7b5274cf2899cf741825f5be22445edd, type: 3}
       propertyPath: deathVfx
       value: 
@@ -38338,6 +38364,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1913013253441052954, guid: 7b5274cf2899cf741825f5be22445edd, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 2796060537893487736, guid: 7b5274cf2899cf741825f5be22445edd, type: 3}
       propertyPath: m_Speed
       value: 1
@@ -38349,7 +38379,7 @@ PrefabInstance:
     - target: {fileID: 3016294631886548266, guid: 7b5274cf2899cf741825f5be22445edd, type: 3}
       propertyPath: animator
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1318291921}
     - target: {fileID: 3016294631886548266, guid: 7b5274cf2899cf741825f5be22445edd, type: 3}
       propertyPath: chaseSpeed
       value: 5
@@ -38414,9 +38444,17 @@ PrefabInstance:
       propertyPath: 'patrolPoints.Array.data[7]'
       value: 
       objectReference: {fileID: 297820762}
+    - target: {fileID: 4607102431966784490, guid: 7b5274cf2899cf741825f5be22445edd, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 5272240121675762530, guid: 7b5274cf2899cf741825f5be22445edd, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6761461660405519496, guid: 7b5274cf2899cf741825f5be22445edd, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 6828859615028720743, guid: 7b5274cf2899cf741825f5be22445edd, type: 3}
       propertyPath: m_Mesh
@@ -52479,6 +52517,33 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7205852514466138065, guid: 2746cc77170c0434c96d64572db649d2, type: 3}
   m_PrefabInstance: {fileID: 1317611248}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1318291920 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 486206f66a745724dba3a9d152c3e437, type: 3}
+  m_PrefabInstance: {fileID: 440558708}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1318291921
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1318291920}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: def0eb9a5763dfa48b6b126e8843774d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1321197392
 PrefabInstance:
   m_ObjectHideFlags: 0
