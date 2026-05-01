@@ -2838,6 +2838,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 546216775069926670, guid: eb9807c1a83926347ba8ac724bbf8af3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3869100370868187269, guid: eb9807c1a83926347ba8ac724bbf8af3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 41.36309
@@ -2881,6 +2885,14 @@ PrefabInstance:
     - target: {fileID: 3925076271668386098, guid: eb9807c1a83926347ba8ac724bbf8af3, type: 3}
       propertyPath: m_Name
       value: wall_with_big_door (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977057729576712108, guid: eb9807c1a83926347ba8ac724bbf8af3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6403040386252038518, guid: eb9807c1a83926347ba8ac724bbf8af3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8918,7 +8930,7 @@ PrefabInstance:
       objectReference: {fileID: 231546793}
     - target: {fileID: 7723284726935233986, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
       propertyPath: stuningTime
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7723284726935233986, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
       propertyPath: flashCooldown
@@ -25768,9 +25780,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: wall_with_small_door
       objectReference: {fileID: 0}
+    - target: {fileID: 3806619352732832944, guid: 983102a4b315f0e4286be9af5732dc0d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3877179342609465310, guid: 983102a4b315f0e4286be9af5732dc0d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3877179342609465310, guid: 983102a4b315f0e4286be9af5732dc0d, type: 3}
       propertyPath: m_TagString
       value: PuertaPatio
+      objectReference: {fileID: 0}
+    - target: {fileID: 4130833257251837314, guid: 983102a4b315f0e4286be9af5732dc0d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8472228789259425259, guid: 983102a4b315f0e4286be9af5732dc0d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -43830,7 +43854,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1157406987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43853,7 +43877,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   m_UseGeometry: 0
   m_DefaultArea: 0
-  m_GenerateLinks: 0
+  m_GenerateLinks: 1
   m_IgnoreNavMeshAgent: 1
   m_IgnoreNavMeshObstacle: 1
   m_OverrideTileSize: 0
@@ -88718,7 +88742,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2154613594307609532, guid: baf318685eb42ea46bf2a09ff5af0eb7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2154613594307609532, guid: baf318685eb42ea46bf2a09ff5af0eb7, type: 3}
       propertyPath: m_TagString
@@ -89249,7 +89273,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5949100932195325696, guid: 66bed7fdd4e9c3d43b6410cd2c11b17e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5949100932195325696, guid: 66bed7fdd4e9c3d43b6410cd2c11b17e, type: 3}
       propertyPath: m_TagString
@@ -89590,7 +89614,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1651772785449787408, guid: 53a40aeb0d9587041b763da7196d3cd3, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1651772785449787408, guid: 53a40aeb0d9587041b763da7196d3cd3, type: 3}
       propertyPath: m_TagString
