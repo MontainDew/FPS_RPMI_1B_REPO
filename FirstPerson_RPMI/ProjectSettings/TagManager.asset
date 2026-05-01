@@ -31,6 +31,7 @@ TagManager:
   - ColorCode1
   - FullColorCode
   - PuertaPatio
+  - SensorsChest
   layers:
   - Default
   - TransparentFX

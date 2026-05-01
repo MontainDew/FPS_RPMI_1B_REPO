@@ -9,6 +9,7 @@ public class SensorDetection : MonoBehaviour
     [SerializeField] bool playerDetected;
     public bool isDeactivated;
     [SerializeField] float deactivationTime;
+    
 
     private bool isFlashing = false;
 
@@ -18,7 +19,7 @@ public class SensorDetection : MonoBehaviour
     public Material deactivatedMat;
 
     [Header("Puzzle Reward Objects")]
-    [SerializeField] GameObject rewardCage;
+    [SerializeField] GameObject rewardCollider;
     [SerializeField] bool rewardPickable;
 
     void Awake()
@@ -33,20 +34,26 @@ public class SensorDetection : MonoBehaviour
         isDeactivated = false;
         rewardPickable = true;
         materialRenderer.material = normalMat;
+        rewardCollider.SetActive(true);
     }
 
     void Update()
     {
-        // Solo lanza la corrutina una vez cuando se desactiva
+        
         if (isDeactivated && !isFlashing)
         {
             StartCoroutine(FlashedRoutine());
         }
+
+        if (rewardPickable == false)
+        {
+            rewardCollider.SetActive(false);
+        }
     }
 
-    public void DeactivateSensor() // <-- LLAMA A ESTO cuando haces la foto
+    public void DeactivateSensor()
     {
-        playerDetected = false; // IMPORTANTE: resetear esto
+        playerDetected = false;
         isDeactivated = true;
     }
 
@@ -55,18 +62,33 @@ public class SensorDetection : MonoBehaviour
         playerDetected = false;
         rewardPickable = true;
 
+        rewardCollider.SetActive(true);
+
         GameObject[] detectionAreas = GameObject.FindGameObjectsWithTag("DetectionArea");
+
         AudioManager.Instance.Playsfx(7);
+
         foreach (GameObject area in detectionAreas)
         {
             MeshCollider col = area.GetComponent<MeshCollider>();
             MeshRenderer rend = area.GetComponent<MeshRenderer>();
 
+            SensorDetection sensor = area.GetComponent<SensorDetection>();
+
+            if (sensor != null)
+            {
+                sensor.rewardPickable = true;
+            }
+
             if (col != null)
+            {
                 col.enabled = true;
+            }
 
             if (rend != null)
+            {
                 rend.material = normalMat;
+            }
         }
     }
 
@@ -95,7 +117,8 @@ public class SensorDetection : MonoBehaviour
             playerDetected = true;
             rewardPickable = false;
 
-            // ANIMACION CERRAR BAUL LLAVE
+            rewardCollider.SetActive(false);
+
             AudioManager.Instance.Playsfx(6);
 
             materialRenderer.material = detectedMat;

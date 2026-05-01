@@ -50,6 +50,8 @@ public class FP_Controller : MonoBehaviour
     [SerializeField] float crouchVolume = 0.15f; // Más silencioso al agacharse
     [SerializeField] float fadeOutSpeed = 3f;
 
+    public CofreSensores cofreSensores;
+    
     float stepTimer;
     bool isFootstepPlaying;
     #endregion
@@ -230,6 +232,14 @@ public class FP_Controller : MonoBehaviour
         if (context.performed && flashlight != null)
         {
             flashlight.enabled = !flashlight.enabled;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("SensorsChest"))
+        {
+            cofreSensores.AbrirCofre(); 
         }
     }
 
