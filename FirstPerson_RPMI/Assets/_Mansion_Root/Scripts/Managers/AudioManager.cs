@@ -48,9 +48,9 @@ public class AudioManager : MonoBehaviour
         {
             nuevaMusica = musicList[3];
         } 
-        else if (Enemy.inChase)
+        else if (Enemy != null && Enemy.inChase)
         {
-            nuevaMusica = musicList[2];
+        nuevaMusica = musicList[2];
         }
         else
         {

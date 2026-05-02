@@ -155,14 +155,15 @@ public class GunSystem : MonoBehaviour
         }
     }
 
-    IEnumerator FlashedEnemy()
+ IEnumerator FlashedEnemy()
+{
+    if (Enemy != null)
     {
-        Enemy.animator.SetTrigger("Stun");
-        Enemy.stuned = true;
-        yield return new WaitForSeconds(stuningTime);
-        Enemy.stuned = false;
-        
+        Enemy.ApplyStun();
     }
+
+    yield return null;
+}
     private void OnDrawGizmos()
     {
         if (fpsCam == null) return;

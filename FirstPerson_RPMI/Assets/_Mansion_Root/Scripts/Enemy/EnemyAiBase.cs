@@ -1,309 +1,219 @@
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
-using UnityEngine.Video;
 using System.Collections;
 
 public class EnemyAiBase : MonoBehaviour
 {
-    public enum EnemyState { Patrol, Investigate, Chase, Attack }
-
-    #region Variables
-    [Header("AI Configuration")]
-    [SerializeField] NavMeshAgent agent;
-    [SerializeField] Transform target;
-    [SerializeField] FP_Controller playerScript;
-    [SerializeField] LayerMask obstacleLayer;
+    [Header("References")]
+    public NavMeshAgent agent;
+    public Transform player;
     public Animator animator;
 
-    [Header("Patrol Points")]
-    [SerializeField] Transform[] patrolPoints;
-    int currentPatrolIndex = 0;
-
     [Header("Jumpscare")]
-    [SerializeField] GameObject jumpscareUI;
-    [SerializeField] VideoPlayer jumpscareVideo;
-    [SerializeField] float jumpscareDuration = 2.5f;
-    [SerializeField] string sceneToLoad = "";
+    public GameObject jumpscareUI;
+    public AudioSource jumpscareAudio;
+    public float jumpscareTime = 3f;
 
-    [Header("State")]
-    public EnemyState currentState;
-    Vector3 lastKnownPosition;
-
-    [Header("Speeds")]
-    [SerializeField] float patrolSpeed = 2f;
-    [SerializeField] float investigateSpeed = 3f;
-    [SerializeField] float chaseSpeed = 6f;
-
-    [Header("Investigate")]
-    [SerializeField] float waitTimeAtInvestigation = 4f;
-    float investigateTimer;
-
-    [Header("Combat")]
-    [SerializeField] float attackRange = 1.8f;
-    [SerializeField] float timeToLoseAggro = 3f;
-    public bool stuned = false; 
-    public bool inChase = false;
-    float timeSinceLastSeen;
-    bool isAttacking;
+    [Header("Patrol")]
+    public Transform[] patrolPoints;
+    int currentPoint;
 
     [Header("Vision")]
-    [SerializeField] float sightRange = 20f;
-    [SerializeField] float fieldOfViewAngle = 120f;
+    public float viewDistance = 15f;
+    public float viewAngle = 90f;
+    public LayerMask obstacleMask;
 
-    [Header("Hearing")]
-    [SerializeField] float sprintNoiseRange = 20f;
-    [SerializeField] float walkNoiseRange = 8f;
-    [SerializeField] float crouchNoiseRange = 1.5f;
+    [Header("Speeds")]
+    public float chaseSpeed = 5f;
+    public float patrolSpeed = 2f;
 
-    Vector3 previousPlayerPosition;
-    float currentPlayerSpeed;
-    #endregion
+    [Header("Attack")]
+    public float attackDistance = 1.5f;
 
-    void Awake()
+    [Header("Stun")]
+    public float stunDuration = 5f;
+    public bool stuned = false;
+
+    public bool inChase = false;
+
+    bool isAttacking = false;
+    Coroutine stunCoroutine;
+
+    void Start()
     {
-        GameObject playerObj = GameObject.Find("Player");
-
-        if (playerObj != null)
-        {
-            target = playerObj.transform;
-            playerScript = playerObj.GetComponent<FP_Controller>();
-        }
-
         agent = GetComponent<NavMeshAgent>();
-        currentState = EnemyState.Patrol;
 
-        if (target != null)
-            previousPlayerPosition = target.position;
+        if (player == null)
+        {
+            GameObject p = GameObject.FindGameObjectWithTag("Player");
+            if (p != null) player = p.transform;
+        }
 
         if (jumpscareUI != null)
             jumpscareUI.SetActive(false);
+
+        GoToNextPoint();
     }
 
     void Update()
     {
-        if (isAttacking || target == null) return;
-
-        CalculatePlayerSpeed();
-        CheckSenses();
-        UpdateState();
-        ChooseAnimation();
         if (stuned)
         {
             agent.isStopped = true;
+            UpdateAnimations();
+            return;
         }
         else
         {
             agent.isStopped = false;
         }
-    }
 
-    void CalculatePlayerSpeed()
-    {
-        if (Time.deltaTime > 0f)
+        if (isAttacking) return;
+
+        if (CanSeePlayer())
         {
-            currentPlayerSpeed = Vector3.Distance(target.position, previousPlayerPosition) / Time.deltaTime;
+            inChase = true;
         }
 
-        previousPlayerPosition = target.position;
-    }
-
-    // ========================= SENSES =========================
-    void CheckSenses()
-    {
-        float distanceToPlayer = Vector3.Distance(transform.position, target.position);
-
-        bool canSeePlayer = false;
-        bool canHearPlayer = false;
-
-        // ===== VISION =====
-        if (distanceToPlayer <= sightRange)
+        if (inChase)
         {
-            Vector3 eyes = transform.position + Vector3.up * 1.5f;
-            Vector3 playerPos = target.position + Vector3.up;
-
-            Vector3 dir = (playerPos - eyes).normalized;
-            float angle = Vector3.Angle(transform.forward, dir);
-            float realDist = Vector3.Distance(eyes, playerPos);
-
-            if (angle < fieldOfViewAngle / 2f)
-            {
-                if (!Physics.Raycast(eyes, dir, realDist, obstacleLayer))
-                {
-                    canSeePlayer = true;
-                }
-            }
-        }
-
-        // ===== HEARING =====
-        bool playerIsMoving = currentPlayerSpeed > 0.1f;
-
-        if (playerIsMoving)
-        {
-            float noiseRange = playerScript.isSprinting ? sprintNoiseRange :
-                               playerScript.isCrounching ? crouchNoiseRange :
-                               walkNoiseRange;
-
-            if (distanceToPlayer <= noiseRange)
-            {
-                canHearPlayer = true;
-            }
-        }
-
-        // ===== DECISIONES =====
-
-        // 🔥 PRIORIDAD TOTAL: VISIÓN
-        if (canSeePlayer)
-        {
-            lastKnownPosition = target.position;
-            currentState = EnemyState.Chase;
-            timeSinceLastSeen = 0f;
-            return;
-        }
-
-        // 🔥 SI LO ESTABA PERSIGUIENDO Y LO PIERDE
-        if (currentState == EnemyState.Chase)
-        {
-            timeSinceLastSeen += Time.deltaTime;
-
-            if (timeSinceLastSeen >= timeToLoseAggro)
-            {
-                currentState = EnemyState.Investigate;
-            }
-
-            return;
-        }
-
-        // 🔥 SI ESCUCHA
-        if (canHearPlayer)
-        {
-            lastKnownPosition = target.position;
-            currentState = EnemyState.Investigate;
-            return;
-        }
-
-        // 🔥 SI NO DETECTA NADA
-        if (currentState != EnemyState.Investigate)
-        {
-            currentState = EnemyState.Patrol;
-        }
-    }
-
-    // ========================= STATES =========================
-    void UpdateState()
-    {
-        float distance = Vector3.Distance(transform.position, target.position);
-
-        if (distance <= attackRange && currentState == EnemyState.Chase)
-        {
-            CatchPlayer();
-            return;
-        }
-
-        switch (currentState)
-        {
-            case EnemyState.Patrol: PatrolLogic();
-                inChase = false;
-                break;
-            case EnemyState.Investigate: InvestigateLogic();
-                inChase = false;
-                break;
-            case EnemyState.Chase: ChaseLogic();
-                inChase = true;
-                break;
-        }
-    }
-
-    void PatrolLogic()
-    {
-        agent.speed = patrolSpeed;
-
-        if (patrolPoints.Length == 0) return;
-
-        if (!agent.hasPath || HasReached())
-        {
-            currentPatrolIndex = Random.Range(0, patrolPoints.Length);
-            agent.SetDestination(patrolPoints[currentPatrolIndex].position);
-        }
-    }
-
-    void InvestigateLogic()
-    {
-        agent.speed = investigateSpeed;
-        agent.SetDestination(lastKnownPosition);
-
-        if (HasReached())
-        {
-            investigateTimer += Time.deltaTime;
-
-            if (investigateTimer >= waitTimeAtInvestigation)
-            {
-                investigateTimer = 0;
-                currentState = EnemyState.Patrol;
-                agent.ResetPath();
-            }
+            Chase();
         }
         else
         {
-            investigateTimer = 0;
+            Patrol();
+        }
+
+        CheckAttack();
+        UpdateAnimations();
+    }
+
+    // ================= PATROL =================
+    void Patrol()
+    {
+        agent.speed = patrolSpeed;
+
+        if (!agent.hasPath || agent.remainingDistance < 0.5f)
+        {
+            GoToNextPoint();
         }
     }
 
-    void ChaseLogic()
+    void GoToNextPoint()
+    {
+        if (patrolPoints.Length == 0) return;
+
+        currentPoint = Random.Range(0, patrolPoints.Length);
+        agent.SetDestination(patrolPoints[currentPoint].position);
+    }
+
+    // ================= CHASE =================
+    void Chase()
     {
         agent.speed = chaseSpeed;
-        agent.SetDestination(target.position);
+        agent.SetDestination(player.position);
     }
 
-    bool HasReached()
+    // ================= VISION =================
+    bool CanSeePlayer()
     {
-        if (agent.pathPending) return false;
+        if (player == null) return false;
 
-        return agent.remainingDistance <= agent.stoppingDistance + 0.2f;
+        float dist = Vector3.Distance(transform.position, player.position);
+        if (dist > viewDistance) return false;
+
+        Vector3 dir = (player.position - transform.position).normalized;
+        float angle = Vector3.Angle(transform.forward, dir);
+        if (angle > viewAngle / 2f) return false;
+
+        if (Physics.Raycast(transform.position + Vector3.up, dir, dist, obstacleMask))
+            return false;
+
+        return true;
     }
 
-    // ========================= JUMPSCARE =========================
-    void CatchPlayer()
+    // ================= ATTACK =================
+    void CheckAttack()
     {
-        isAttacking = true;
-        currentState = EnemyState.Attack;
-        agent.isStopped = true;
+        if (player == null) return;
 
-        if (playerScript != null)
-            playerScript.enabled = false;
+        float dist = Vector3.Distance(transform.position, player.position);
 
-        Vector3 dir = (target.position - transform.position).normalized;
-        dir.y = 0;
-        transform.rotation = Quaternion.LookRotation(dir);
-
-        StartCoroutine(Jumpscare());
+        if (dist <= attackDistance)
+        {
+            StartCoroutine(Jumpscare());
+        }
     }
 
     IEnumerator Jumpscare()
     {
-        if (jumpscareUI != null) jumpscareUI.SetActive(true);
-        if (jumpscareVideo != null) jumpscareVideo.Play();
+        isAttacking = true;
+        agent.isStopped = true;
 
-        if (AudioManager.Instance != null)
-            AudioManager.Instance.Playsfx(17);
+        // Mirar al jugador
+        Vector3 dir = (player.position - transform.position).normalized;
+        dir.y = 0;
+        transform.rotation = Quaternion.LookRotation(dir);
 
-        yield return new WaitForSeconds(jumpscareDuration);
+        // Animación enemigo
+        if (animator != null)
+            animator.SetTrigger("Attack");
 
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        // Activar UI
+        if (jumpscareUI != null)
+            jumpscareUI.SetActive(true);
 
-        if (string.IsNullOrEmpty(sceneToLoad))
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        else
-            SceneManager.LoadScene(sceneToLoad);
+        // Sonido
+        if (jumpscareAudio != null)
+            jumpscareAudio.Play();
+
+        // Bloquear jugador
+        if (player != null)
+        {
+            FP_Controller controller = player.GetComponent<FP_Controller>();
+            if (controller != null)
+            controller.enabled = false;
+        }
+
+        yield return new WaitForSeconds(jumpscareTime);
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    // ========================= ANIMACIONES =========================
-    void ChooseAnimation()
+    // ================= STUN =================
+    public void ApplyStun()
+    {
+        if (stunCoroutine != null)
+            StopCoroutine(stunCoroutine);
+
+        stunCoroutine = StartCoroutine(StunRoutine());
+    }
+
+    IEnumerator StunRoutine()
+    {
+        stuned = true;
+
+        inChase = false;
+        agent.ResetPath();
+
+        if (animator != null)
+            animator.SetTrigger("Stun");
+
+        yield return new WaitForSeconds(stunDuration);
+
+        stuned = false;
+
+        GoToNextPoint();
+    }
+
+    // ================= ANIMACIONES =================
+    void UpdateAnimations()
     {
         if (animator == null) return;
 
-        animator.SetBool("Attack", currentState == EnemyState.Chase || currentState == EnemyState.Attack);
-        animator.SetBool("Investigate", currentState == EnemyState.Investigate);
+        animator.SetBool("isWalking", !inChase && !stuned);
+        animator.SetBool("isRunning", inChase && !stuned);
+        animator.SetBool("isStunned", stuned);
     }
 }

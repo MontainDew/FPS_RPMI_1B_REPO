@@ -6,7 +6,7 @@ public class FP_Controller : MonoBehaviour
     #region General Variables
     [Header("Movement & Look")]
     [SerializeField] GameObject camHolder;
-    [SerializeField] float speed = 3f; // Más lento para terror
+    [SerializeField] float speed = 3f; // Mï¿½s lento para terror
     [SerializeField] float crouchSpeed = 1.5f;
     [SerializeField] float sprintSpeed = 6f;
     [SerializeField] float maxForce = 1f;
@@ -21,12 +21,12 @@ public class FP_Controller : MonoBehaviour
 
     [Header("Player State Bools")]
     public bool isSprinting;
-    public bool isCrounching; // Hecho público para que el enemigo lo lea
+    public bool isCrounching; // Hecho pï¿½blico para que el enemigo lo lea
 
     [Header("Horror Mechanics")]
     [SerializeField] Light flashlight; // Linterna
-    [SerializeField] float standingHeight = 0.6f; // Altura normal de la cámara
-    [SerializeField] float crouchingHeight = -0.2f; // Altura de la cámara al agacharse
+    [SerializeField] float standingHeight = 0.6f; // Altura normal de la cï¿½mara
+    [SerializeField] float crouchingHeight = -0.2f; // Altura de la cï¿½mara al agacharse
     [SerializeField] float crouchTransitionSpeed = 5f;
 
     [Header("Lean Settings")]
@@ -47,7 +47,7 @@ public class FP_Controller : MonoBehaviour
     [SerializeField] float crouchStepRate = 0.9f;
     [SerializeField] float walkVolume = 0.5f;
     [SerializeField] float sprintVolume = 0.8f;
-    [SerializeField] float crouchVolume = 0.15f; // Más silencioso al agacharse
+    [SerializeField] float crouchVolume = 0.15f; // Mï¿½s silencioso al agacharse
     [SerializeField] float fadeOutSpeed = 3f;
 
     public CofreSensores cofreSensores;
@@ -120,7 +120,7 @@ public class FP_Controller : MonoBehaviour
 
     void ApplyHeadBobAndCrouch()
     {
-        // Transición suave al agacharse
+        // Transiciï¿½n suave al agacharse
         targetCamHeight = isCrounching ? crouchingHeight : standingHeight;
         initialCamPos.y = Mathf.Lerp(initialCamPos.y, targetCamHeight, Time.deltaTime * crouchTransitionSpeed);
 
@@ -158,7 +158,7 @@ public class FP_Controller : MonoBehaviour
 
     void Jump()
     {
-        if (isGrounded && !isCrounching) // No saltar si está agachado
+        if (isGrounded && !isCrounching) // No saltar si estï¿½ agachado
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 
