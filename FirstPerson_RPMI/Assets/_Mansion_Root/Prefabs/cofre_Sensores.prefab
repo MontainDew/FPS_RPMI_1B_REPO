@@ -79,9 +79,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9d76ee7c630125e4c85402bdcb01d9a3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 994784357432506760}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9d76ee7c630125e4c85402bdcb01d9a3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: -843465096371006359}
   m_SourcePrefab: {fileID: 100100000, guid: 9d76ee7c630125e4c85402bdcb01d9a3, type: 3}
 --- !u!1 &7642253748597172445 stripped
 GameObject:
@@ -110,17 +107,3 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-843465096371006359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7642253748597172445}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b26cf17ef051f84581cf6241a7894c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CofreSensores
-  animator: {fileID: 0}
-  ColorCode: {fileID: 0}
