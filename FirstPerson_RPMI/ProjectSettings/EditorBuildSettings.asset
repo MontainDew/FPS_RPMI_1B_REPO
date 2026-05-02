@@ -12,8 +12,8 @@ EditorBuildSettings:
     path: Assets/_Mansion_Root/Scenes/SCN_Mansion.unity
     guid: 018a8123f09e75743a2ebdbac1bb99dc
   - enabled: 1
-    path: Assets/_Mansion_Root/Scenes/SCN_IA_Test_2.unity
-    guid: dcabbce27cd5eca4fa4e19a576e3a5fb
+    path: Assets/_Mansion_Root/Scenes/End.unity
+    guid: a1ea7a3623ed6d74889d6c5607f29137
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 770f3ac2e49e32b41b0d6fbafac87bfd, type: 3}
   m_UseUCBPForAssetBundles: 0
