@@ -38,7 +38,6 @@ public class GunSystem : MonoBehaviour
     [SerializeField] GameObject DPuzzleInterface;
     [SerializeField] GameObject LeftDoor;
     [SerializeField] GameObject RightDoor;
-    private bool doorChecker = true;
 
     [Header("Scripts References")]
     public PuzzleManager puzzleManager;
@@ -244,6 +243,7 @@ public class GunSystem : MonoBehaviour
                     fuseBox.blueFuse.SetActive(true);
                     fuseBox.redFuse.SetActive(true);
                     fuseBox.enemy.SetActive(true);
+                    inventory.FuseCuantity = 0;
 
                     GameObject[] puertas = GameObject.FindGameObjectsWithTag("PuertaPatio");
 
@@ -295,27 +295,28 @@ public class GunSystem : MonoBehaviour
                 AudioManager.Instance.Playsfx(9);
                 Destroy(hit.collider.gameObject);
                 inventory.ColorCode = true;
+                inventory.HColorCode = false;
             }
 
             if (hit.collider.CompareTag("PuertaSalonIZQ"))
             {
-                if (inventory.Key && doorChecker)
+                if (inventory.Key)
                 {
                     LeftDoor.transform.Rotate(0f, 90, 0f);
                     RightDoor.transform.Rotate(0f, -90, 0f);
                     AudioManager.Instance.Playsfx(16);
-                    doorChecker = false;
+                    inventory.Key = false;
                 }
             }
 
             if (hit.collider.CompareTag("PuertaSalonDER"))
             {
-                if (inventory.Key && doorChecker)
+                if (inventory.Key)
                 {
                     LeftDoor.transform.Rotate(0f, 90, 0f);
                     RightDoor.transform.Rotate(0f, -90, 0f);
                     AudioManager.Instance.Playsfx(16);
-                    doorChecker = false;
+                    inventory.Key = false;
                 }
             }
         }
