@@ -8663,7 +8663,7 @@ PrefabInstance:
       objectReference: {fileID: 1165312521}
     - target: {fileID: 3573164558944869355, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
       propertyPath: ColorCode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3573164558944869355, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
       propertyPath: Inventory
@@ -53932,6 +53932,10 @@ PrefabInstance:
     - target: {fileID: 3251522421427182870, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: escena
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3251522421427182870, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
+      propertyPath: correctCode
+      value: 2398
       objectReference: {fileID: 0}
     - target: {fileID: 3349945687095928500, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_IsActive
