@@ -5,12 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/NADA QUE VER/Assets/_FPS_RPMI_/Scenes/SCN_PruebasParticle.unity
-    guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/_Mansion_Root/Scenes/SCN_IA_Test.unity
-    guid: 4174c542e66a4f84b97700b6b9c4cc4d
+    path: Assets/_Mansion_Root/Scenes/SCN_Menu.unity
+    guid: cae73078368e60d46bcd398a3eddb1ac
+  - enabled: 1
+    path: Assets/_Mansion_Root/Scenes/SCN_Mansion.unity
+    guid: 018a8123f09e75743a2ebdbac1bb99dc
+  - enabled: 1
+    path: Assets/_Mansion_Root/Scenes/SCN_IA_Test_2.unity
+    guid: dcabbce27cd5eca4fa4e19a576e3a5fb
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 770f3ac2e49e32b41b0d6fbafac87bfd, type: 3}
   m_UseUCBPForAssetBundles: 0

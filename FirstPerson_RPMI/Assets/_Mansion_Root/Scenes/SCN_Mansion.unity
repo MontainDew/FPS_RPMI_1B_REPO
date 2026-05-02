@@ -24365,11 +24365,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6429811503967129983, guid: de9788876f67ee041939157bb153b79b, type: 3}
   m_PrefabInstance: {fileID: 277685764}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &640084349 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6563613161113021523, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
-  m_PrefabInstance: {fileID: 1326226438}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &640120291
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53224,7 +53219,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 606767009608715042, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 606767009608715042, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -53233,7 +53228,7 @@ PrefabInstance:
     - target: {fileID: 606767009608715042, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 640084349}
+      objectReference: {fileID: 1326226440}
     - target: {fileID: 606767009608715042, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
@@ -53244,7 +53239,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 606767009608715042, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: 
+      value: AddNumber
       objectReference: {fileID: 0}
     - target: {fileID: 606767009608715042, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -53252,15 +53247,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 606767009608715042, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: ClockPuzzle, Assembly-CSharp
+      value: DoorPuzzle, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 606767009608715042, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
-      value: 
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 606767009608715042, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: 
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 864032049781067635, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -53272,7 +53267,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 864032049781067635, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 864032049781067635, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -53281,7 +53276,7 @@ PrefabInstance:
     - target: {fileID: 864032049781067635, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 640084349}
+      objectReference: {fileID: 1326226440}
     - target: {fileID: 864032049781067635, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
@@ -53292,7 +53287,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 864032049781067635, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: 
+      value: AddNumber
       objectReference: {fileID: 0}
     - target: {fileID: 864032049781067635, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -53300,15 +53295,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 864032049781067635, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: ClockPuzzle, Assembly-CSharp
+      value: DoorPuzzle, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 864032049781067635, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
-      value: 
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 864032049781067635, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: 
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1029406872262116269, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
@@ -53464,7 +53459,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2184364562008480254, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2184364562008480254, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -53473,7 +53468,7 @@ PrefabInstance:
     - target: {fileID: 2184364562008480254, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 640084349}
+      objectReference: {fileID: 1326226440}
     - target: {fileID: 2184364562008480254, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
@@ -53484,7 +53479,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2184364562008480254, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: 
+      value: AddNumber
       objectReference: {fileID: 0}
     - target: {fileID: 2184364562008480254, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -53492,15 +53487,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2184364562008480254, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: ClockPuzzle, Assembly-CSharp
+      value: DoorPuzzle, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2184364562008480254, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
-      value: 
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2184364562008480254, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: 
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2663281975027006388, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -53512,7 +53507,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2663281975027006388, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2663281975027006388, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -53521,7 +53516,7 @@ PrefabInstance:
     - target: {fileID: 2663281975027006388, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 640084349}
+      objectReference: {fileID: 1326226440}
     - target: {fileID: 2663281975027006388, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
@@ -53532,7 +53527,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2663281975027006388, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: 
+      value: AddNumber
       objectReference: {fileID: 0}
     - target: {fileID: 2663281975027006388, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -53540,15 +53535,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2663281975027006388, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: ClockPuzzle, Assembly-CSharp
+      value: DoorPuzzle, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2663281975027006388, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
-      value: 
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2663281975027006388, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: 
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2801933020843780277, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_AnchorMax.y
@@ -53600,7 +53595,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3048141428072152603, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3048141428072152603, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -53609,7 +53604,7 @@ PrefabInstance:
     - target: {fileID: 3048141428072152603, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 640084349}
+      objectReference: {fileID: 1326226440}
     - target: {fileID: 3048141428072152603, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
@@ -53620,7 +53615,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3048141428072152603, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: 
+      value: AddNumber
       objectReference: {fileID: 0}
     - target: {fileID: 3048141428072152603, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -53628,19 +53623,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3048141428072152603, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: ClockPuzzle, Assembly-CSharp
+      value: DoorPuzzle, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3048141428072152603, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
-      value: 
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3048141428072152603, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: 
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3251522421427182870, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: escena
-      value: SCN_Menu
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3349945687095928500, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_IsActive
@@ -53760,7 +53755,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5366358223179851387, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5366358223179851387, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5366358223179851387, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -54008,7 +54007,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5851016578839202949, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5851016578839202949, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -54017,7 +54016,7 @@ PrefabInstance:
     - target: {fileID: 5851016578839202949, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 640084349}
+      objectReference: {fileID: 1326226440}
     - target: {fileID: 5851016578839202949, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
@@ -54028,7 +54027,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5851016578839202949, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: 
+      value: AddNumber
       objectReference: {fileID: 0}
     - target: {fileID: 5851016578839202949, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -54036,15 +54035,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5851016578839202949, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: ClockPuzzle, Assembly-CSharp
+      value: DoorPuzzle, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5851016578839202949, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
-      value: 
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5851016578839202949, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: 
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5892157781747919656, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_AnchorMax.y
@@ -54136,7 +54135,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6649169528729811389, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6649169528729811389, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -54145,7 +54144,7 @@ PrefabInstance:
     - target: {fileID: 6649169528729811389, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 640084349}
+      objectReference: {fileID: 1326226440}
     - target: {fileID: 6649169528729811389, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
@@ -54156,7 +54155,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6649169528729811389, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: 
+      value: AddNumber
       objectReference: {fileID: 0}
     - target: {fileID: 6649169528729811389, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -54164,15 +54163,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6649169528729811389, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: ClockPuzzle, Assembly-CSharp
+      value: DoorPuzzle, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6649169528729811389, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
-      value: 
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6649169528729811389, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: 
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6692208239939068147, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -54184,7 +54183,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6692208239939068147, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6692208239939068147, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -54193,7 +54192,7 @@ PrefabInstance:
     - target: {fileID: 6692208239939068147, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 640084349}
+      objectReference: {fileID: 1326226440}
     - target: {fileID: 6692208239939068147, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
@@ -54204,7 +54203,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6692208239939068147, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: 
+      value: AddNumber
       objectReference: {fileID: 0}
     - target: {fileID: 6692208239939068147, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -54212,15 +54211,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6692208239939068147, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: ClockPuzzle, Assembly-CSharp
+      value: DoorPuzzle, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6692208239939068147, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
-      value: 
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6692208239939068147, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: 
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7468679637985220923, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
       propertyPath: m_SizeDelta.x
@@ -54445,7 +54444,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3251522421427182870, guid: 2b7f183d133fba3469fb4673e71e2544, type: 3}
   m_PrefabInstance: {fileID: 1326226438}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 640084349}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8bbc7db4ae9bd7842ac180c68adf2eb4, type: 3}
