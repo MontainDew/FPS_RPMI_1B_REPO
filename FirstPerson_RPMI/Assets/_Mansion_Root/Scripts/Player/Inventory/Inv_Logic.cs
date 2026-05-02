@@ -26,6 +26,8 @@ public class Inv_Logic : MonoBehaviour
     [Header("Other")]
     [SerializeField] private GameObject Inventory;
     [SerializeField] private int onoff = 1;
+    [SerializeField] private GunSystem Gun;
+    [SerializeField] private FP_Controller player;
     #endregion
 
 
@@ -90,11 +92,19 @@ public class Inv_Logic : MonoBehaviour
     public void Pause()
     {
         Time.timeScale = 0;
+        Gun.enabled = false;
+        player.enabled = false;
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
     }
 
     public void Resume()
     {
         Time.timeScale = 1;
+        Gun.enabled = true;
+        player.enabled = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
     #region inventory
     public void OnInventory(InputAction.CallbackContext context)
@@ -105,8 +115,6 @@ public class Inv_Logic : MonoBehaviour
             {
                 Debug.Log("Abre");
                 Inventory.SetActive(true);
-                Cursor.lockState = CursorLockMode.Confined;
-                Cursor.visible = true;
                 onoff++;
                 Pause();
             }
@@ -114,8 +122,6 @@ public class Inv_Logic : MonoBehaviour
             {
                 Debug.Log("Cierra");
                 Inventory.SetActive(false);
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
                 onoff--;
                 Resume();
             }

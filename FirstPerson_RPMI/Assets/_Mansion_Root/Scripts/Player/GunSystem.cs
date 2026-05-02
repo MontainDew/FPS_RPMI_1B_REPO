@@ -158,9 +158,9 @@ public class GunSystem : MonoBehaviour
     IEnumerator FlashedEnemy()
     {
         Enemy.animator.SetTrigger("Stun");
-        Enemy.enabled = false;
+        Enemy.stuned = true;
         yield return new WaitForSeconds(stuningTime);
-        Enemy.enabled = true;
+        Enemy.stuned = false;
         
     }
     private void OnDrawGizmos()

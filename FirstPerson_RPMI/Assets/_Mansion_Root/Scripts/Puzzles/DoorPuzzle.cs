@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 public class DoorPuzzle : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class DoorPuzzle : MonoBehaviour
 
     [SerializeField] string currentInput = "";
     [SerializeField] string correctCode = "2389";
+    [SerializeField] string escena;
 
     public void AddNumber(string number)
     {
@@ -30,6 +32,7 @@ public class DoorPuzzle : MonoBehaviour
         {
             AudioManager.Instance.Playsfx(14);
             Debug.Log("Pli Open de dor");
+            open();
         }
         else
         {
@@ -40,6 +43,11 @@ public class DoorPuzzle : MonoBehaviour
     void UpdateDisplay()
     {
         displayText.text = currentInput;
+    }
+
+    public void open()
+    {
+        SceneManager.LoadScene(escena);
     }
     void Fail()
     {

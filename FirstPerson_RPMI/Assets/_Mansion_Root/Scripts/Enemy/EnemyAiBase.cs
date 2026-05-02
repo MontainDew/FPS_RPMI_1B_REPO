@@ -42,7 +42,8 @@ public class EnemyAiBase : MonoBehaviour
     [Header("Combat")]
     [SerializeField] float attackRange = 1.8f;
     [SerializeField] float timeToLoseAggro = 3f;
-    public bool inChase;
+    public bool stuned = false; 
+    public bool inChase = false;
     float timeSinceLastSeen;
     bool isAttacking;
 
@@ -87,6 +88,14 @@ public class EnemyAiBase : MonoBehaviour
         CheckSenses();
         UpdateState();
         ChooseAnimation();
+        if (stuned)
+        {
+            agent.isStopped = true;
+        }
+        else
+        {
+            agent.isStopped = false;
+        }
     }
 
     void CalculatePlayerSpeed()
