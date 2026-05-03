@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Video;
 using System.Collections;
 
 public class EnemyAiBase : MonoBehaviour
@@ -10,10 +11,11 @@ public class EnemyAiBase : MonoBehaviour
     public Transform player;
     public Animator animator;
 
-    [Header("Jumpscare")]
-    public GameObject jumpscareUI;
+    [Header("Jumpscare Video")]
+    public GameObject jumpscareObject; // Objeto UI que contiene el RawImage + VideoPlayer
+    public VideoPlayer jumpscareVideo;
     public AudioSource jumpscareAudio;
-    public float jumpscareTime = 3f;
+    public float jumpscareDelay = 0.2f;
 
     [Header("Patrol")]
     public Transform[] patrolPoints;
@@ -50,8 +52,9 @@ public class EnemyAiBase : MonoBehaviour
             if (p != null) player = p.transform;
         }
 
-        if (jumpscareUI != null)
-            jumpscareUI.SetActive(false);
+        // Apagar jumpscare al inicio
+        if (jumpscareObject != null)
+            jumpscareObject.SetActive(false);
 
         GoToNextPoint();
     }
@@ -77,13 +80,9 @@ public class EnemyAiBase : MonoBehaviour
         }
 
         if (inChase)
-        {
             Chase();
-        }
         else
-        {
             Patrol();
-        }
 
         CheckAttack();
         UpdateAnimations();
@@ -95,9 +94,7 @@ public class EnemyAiBase : MonoBehaviour
         agent.speed = patrolSpeed;
 
         if (!agent.hasPath || agent.remainingDistance < 0.5f)
-        {
             GoToNextPoint();
-        }
     }
 
     void GoToNextPoint()
@@ -136,7 +133,7 @@ public class EnemyAiBase : MonoBehaviour
     // ================= ATTACK =================
     void CheckAttack()
     {
-        if (player == null) return;
+        if (player == null || isAttacking) return;
 
         float dist = Vector3.Distance(transform.position, player.position);
 
@@ -156,15 +153,25 @@ public class EnemyAiBase : MonoBehaviour
         dir.y = 0;
         transform.rotation = Quaternion.LookRotation(dir);
 
-        // Animación enemigo
+        // Animación
         if (animator != null)
             animator.SetTrigger("Attack");
 
-        // Activar UI
-        if (jumpscareUI != null)
-            jumpscareUI.SetActive(true);
+        // Pequeño delay para impacto
+        yield return new WaitForSeconds(jumpscareDelay);
 
-        // Sonido
+        // Activar objeto del video
+        if (jumpscareObject != null)
+            jumpscareObject.SetActive(true);
+
+        // Reproducir video
+        if (jumpscareVideo != null)
+        {
+            jumpscareVideo.Stop();
+            jumpscareVideo.Play();
+        }
+
+        // Audio extra (opcional)
         if (jumpscareAudio != null)
             jumpscareAudio.Play();
 
@@ -173,10 +180,15 @@ public class EnemyAiBase : MonoBehaviour
         {
             FP_Controller controller = player.GetComponent<FP_Controller>();
             if (controller != null)
-            controller.enabled = false;
+                controller.enabled = false;
         }
 
-        yield return new WaitForSeconds(jumpscareTime);
+        // Esperar a que termine el video
+        float duration = (float)jumpscareVideo.length;
+
+        if (duration <= 0f) duration = 3f; // fallback
+
+        yield return new WaitForSeconds(duration);
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

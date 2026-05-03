@@ -8897,7 +8897,7 @@ PrefabInstance:
       objectReference: {fileID: 1545448297}
     - target: {fileID: 3573164558944869355, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
       propertyPath: Key
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3573164558944869355, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
       propertyPath: Camera
@@ -8933,7 +8933,7 @@ PrefabInstance:
       objectReference: {fileID: 1165312516}
     - target: {fileID: 3573164558944869355, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
       propertyPath: HColorCode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3573164558944869355, guid: 2c8733d868a7c3c4f98986e32996c9f6, type: 3}
       propertyPath: DoorCodeSlot
@@ -20363,6 +20363,7 @@ RectTransform:
   - {fileID: 292814243}
   - {fileID: 1165312514}
   - {fileID: 1608281357}
+  - {fileID: 798384638}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -30573,6 +30574,113 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7273087425032351647, guid: 2746cc77170c0434c96d64572db649d2, type: 3}
   m_PrefabInstance: {fileID: 1742818638}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &798384634
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 798384638}
+  - component: {fileID: 798384637}
+  - component: {fileID: 798384636}
+  - component: {fileID: 798384635}
+  m_Layer: 5
+  m_Name: JumpscareVideo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!328 &798384635
+VideoPlayer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798384634}
+  m_Enabled: 1
+  m_VideoClip: {fileID: 32900000, guid: 22166397a549c834f91e00f7495a5184, type: 3}
+  m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
+  m_TargetCamera: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: 12eee6a7298619c448227d24d1264bc8, type: 2}
+  m_TimeReference: 0
+  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: <noninit>
+  m_RenderMode: 2
+  m_AspectRatio: 2
+  m_DataSource: 0
+  m_TimeUpdateMode: 2
+  m_PlaybackSpeed: 0.4
+  m_AudioOutputMode: 2
+  m_TargetAudioSources: []
+  m_DirectAudioVolumes: []
+  m_Url: 
+  m_EnabledAudioTracks: 
+  m_DirectAudioMutes: 
+  m_ControlledAudioTrackCount: 0
+  m_PlayOnAwake: 0
+  m_SkipOnDrop: 1
+  m_Looping: 0
+  m_WaitForFirstFrame: 1
+  m_FrameReadyEventEnabled: 0
+  m_VideoShaders: []
+--- !u!114 &798384636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798384634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RawImage
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 8400000, guid: 12eee6a7298619c448227d24d1264bc8, type: 2}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!222 &798384637
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798384634}
+  m_CullTransparentMesh: 1
+--- !u!224 &798384638
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798384634}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 6.408492, y: 6.5739627, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 518100218}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -2, y: 5}
+  m_SizeDelta: {x: -540, y: -260}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &798708993
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39353,6 +39461,10 @@ PrefabInstance:
       value: 1.4283
       objectReference: {fileID: 0}
     - target: {fileID: 3016294631886548266, guid: 7b5274cf2899cf741825f5be22445edd, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 231546803}
+    - target: {fileID: 3016294631886548266, guid: 7b5274cf2899cf741825f5be22445edd, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 231546803}
@@ -39369,17 +39481,25 @@ PrefabInstance:
       value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3016294631886548266, guid: 7b5274cf2899cf741825f5be22445edd, type: 3}
+      propertyPath: jumpscareUI
+      value: 
+      objectReference: {fileID: 798384634}
+    - target: {fileID: 3016294631886548266, guid: 7b5274cf2899cf741825f5be22445edd, type: 3}
       propertyPath: playerScript
       value: 
       objectReference: {fileID: 231546799}
     - target: {fileID: 3016294631886548266, guid: 7b5274cf2899cf741825f5be22445edd, type: 3}
       propertyPath: jumpscareVideo
       value: 
-      objectReference: {fileID: 1079021624}
+      objectReference: {fileID: 798384635}
     - target: {fileID: 3016294631886548266, guid: 7b5274cf2899cf741825f5be22445edd, type: 3}
       propertyPath: walkNoiseRange
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3016294631886548266, guid: 7b5274cf2899cf741825f5be22445edd, type: 3}
+      propertyPath: jumpscareObject
+      value: 
+      objectReference: {fileID: 518100214}
     - target: {fileID: 3016294631886548266, guid: 7b5274cf2899cf741825f5be22445edd, type: 3}
       propertyPath: crouchNoiseRange
       value: 1
@@ -54140,6 +54260,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0b970c3cd4a87b64e9d8c34655b6617f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1316881950}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0b970c3cd4a87b64e9d8c34655b6617f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1316881952}
   m_SourcePrefab: {fileID: 100100000, guid: 0b970c3cd4a87b64e9d8c34655b6617f, type: 3}
 --- !u!1 &1316881949 stripped
 GameObject:
@@ -54167,6 +54290,40 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.3219283, y: 9.616542, z: 2.8452258}
   m_Center: {x: -0.16254573, y: 4.3082714, z: 0.019269973}
+--- !u!328 &1316881952
+VideoPlayer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316881949}
+  m_Enabled: 1
+  m_VideoClip: {fileID: 32900000, guid: 22166397a549c834f91e00f7495a5184, type: 3}
+  m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
+  m_TargetCamera: {fileID: 0}
+  m_TargetTexture: {fileID: 0}
+  m_TimeReference: 0
+  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: <noninit>
+  m_RenderMode: 2
+  m_AspectRatio: 2
+  m_DataSource: 0
+  m_TimeUpdateMode: 2
+  m_PlaybackSpeed: 1
+  m_AudioOutputMode: 2
+  m_TargetAudioSources: []
+  m_DirectAudioVolumes: []
+  m_Url: 
+  m_EnabledAudioTracks: 
+  m_DirectAudioMutes: 
+  m_ControlledAudioTrackCount: 0
+  m_PlayOnAwake: 1
+  m_SkipOnDrop: 1
+  m_Looping: 0
+  m_WaitForFirstFrame: 1
+  m_FrameReadyEventEnabled: 0
+  m_VideoShaders: []
 --- !u!1 &1317064543
 GameObject:
   m_ObjectHideFlags: 0
