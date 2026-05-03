@@ -32,7 +32,7 @@ public class DoorPuzzle : MonoBehaviour
         {
             AudioManager.Instance.Playsfx(14);
             Debug.Log("Pli Open de dor");
-            SceneManager.LoadScene(4);
+            SceneManager.LoadScene(3);
         }
         else
         {
