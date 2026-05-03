@@ -9,8 +9,14 @@ EditorBuildSettings:
     path: Assets/_Mansion_Root/Scenes/SCN_Menu.unity
     guid: cae73078368e60d46bcd398a3eddb1ac
   - enabled: 1
+    path: Assets/_Mansion_Root/Scenes/SCN_Intro.unity
+    guid: 393aa5974b831db4b8d05e4fc3bed836
+  - enabled: 1
     path: Assets/_Mansion_Root/Scenes/SCN_Mansion.unity
     guid: 018a8123f09e75743a2ebdbac1bb99dc
+  - enabled: 1
+    path: Assets/_Mansion_Root/Scenes/SCN_LastCinematic.unity
+    guid: 873539769876d5748b37a058728c681c
   - enabled: 1
     path: Assets/_Mansion_Root/Scenes/SCN_EndScene.unity
     guid: a1ea7a3623ed6d74889d6c5607f29137
