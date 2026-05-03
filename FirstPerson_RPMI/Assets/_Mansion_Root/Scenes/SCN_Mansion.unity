@@ -21348,7 +21348,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1905930264}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -843465096371006359, guid: 1c71ca01eec1e54498379fc96beb34c7, type: 3}
       propertyPath: animator
@@ -21402,17 +21402,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: cofre_Sensores
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 994784357432506760, guid: 1c71ca01eec1e54498379fc96beb34c7, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c71ca01eec1e54498379fc96beb34c7, type: 3}
---- !u!4 &530707450 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7009129237638050407, guid: 1c71ca01eec1e54498379fc96beb34c7, type: 3}
-  m_PrefabInstance: {fileID: 530707449}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &532119747 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7273087425032351647, guid: 2746cc77170c0434c96d64572db649d2, type: 3}
@@ -71399,7 +71393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b26cf17ef051f84581cf6241a7894c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CofreSensores
-  animator: {fileID: 0}
+  animator: {fileID: 1877921132}
   ColorCode: {fileID: 6839292641697884409}
 --- !u!1001 &1678512221
 PrefabInstance:
@@ -79329,6 +79323,11 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!95 &1877921132 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 994784357432506760, guid: 1c71ca01eec1e54498379fc96beb34c7, type: 3}
+  m_PrefabInstance: {fileID: 530707449}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1878331712 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6429811503967129983, guid: de9788876f67ee041939157bb153b79b, type: 3}
@@ -80770,9 +80769,7 @@ Transform:
   - {fileID: 1859304688}
   - {fileID: 1059649492}
   - {fileID: 834597064}
-  - {fileID: 530707450}
   - {fileID: 1677735739}
-  - {fileID: 6839292641697884410}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1906317054 stripped
@@ -93545,7 +93542,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1905930264}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2366116516279733760, guid: ff90669c2036120429299577d5b865a5, type: 3}
       propertyPath: m_Name
@@ -93561,7 +93558,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8939114741007496623, guid: ff90669c2036120429299577d5b865a5, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.6100001
+      value: 1.6100003
       objectReference: {fileID: 0}
     - target: {fileID: 8939114741007496623, guid: ff90669c2036120429299577d5b865a5, type: 3}
       propertyPath: m_LocalScale.y
@@ -93569,7 +93566,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8939114741007496623, guid: ff90669c2036120429299577d5b865a5, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.6100001
+      value: 1.6100003
       objectReference: {fileID: 0}
     - target: {fileID: 8939114741007496623, guid: ff90669c2036120429299577d5b865a5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -93623,11 +93620,6 @@ PrefabInstance:
 --- !u!1 &6839292641697884409 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2366116516279733760, guid: ff90669c2036120429299577d5b865a5, type: 3}
-  m_PrefabInstance: {fileID: 6839292641697884408}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &6839292641697884410 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8939114741007496623, guid: ff90669c2036120429299577d5b865a5, type: 3}
   m_PrefabInstance: {fileID: 6839292641697884408}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8038184279786479931
@@ -93894,6 +93886,8 @@ SceneRoots:
   - {fileID: 426816574491162024}
   - {fileID: 1905930264}
   - {fileID: 74663119}
+  - {fileID: 6839292641697884408}
+  - {fileID: 530707449}
   - {fileID: 581029209}
   - {fileID: 360166030}
   - {fileID: 1964569050681693144}
