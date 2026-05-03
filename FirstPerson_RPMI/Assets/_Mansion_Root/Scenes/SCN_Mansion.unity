@@ -30608,7 +30608,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!328 &798384635
 VideoPlayer:
   m_ObjectHideFlags: 0
@@ -39520,7 +39520,7 @@ PrefabInstance:
     - target: {fileID: 3016294631886548266, guid: 7b5274cf2899cf741825f5be22445edd, type: 3}
       propertyPath: jumpscareObject
       value: 
-      objectReference: {fileID: 518100214}
+      objectReference: {fileID: 798384634}
     - target: {fileID: 3016294631886548266, guid: 7b5274cf2899cf741825f5be22445edd, type: 3}
       propertyPath: crouchNoiseRange
       value: 1
