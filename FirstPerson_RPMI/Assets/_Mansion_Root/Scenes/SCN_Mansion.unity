@@ -22215,7 +22215,7 @@ MonoBehaviour:
   musicList:
   - {fileID: 8300000, guid: ff58a16991b62ed46bb1e60c0e1d60b2, type: 3}
   - {fileID: 8300000, guid: a7e6b5260e8c2a9428cf48bbeef21dc1, type: 3}
-  - {fileID: 8300000, guid: b69e9932523f4904fa6c526abc52e988, type: 3}
+  - {fileID: 0}
   - {fileID: 8300000, guid: e017999c6620b9a45a4f9dee04d52fb8, type: 3}
   sfxList:
   - {fileID: 8300000, guid: 23531de7d82ef0c479993027a0f2be98, type: 3}

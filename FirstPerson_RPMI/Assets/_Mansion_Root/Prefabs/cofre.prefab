@@ -101,6 +101,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Cofre
   animator: {fileID: 994784357432506760}
+  llave: {fileID: 0}
+  HColorCode: {fileID: 0}
 --- !u!95 &994784357432506760
 Animator:
   serializedVersion: 7
